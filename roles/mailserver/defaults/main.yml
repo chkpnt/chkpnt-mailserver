@@ -25,8 +25,8 @@ mail_dkim_keys:
 # I recommend using Blowfish as the hashing schema, the ideal number of rounds depends on your system.
 # > doveadm pw -s BLF-CRYPT -r 10
 mail_accounts:
-  - { user: 'john.doe@example.com', password: '{BLF-CRYPT}$2a$10$XDN5fgw.vKV./VcaeTHTPuTV5wr5FBqmiY6sfeGtMu9IPF3GXk4BG' }
-  - { user: 'jane.doe@example.com', password: '{BLF-CRYPT}$2a$10$v7Udp.UKXmr3yS/HCOO9l.lyO.Pb35PosrMuwOd0URNVcoxm/2kLi' }
+  - { user: 'john.doe@example.com', password: '{BLF-CRYPT}$2y$10$6W9VYuRklwLg8y2UoP6YHuK5Q8g7g.LOJdSa7K4CgoVMmARNYMVMK' } # Password: changeme
+  - { user: 'jane.doe@example.com', password: '{BLF-CRYPT}$2y$10$wZtIn5uHAsbsMgMmOdBdU.qbRgrQxfeej65G63aUxMaDNEHfb8P2e' } # Password: changeme
   - { user: 'demo', password: '{PLAIN}demo' }
 
 mail_mailboxes:
