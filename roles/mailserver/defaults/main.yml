@@ -48,6 +48,10 @@ mail_aliases:
   - { for: '@example.org', destination: 'john.doe@example.org' }
   - { for: '@example.net', destination: 'john.doe@example.net' }
 
+mail_recipient_access:
+  - for: 'reject@example.com'
+    action: 'REJECT This address is not supposed to receive mails!'
+
 mail_transports:
   - for: 'gmail@example.com'
     nexthop: 'smtp:gmail.com'
@@ -70,8 +74,8 @@ postfix_aliases: []
 postfix_virtual_aliases: []
 postfix_sender_canonical_maps: []
 postfix_generic: []
-postfix_inet_interfaces: all
-postfix_inet_protocols: all
+postfix_inet_interfaces: [ all ]
+postfix_inet_protocols: [ all ]
 postfix_mydestination:
   - $myhostname
   - localhost

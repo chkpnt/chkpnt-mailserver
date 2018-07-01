@@ -17,8 +17,9 @@ Vagrant.configure("2") do |config|
         ansible.playbook = "playbook.yml"
     end
 
-    config.vm.network :forwarded_port, host: 11334, guest: 11334
+    config.vm.network :forwarded_port, host: 10025, guest: 25
     config.vm.network :forwarded_port, host: 10993, guest: 993
+    config.vm.network :forwarded_port, host: 11334, guest: 11334
 
     # Setup
     # config.vm.provision :shell, :inline => "touch .hushlogin"

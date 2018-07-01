@@ -1,0 +1,35 @@
+---
+
+- name: Configure Postfix
+  template:
+    src: etc/postfix/main.cf.j2
+    dest: /etc/postfix/main.cf
+  notify:
+    - restart postfix
+
+- name: Ensure user postfix is member of group _rspamd, so /var/run/rspamd/worker-proxy.socket can be accessed
+  user:
+    name: postfix
+    groups: _rspamd
+    append: yes
+
+- name: Configure virtual aliases
+  template:
+    src: etc/postfix/virtual_aliases.j2
+    dest: /etc/postfix/virtual_aliases
+  notify:
+    - postmap virtual_aliases
+
+- name: Configure virtual mailboxes
+  template:
+    src: etc/postfix/virtual_mailboxes.j2
+    dest: /etc/postfix/virtual_mailboxes
+  notify:
+    - postmap virtual_mailboxes
+
+- name: Configure access-db for recipient-checks
+  template:
+    src: etc/postfix/recipient_access.j2
+    dest: /etc/postfix/recipient_access
+  notify:
+    - postmap recipient_access

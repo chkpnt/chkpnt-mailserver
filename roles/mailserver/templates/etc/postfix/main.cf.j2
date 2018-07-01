@@ -12,10 +12,12 @@
 # For best results, change no more than 2-3 parameters at a time,
 # and test if Postfix still works after every change.
 
+compatibility_level = 3
+
 # LOCAL PATHNAME INFORMATION
 queue_directory = /var/spool/postfix
 command_directory = /usr/sbin
-daemon_directory = /usr/lib/postfix
+daemon_directory = /usr/lib/postfix/bin/
 data_directory = /var/lib/postfix
 
 # QUEUE AND PROCESS OWNERSHIP
@@ -89,6 +91,8 @@ message_size_limit = 0
 strict_8bitmime = no
 strict_rfc821_envelopes = no
 
+smtpd_milters = unix:/var/run/rspamd/worker-proxy.socket
+milter_default_action = accept
 
 ############################################################
 # SASL stuff
@@ -111,15 +115,14 @@ smtpd_recipient_restrictions =  permit_mynetworks,
                                 permit_sasl_authenticated,
                                 reject_unauth_destination,
                                 check_recipient_access hash:/etc/postfix/recipient_access
-                                check_policy_service unix:postgrey/socket
 
 smtpd_tls_security_level = may
 smtpd_tls_auth_only = yes
 smtpd_tls_loglevel = 2
 smtpd_tls_CAfile =
 smtpd_tls_CApath =
-smtpd_tls_cert_file = /etc/pki/trust/dschung.com.crt.pem
-smtpd_tls_key_file = /etc/ssl/private/dschung.com.privkey.pem
+smtpd_tls_cert_file = {{ mail_ssl.certificate }}
+smtpd_tls_key_file = {{ mail_ssl.private_key }}
 smtpd_tls_ask_ccert = no
 smtpd_tls_received_header = yes
 smtpd_tls_dh1024_param_file = /etc/postfix/dh_1024.pem
@@ -143,8 +146,8 @@ smtp_tls_security_level = may
 smtp_tls_loglevel = 2
 smtp_tls_CAfile =
 smtp_tls_CApath =
-smtp_tls_cert_file = /etc/pki/trust/dschung.com.crt.pem
-smtp_tls_key_file = /etc/ssl/private/dschung.com.privkey.pem
+smtp_tls_cert_file = {{ mail_ssl.certificate }}
+smtp_tls_key_file = {{ mail_ssl.private_key }}
 #smtp_tls_session_cache_timeout = 3600s
 smtp_tls_session_cache_database =
 
@@ -154,4 +157,4 @@ smtp_tls_session_cache_database =
 virtual_transport = lmtp:unix:private/dovecot-lmtp
 virtual_mailbox_domains = {{ mail_mailbox_domains | join(', ') }}
 virtual_alias_maps = hash:/etc/postfix/virtual_aliases
-virtual_mailbox_maps = hash:/etc/postfix/virtual_addresses
+virtual_mailbox_maps = hash:/etc/postfix/virtual_mailboxes

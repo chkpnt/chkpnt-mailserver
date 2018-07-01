@@ -1,5 +1,9 @@
 # {{ ansible_managed }}
 
 {% for alias in mail_aliases %}
+{% if alias.destination is string %}
+{{ alias.for }}     {{ alias.destination }}
+{% else %}
 {{ alias.for }}     {{ alias.destination | join(',\n\t\t\t') }}
+{% endif %}
 {% endfor %}

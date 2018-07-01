@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+# http://www.postfix.org/access.5.html
+
+{% for entry in mail_recipient_access %}
+{{ entry.for }}     {{ entry.action }}
+{% endfor %}

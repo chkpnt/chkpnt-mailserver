@@ -9,8 +9,17 @@
 - name: restart dovecot
   systemd: name=dovecot state=restarted
 
+- name: restart postfix
+  systemd: name=postfix state=restarted
+
 - name: postmap virtual_aliases
   command: postmap hash:/etc/postfix/virtual_aliases
+  notify: restart postfix
 
 - name: postmap virtual_mailboxes
   command: postmap hash:/etc/postfix/virtual_mailboxes
+  notify: restart postfix
+
+- name: postmap recipient_access
+  command: postmap hash:/etc/postfix/recipient_access
+  notify: restart postfix
