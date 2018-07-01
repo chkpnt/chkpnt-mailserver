@@ -27,6 +27,13 @@
   notify:
     - postmap virtual_mailboxes
 
+- name: Configure transports map
+  template:
+    src: etc/postfix/transport.j2
+    dest: /etc/postfix/transport
+  notify:
+    - postmap transport
+
 - name: Configure access-db for recipient-checks
   template:
     src: etc/postfix/recipient_access.j2

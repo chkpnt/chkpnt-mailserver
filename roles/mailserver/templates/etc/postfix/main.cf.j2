@@ -79,7 +79,6 @@ alias_maps = hash:/etc/aliases
 #relocated_maps = hash:/etc/postfix/relocated
 #sender_canonical_maps = hash:/etc/postfix/sender_canonical
 #canonical_maps = hash:/etc/postfix/canonical
-#transport_maps = hash:/etc/postfix/transport
 
 mail_spool_directory = /var/mail
 message_strip_characters = \0
@@ -133,6 +132,7 @@ smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
 smtpd_tls_exclude_ciphers = RC4
 #tls_preempt_cipherlist = yes
 
+transport_maps = hash:/etc/postfix/transport
 
 ############################################################
 # TLS stuff

@@ -20,6 +20,10 @@
   command: postmap hash:/etc/postfix/virtual_mailboxes
   notify: restart postfix
 
+- name: postmap transport
+  command: postmap hash:/etc/postfix/transport
+  notify: restart postfix
+
 - name: postmap recipient_access
   command: postmap hash:/etc/postfix/recipient_access
   notify: restart postfix
