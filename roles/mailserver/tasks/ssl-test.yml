@@ -1,0 +1,93 @@
+---
+
+# I had issues to use Thunderbird with a simple self-signed certificate,
+# therefore a customa CA is used here.
+# Ansible's openssl_*-modules can't be used to generate the appropriate certificates.
+
+- name: Ensure directory for Mailserver CA exists
+  file:
+    path: /etc/ssl/mailserver-ca/
+    state: directory
+    owner: vmail
+    group: vmail
+    mode: 0744
+
+# Setup Mailserver CA
+- name: Copy OpenSSL config file for Mailserver CA
+  template:
+    src: etc/ssl/mailserver-ca/ca.cnf.j2
+    dest: /etc/ssl/mailserver-ca/ca.cnf
+  register: openssl_ca_config
+
+- name: Ensure certificate for Mailserver CA will be regenerated, if config file changed
+  file:
+    path: /etc/ssl/mailserver-ca/ca.crt
+    state: absent
+  when: openssl_ca_config.changed
+
+- name: Generate private key for Mailserver CA
+  command: openssl genrsa -out ca.key 2048
+  args:
+    chdir: /etc/ssl/mailserver-ca/
+    creates: /etc/ssl/mailserver-ca/ca.key
+
+- name: Create CSR for Mailserver CA
+  command: openssl req -config ca.cnf -new -key ca.key -out ca.csr
+  args:
+    chdir: /etc/ssl/mailserver-ca/
+    creates: /etc/ssl/mailserver-ca/ca.csr
+
+- name: Create selfsigned certificate for Mailserver CA
+  command: openssl x509 -req -in ca.csr -signkey ca.key -extfile ca.cnf -extensions v3_extensions -days 3650 -out ca.crt
+  args:
+    chdir: /etc/ssl/mailserver-ca/
+    creates: /etc/ssl/mailserver-ca/ca.crt
+
+# Use Mailserver CA to issue a certificate for our Mailserver
+- name: Copy OpenSSL config file for Mailserver
+  template:
+    src: etc/ssl/mailserver-ca/server.cnf.j2
+    dest: /etc/ssl/mailserver-ca/server.cnf
+  register: openssl_server_config
+
+- name: Ensure certificate for Mailserver will be regenerated, if config file changed
+  file:
+    path: /etc/ssl/mailserver-ca/server.crt
+    state: absent
+  when: openssl_ca_config.changed or openssl_server_config.changed
+
+- name: Generate private key for Mailserver
+  command: openssl genrsa -out server.key 2048
+  args:
+    chdir: /etc/ssl/mailserver-ca/
+    creates: /etc/ssl/mailserver-ca/server.key
+
+- name: Create CSR for Mailserver
+  command: openssl req -config server.cnf -new -key server.key -out server.csr
+  args:
+    chdir: /etc/ssl/mailserver-ca/
+    creates: /etc/ssl/mailserver-ca/server.csr
+
+- name: Create certificate for Mailserver issued by Mailserver CA
+  command: openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -extfile server.cnf -extensions v3_extensions -days 365 -out server.crt
+  args:
+    chdir: /etc/ssl/mailserver-ca/
+    creates: /etc/ssl/mailserver-ca/server.crt
+
+- name: "Copy mailserver certificate to {{ mail_ssl.certificate }}"
+  copy:
+    src: /etc/ssl/mailserver-ca/server.crt
+    dest: "{{ mail_ssl.certificate }}"
+    remote_src: yes
+    owner: root
+    group: root
+    mode: 0444
+
+- name: "Copy mailserver private key to {{ mail_ssl.private_key }}"
+  copy:
+    src: /etc/ssl/mailserver-ca/server.key
+    dest: "{{ mail_ssl.private_key }}"
+    remote_src: yes
+    owner: root
+    group: root
+    mode: 0400

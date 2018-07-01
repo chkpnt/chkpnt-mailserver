@@ -1,0 +1,31 @@
+---
+
+- name: Install python-xml needed for ansible's zypper module
+  command: /usr/bin/zypper --non-interactive --quiet install python-xml
+  args:
+    warn: no
+  changed_when: false
+  warn: False
+
+- name: Install check-create-certificate
+  zypper:
+    name: check-create-certificate
+    state: present
+
+- name: Check certificates for {{ ssl_hostname }}
+  command: >
+      check-create-certificate
+      --certfile /etc/ssl/certs/{{ ssl_hostname }}.pem
+      --keyfile /etc/ssl/private/{{ ssl_hostname }}.key
+  ignore_errors: yes
+  register: check_certificate
+
+- name: Create self-signed certificate for {{ ssl_hostname }}
+  command: >
+    check-create-certificate
+      --create
+      --verbose
+      --hostname {{ ssl_hostname }}
+      --certfile /etc/ssl/certs/{{ ssl_hostname }}.pem
+      --keyfile /etc/ssl/private/{{ ssl_hostname }}.key
+  when: check_certificate.rc == 1

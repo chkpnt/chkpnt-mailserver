@@ -1,0 +1,34 @@
+---
+    
+- name: Install repository home:chkpnt:mailserver
+  zypper_repository:
+    name: home_chkpnt_mailserver
+    repo: 'https://download.opensuse.org/repositories/home:/chkpnt:/mailserver/openSUSE_Leap_15.0/'
+    state: present
+    auto_import_keys: yes
+
+- name: Install packages for mailserver 
+  zypper:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - postfix
+    #- postgrey
+    - dovecot # openSUSE Leap 42.3: 2.2, openSUSE Leap 15: 2.3
+    #- amavisd-new
+    #- spamassassin
+    - rspamd
+    - redis
+    - clamav
+    - clamav-unofficial-sigs # installed from home:chkpnt:mailserver
+    - acl
+    - python2-pyOpenSSL # needed for ansible-module openssl_certificate
+
+- name: Check that /etc/dovecot/dh.pem exists
+  stat:
+    path: /etc/dovecot/dh.pem
+  register: dh_parameters
+
+- name: Generate Diffie-Hellman parameters
+  command: openssl dhparam -dsaparam -out /etc/dovecot/dh.pem 4096
+  when: not dh_parameters.stat.exists

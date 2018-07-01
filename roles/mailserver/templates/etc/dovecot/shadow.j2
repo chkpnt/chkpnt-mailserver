@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for account in mail_accounts %}
+{{ account.user }}:{{ account.password }}
+{% endfor %}

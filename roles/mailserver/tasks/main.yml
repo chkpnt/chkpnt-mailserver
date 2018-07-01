@@ -1,0 +1,16 @@
+---
+
+- debug:
+    msg: "Variable is {{postfix_hostname}}"
+
+# - name: Display all variables/facts known for a host
+#   debug:
+#     var: hostvars[inventory_hostname]
+
+- include: install.yml
+  tags:
+    - install
+
+- include: config.yml
+  tags:
+    - configure

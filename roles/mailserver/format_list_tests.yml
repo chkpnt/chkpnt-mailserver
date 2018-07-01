@@ -1,0 +1,18 @@
+---
+
+- hosts: localhost
+  vars:
+    hosts:
+    - example.com
+    - example.org
+  
+  tasks:
+  - name: Testing format_list...
+    debug:
+      msg: '{{ hosts | format_list("''.%s''") | join(", ") }}'
+    register: result
+
+  - name: Testing format_list... asserting
+    assert:
+      that:
+      - "result.msg == \"'.example.com', '.example.org'\""

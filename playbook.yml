@@ -1,0 +1,13 @@
+---
+- hosts: all
+
+  tasks:
+  - name: get hostname
+    command: /bin/hostname
+    changed_when: False
+
+- hosts: all
+
+  roles:
+  - common
+  - mailserver

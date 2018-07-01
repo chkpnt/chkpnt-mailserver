@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+
+[ req ]
+prompt = no
+distinguished_name = req_distinguished_name
+
+[ req_distinguished_name ]
+O = Mailserver Root CA
+CN = Mailserver Root CA
+
+[ v3_extensions ]
+basicConstraints        = critical, CA:TRUE
+subjectKeyIdentifier    = hash
+authorityKeyIdentifier  = keyid:always, issuer:always
+keyUsage                = critical, cRLSign, keyCertSign

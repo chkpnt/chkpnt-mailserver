@@ -1,0 +1,83 @@
+---
+# Variables used for various applications
+mail_domain: example.com
+mail_hostname: server1.example.com
+
+# This domain name is used for MX and IMAP
+mail_mailname: mail.example.com
+
+mail_mailbox_domains:
+  - example.com
+  - example.org
+  - example.net
+
+mail_ssl:
+  certificate: '/etc/ssl/certs/example.com.pem'
+  private_key: '/etc/ssl/private/example.com.key'
+  use_test_ca: yes
+
+mail_dkim_keys:
+  - { domain: example.com, selector: 'key', private_key: '/etc/ssl/private/key1._domainkey.example.com.privkey.pem' }
+  - { domain: example.org, selector: 'key', private_key: '/etc/ssl/private/key1._domainkey.example.org.privkey.pem' }
+  - { domain: example.net, selector: 'key', private_key: '/etc/ssl/private/key1._domainkey.example.net.privkey.pem' }
+
+# Hash can be computated with doveadm.
+# I recommend using Blowfish as the hashing schema, the ideal number of rounds depends on your system.
+# > doveadm pw -s BLF-CRYPT -r 10
+mail_accounts:
+  - { user: 'john.doe@example.com', password: '{BLF-CRYPT}$2a$10$XDN5fgw.vKV./VcaeTHTPuTV5wr5FBqmiY6sfeGtMu9IPF3GXk4BG' }
+  - { user: 'jane.doe@example.com', password: '{BLF-CRYPT}$2a$10$v7Udp.UKXmr3yS/HCOO9l.lyO.Pb35PosrMuwOd0URNVcoxm/2kLi' }
+  - { user: 'demo', password: '{PLAIN}demo' }
+
+mail_mailboxes:
+  - { name: 'john.doe@example.com', path: '/srv/mail/john' }
+  - { name: 'john.doe@example.org', path: '/srv/mail/john' }
+  - { name: 'john.doe@example.net', path: '/srv/mail/john' }
+
+mail_aliases:
+  # needed for 
+  - { for: 'gmail@example.com', destination: 'gmail@example.com' }
+  # normal aliases
+  - { for: 'electric_company@example.com', destination: 'family@example.com' }
+  - for: 'family@example.com'
+    destination:
+      - 'john.doe@example.com'
+      - 'jane.doe@example.com'
+  # Catch-Alls:
+  - { for: '@example.com', destination: 'john.doe@example.com' }
+  - { for: '@example.org', destination: 'john.doe@example.org' }
+  - { for: '@example.net', destination: 'john.doe@example.net' }
+
+mail_transports:
+  - for: 'gmail@example.com'
+    nexthop: 'smtp:gmail.com'
+    
+mail_internal_networks:
+  - 127.0.0.0/8
+  - '[::1]/128'
+
+mail_spam:
+  greylisting_delay: '5min'
+  thresholds: # Requirement: greylist < add_header < reject
+    greylist: 4
+    add_header: 6
+    reject: 15
+
+# Variables used for postfix
+postfix_hostname: "{{ ansible_fqdn }}"
+postfix_mailname: "{{ ansible_fqdn }}"
+postfix_aliases: []
+postfix_virtual_aliases: []
+postfix_sender_canonical_maps: []
+postfix_generic: []
+postfix_inet_interfaces: all
+postfix_inet_protocols: all
+postfix_mydestination:
+  - $myhostname
+  - localhost
+  - localhost.$mydomain
+postfix_mynetworks:
+  - 127.0.0.0/8
+  - '[::ffff:127.0.0.0]/104'
+  - '[::1]/128'
+postfix_disable_vrfy_command: false
