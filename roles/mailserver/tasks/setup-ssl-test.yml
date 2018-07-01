@@ -8,8 +8,8 @@
   file:
     path: /etc/ssl/mailserver-ca/
     state: directory
-    owner: vmail
-    group: vmail
+    owner: root
+    group: root
     mode: 0744
 
 # Setup Mailserver CA

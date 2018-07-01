@@ -1,0 +1,58 @@
+---
+
+- name: Configure Redis for rspamd
+  copy:
+    src: etc/redis/rspamd.conf
+    dest: /etc/redis/rspamd.conf
+    owner: root
+    group: redis
+    mode: 0640
+  notify:
+    - restart redis
+
+- name: Ensure user _rspamd is member of group redis
+  user:
+    name: _rspamd
+    groups: redis
+    append: yes
+
+- name: Ensure working directory for Redis exists
+  file:
+    path: /var/lib/redis/rspamd
+    state: directory
+    owner: redis
+    group: redis
+    mode: 0750
+
+- name: Enable server redis@rspamd and make sure it is running
+  systemd:
+    name: redis@rspamd
+    enabled: yes
+    state: started
+
+- name: Configure rspamd (static config)
+  copy:
+    src: etc/rspamd/
+    dest: /etc/rspamd/
+  notify:
+    - restart rspamd
+
+- name: Configure DKIM-signing
+  template:
+    src: etc/rspamd/local.d/dkim_signing.conf.j2
+    dest: /etc/rspamd/local.d/dkim_signing.conf
+  notify:
+    - restart rspamd
+
+- name: Configure spam actions
+  template:
+    src: etc/rspamd/local.d/actions.conf.j2
+    dest: /etc/rspamd/local.d/actions.conf
+  notify:
+    - restart rspamd
+
+- name: Enable rspamd and make sure it is running
+  systemd:
+    name: rspamd
+    enabled: yes
+    state: started

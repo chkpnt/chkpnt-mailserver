@@ -1,0 +1,37 @@
+---
+
+- name: Configure dovecot
+  template:
+    src: etc/dovecot/dovecot.conf.j2
+    dest: /etc/dovecot/dovecot.conf
+  notify:
+    - restart dovecot
+
+- name: Configure accounts
+  template:
+    src: etc/dovecot/shadow.j2
+    dest: /etc/dovecot/shadow
+    owner: dovecot
+    group: root
+    mode: 0400
+
+- name: Configure mailboxes
+  template:
+    src: etc/dovecot/users.j2
+    dest: /etc/dovecot/users
+
+- name: Ensure that required mailboxes exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: vmail
+    group: vmail
+    mode: 0700
+  with_items:
+    - "{{ mail_mailboxes | map(attribute='path') | list | unique }}"
+
+- name: Enable dovecot and make sure it is running
+  systemd:
+    name: dovecot
+    enabled: yes
+    state: started

@@ -1,16 +1,8 @@
 ---
 
-- debug:
-    msg: "Variable is {{postfix_hostname}}"
-
-# - name: Display all variables/facts known for a host
-#   debug:
-#     var: hostvars[inventory_hostname]
-
 - include: install.yml
-  tags:
-    - install
-
-- include: config.yml
-  tags:
-    - configure
+- include: setup.yml
+- include: setup-rspamd.yml
+- include: setup-ssl-test.yml
+  when: "mail_ssl.generate_certificate_for_test | default(false) | bool"
+- include: setup-dovecot.yml

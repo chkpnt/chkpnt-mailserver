@@ -24,11 +24,7 @@
     - acl
     - python2-pyOpenSSL # needed for ansible-module openssl_certificate
 
-- name: Check that /etc/dovecot/dh.pem exists
-  stat:
-    path: /etc/dovecot/dh.pem
-  register: dh_parameters
-
 - name: Generate Diffie-Hellman parameters
   command: openssl dhparam -dsaparam -out /etc/dovecot/dh.pem 4096
-  when: not dh_parameters.stat.exists
+  args:
+    creates: /etc/dovecot/dh.pem

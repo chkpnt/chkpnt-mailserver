@@ -1,0 +1,26 @@
+---
+
+- name: Ensure group vmail exists
+  group:
+    name: vmail
+    gid: 5000
+    state: present
+
+- name: Ensure user vmail exists
+  user:
+    name: vmail
+    uid: 5000
+    group: vmail
+    comment: User for virtual mailboxes
+    shell: /bin/false
+    home: /srv/mail/
+    create_home: no
+    state: present
+
+- name: Ensure directory for virtual mailboxes exists
+  file:
+    path: /srv/mail
+    state: directory
+    owner: vmail
+    group: vmail
+    mode: 0755

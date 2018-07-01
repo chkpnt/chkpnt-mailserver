@@ -14,7 +14,7 @@ mail_mailbox_domains:
 mail_ssl:
   certificate: '/etc/ssl/certs/example.com.pem'
   private_key: '/etc/ssl/private/example.com.key'
-  use_test_ca: yes
+  generate_certificate_for_test: yes
 
 mail_dkim_keys:
   - { domain: example.com, selector: 'key', private_key: '/etc/ssl/private/key1._domainkey.example.com.privkey.pem' }
