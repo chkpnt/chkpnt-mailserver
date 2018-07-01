@@ -1,11 +1,11 @@
 # {{ ansible_managed }}
+# Please be aware: If ansible detects any change here, the CA- and server-cert gets recreated
 
 [ req ]
 prompt = no
 distinguished_name = req_distinguished_name
 
 [ req_distinguished_name ]
-O = Mailserver Root CA
 CN = Mailserver Root CA
 
 [ v3_extensions ]
