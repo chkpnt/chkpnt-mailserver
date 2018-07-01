@@ -1,9 +1,11 @@
+#jinja2: lstrip_blocks: True
 # {{ ansible_managed }}
+# http://www.postfix.org/virtual.5.html
 
 {% for alias in mail_aliases %}
-{% if alias.destination is string %}
-{{ alias.for }}     {{ alias.destination }}
-{% else %}
-{{ alias.for }}     {{ alias.destination | join(',\n\t\t\t') }}
-{% endif %}
+    {% if alias.destination is string %}
+{{ alias.for.ljust(30) }}     {{ alias.destination }}
+    {% else %}
+{{ alias.for.ljust(30) }}     {{ alias.destination | join(',\n' + ' ' * 35) }}
+    {% endif %}
 {% endfor %}

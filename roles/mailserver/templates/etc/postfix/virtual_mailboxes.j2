@@ -1,5 +1,6 @@
 # {{ ansible_managed }}
+# http://www.postfix.org/virtual.8.html
 
 {% for mailbox in mail_mailboxes %}
-{{ mailbox.name }}  OK
+{{ mailbox.name.ljust(20) }}    OK
 {% endfor %}
