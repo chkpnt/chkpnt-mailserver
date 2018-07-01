@@ -1,5 +1,10 @@
 ---
 
+- name: Generate Diffie-Hellman parameters
+  command: openssl dhparam -dsaparam -out /etc/dovecot/dh.pem 4096
+  args:
+    creates: /etc/dovecot/dh.pem
+
 - name: Configure dovecot
   template:
     src: etc/dovecot/dovecot.conf.j2

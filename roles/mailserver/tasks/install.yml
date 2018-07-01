@@ -23,8 +23,3 @@
     - clamav-unofficial-sigs # installed from home:chkpnt:mailserver
     - acl
     - python2-pyOpenSSL # needed for ansible-module openssl_certificate
-
-- name: Generate Diffie-Hellman parameters
-  command: openssl dhparam -dsaparam -out /etc/dovecot/dh.pem 4096
-  args:
-    creates: /etc/dovecot/dh.pem
