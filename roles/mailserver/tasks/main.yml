@@ -7,3 +7,5 @@
   when: "mail_ssl.generate_certificate_for_test | default(false) | bool"
 - include: setup-dovecot.yml
 - include: setup-postfix.yml
+  tags:
+    - postfix
