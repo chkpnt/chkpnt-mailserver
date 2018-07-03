@@ -7,6 +7,16 @@
   notify:
     - restart postfix
 
+- name: Configure Postfix (master.cf)
+  copy:
+    src: etc/postfix/master.cf
+    dest: /etc/postfix/master.cf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart postfix
+
 - name: Ensure user postfix is member of group _rspamd, so /var/run/rspamd/worker-proxy.socket can be accessed
   user:
     name: postfix

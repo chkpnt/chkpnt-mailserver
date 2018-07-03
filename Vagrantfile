@@ -17,9 +17,11 @@ Vagrant.configure("2") do |config|
         ansible.playbook = "playbook.yml"
     end
 
-    config.vm.network :forwarded_port, host: 10025, guest: 25
-    config.vm.network :forwarded_port, host: 10993, guest: 993
-    config.vm.network :forwarded_port, host: 11334, guest: 11334
+    config.vm.network :forwarded_port, host: 10025, guest: 25    # smtp
+    config.vm.network :forwarded_port, host: 10993, guest: 993   # imaps
+    config.vm.network :forwarded_port, host: 10465, guest: 465   # submissions
+    config.vm.network :forwarded_port, host: 10587, guest: 587   # submission
+    config.vm.network :forwarded_port, host: 11334, guest: 11334 # rspamd-dashboard
 
     # Setup
     # config.vm.provision :shell, :inline => "touch .hushlogin"
