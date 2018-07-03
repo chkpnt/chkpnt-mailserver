@@ -75,19 +75,29 @@
     creates: /etc/ssl/mailserver-ca/server.crt
 
 - name: "Copy mailserver certificate to {{ mail_ssl.certificate }}"
-  copy:
-    src: /etc/ssl/mailserver-ca/server.crt
-    dest: "{{ mail_ssl.certificate }}"
-    remote_src: yes
-    owner: root
-    group: root
-    mode: 0444
+  block:
+    - file:
+        path: "{{ mail_ssl.certificate | dirname }}"
+        state: directory
+        recurse: yes
+    - copy:
+        src: /etc/ssl/mailserver-ca/server.crt
+        dest: "{{ mail_ssl.certificate }}"
+        remote_src: yes
+        owner: root
+        group: root
+        mode: 0444
 
 - name: "Copy mailserver private key to {{ mail_ssl.private_key }}"
-  copy:
-    src: /etc/ssl/mailserver-ca/server.key
-    dest: "{{ mail_ssl.private_key }}"
-    remote_src: yes
-    owner: root
-    group: root
-    mode: 0400
+  block:
+    - file:
+        path: "{{ mail_ssl.private_key | dirname }}"
+        state: directory
+        recurse: yes
+    - copy:
+        src: /etc/ssl/mailserver-ca/server.key
+        dest: "{{ mail_ssl.private_key }}"
+        remote_src: yes
+        owner: root
+        group: root
+        mode: 0400

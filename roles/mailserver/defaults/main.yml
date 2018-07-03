@@ -12,7 +12,7 @@ mail_mailbox_domains:
   - example.net
 
 mail_ssl:
-  certificate: '/etc/ssl/certs/example.com.pem'
+  certificate: '/etc/ssl/servercerts/example.com.pem'
   private_key: '/etc/ssl/private/example.com.key'
   generate_certificate_for_test: yes
 
