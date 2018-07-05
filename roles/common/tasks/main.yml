@@ -1,12 +1,5 @@
 ---
 
-- name: Install python-xml needed for ansible's zypper module
-  command: /usr/bin/zypper --non-interactive --quiet install python-xml
-  args:
-    warn: no
-  changed_when: false
-  warn: False
-
 - name: Install common packages
   zypper:
     name: "{{ item }}"
