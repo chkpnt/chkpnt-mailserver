@@ -1,0 +1,26 @@
+---
+- hosts: sut
+  roles:
+  - common
+  - { role: use-nameserver, with_ip: "10.0.3.2", domain: "mydomain.test" }
+  - role: mailserver
+    vars:
+      mail_domain: mydomain.test
+      mail_hostname: sut.mydomain.test
+      mail_mailname: sut.mydomain.test
+      mail_mailbox_domains:
+        - mydomain.test
+      mail_ssl:
+        certificate: '/etc/ssl/servercerts/mydomain.test.pem'
+        private_key: '/etc/ssl/private/mydomain.test.key'
+        generate_certificate_for_test: yes
+      mail_dkim_keys:
+        - { domain: mydomain.test, selector: 'key', private_key: '/etc/ssl/private/key1._domainkey.mydomain.test.privkey.pem' }
+      mail_accounts:
+        - { user: 'john.doe@mydomain.test', password: '{BLF-CRYPT}$2y$10$6W9VYuRklwLg8y2UoP6YHuK5Q8g7g.LOJdSa7K4CgoVMmARNYMVMK' } # Password: changeme
+      mail_mailboxes:
+        - { name: 'john.doe@mydomain.test', path: '/srv/mail/john' }
+      mail_aliases: []
+      mail_recipient_access:
+        - for: 'reject@example.com'
+          action: 'REJECT This address is not supposed to receive mails!'

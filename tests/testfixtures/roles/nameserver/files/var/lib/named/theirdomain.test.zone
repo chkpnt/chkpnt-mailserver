@@ -1,0 +1,8 @@
+; Ansible managed
+
+$TTL 300
+@               IN SOA  ns.test.  root.test. ( 2018092600 1D 2H 1W 300 )
+                IN NS   ns.test.
+                IN MX   10 mail-sink
+
+mail-sink       IN A    10.0.3.20

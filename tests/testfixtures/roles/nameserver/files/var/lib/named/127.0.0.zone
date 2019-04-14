@@ -1,0 +1,7 @@
+; Ansible managed
+
+$TTL 1W
+@               IN SOA          localhost.   root.localhost. ( 2018092600 2D 4H 6W 1W )
+                IN NS           localhost.
+
+1               IN PTR          localhost.

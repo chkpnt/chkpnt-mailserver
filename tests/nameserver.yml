@@ -1,0 +1,6 @@
+---
+- hosts: ns
+  roles:
+  - common
+  - nameserver
+  - { role: use-nameserver, with_ip: "127.0.0.1", domain: "test" }

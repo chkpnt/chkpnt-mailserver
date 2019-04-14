@@ -1,0 +1,26 @@
+---
+
+- name: Install bind, which provides named
+  zypper:
+    name: bind
+    state: present
+
+- name: Configure nameserver (named.conf)
+  copy:
+    src: etc/named.conf
+    dest: /etc/named.conf
+  notify:
+    - restart named
+
+- name: Configure nameserver (zone files)
+  copy:
+    src: var/lib/named/
+    dest: /var/lib/named/
+  notify:
+    - restart named
+
+- name: Enable named and make sure it is running
+  systemd:
+    name: named
+    enabled: yes
+    state: started

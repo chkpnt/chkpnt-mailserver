@@ -1,0 +1,12 @@
+---
+
+- name: Configure used nameserver resolver
+  block:
+    - lineinfile:
+        path: /etc/sysconfig/network/config
+        regexp: '^NETCONFIG_DNS_POLICY='
+        line: 'NETCONFIG_DNS_POLICY=""'
+    - template:
+        src: etc/resolv.conf.j2
+        dest: /etc/resolv.conf
+  

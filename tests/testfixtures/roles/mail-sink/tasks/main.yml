@@ -1,0 +1,6 @@
+- name: Install postfix, which provides smtp-sink
+  zypper:
+    name: postfix
+    state: present
+
+#- name: Ensure, smpt-sink is started

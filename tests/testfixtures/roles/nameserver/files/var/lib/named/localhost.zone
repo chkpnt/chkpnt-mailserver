@@ -1,0 +1,6 @@
+; Ansible managed
+
+$TTL 1W
+@               IN SOA  @   root ( 2018092600 2D 4H 6W 1W )
+                IN NS           @
+                IN A            127.0.0.1

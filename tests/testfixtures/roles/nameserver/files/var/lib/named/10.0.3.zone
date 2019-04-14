@@ -1,0 +1,9 @@
+; Ansible managed
+
+$TTL 300
+@               IN SOA          ns.test.   root.test. ( 2018092600 2D 4H 6W 1W )
+                IN NS           ns.test.
+
+2               IN PTR          ns.test.
+10              IN PTR          sut.mydomain.test.
+20              IN PTR          mail-sink.theirdomain.test.
