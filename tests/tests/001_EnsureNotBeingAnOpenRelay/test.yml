@@ -1,20 +1,20 @@
 ---
 - name: 'setup (mail-sink)'
-  hosts: mail-sink
+  hosts: client
   tasks:
     - shell: '> ~/dead.letter'
     - shell: '> ~/mail.err'
 
-- hosts: mail-sink
+- hosts: client
   tasks:
-    - name: 'Send test mail from mail-sink via SUT without authentication'
+    - name: 'Send test mail from client to mail-sink via SUT without authentication'
       shell: |
         echo "Test-Body" | mailx -s "Test" \
         -S smtp=smtp://sut.mydomain.test \
         test@mail-sink.theirdomain.test 2> ~/mail.err
 
 - name: 'Assert mail could not be sent'
-  hosts: mail-sink
+  hosts: client
   tasks:
     - compare:
         file: ~/mail.err
@@ -25,7 +25,7 @@
         file: ~/dead.letter
         with_content: |
           Date: $$ .* $$
-          From: vagrant@mail-sink.theirdomain.test
+          From: vagrant@client.localdomain
           To: test@mail-sink.theirdomain.test
           Subject: Test
           Message-ID: $$ .* $$

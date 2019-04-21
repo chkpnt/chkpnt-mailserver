@@ -7,3 +7,4 @@ $TTL 300
 2               IN PTR          ns.test.
 10              IN PTR          sut.mydomain.test.
 20              IN PTR          mail-sink.theirdomain.test.
+201             IN PTR          ip-10.0.3.201.someisp.test.

@@ -1,0 +1,10 @@
+- name: Install postfix, which provides sendmail
+  zypper:
+    name: postfix
+    state: present
+
+- name: Disable postfix and make sure it is not running
+  systemd:
+    name: postfix
+    enabled: no
+    state: stopped

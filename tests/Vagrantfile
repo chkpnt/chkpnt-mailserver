@@ -20,15 +20,25 @@ Vagrant.configure("2") do |config|
         end
     end
 
-    config.vm.define :sut do |sut|
+    config.vm.define "sut" do |sut|
         sut.vm.box = "opensuse/openSUSE-15.0-x86_64"
         sut.vm.hostname = "sut.mydomain.test"
         sut.vm.network "private_network", ip: "10.0.3.10"
         sut.vm.provision :ansible do |ansible|
-            ansible.force_remote_user = true
             ansible.compatibility_mode = "2.0"
             ansible.verbose = true
             ansible.playbook = "sut.yml"
+        end
+    end
+
+    config.vm.define "client" do |sut|
+        sut.vm.box = "opensuse/openSUSE-15.0-x86_64"
+        sut.vm.hostname = "client.localdomain" # doens't match the DNS-RR by purpose
+        sut.vm.network "private_network", ip: "10.0.3.201"
+        sut.vm.provision :ansible do |ansible|
+            ansible.compatibility_mode = "2.0"
+            ansible.verbose = true
+            ansible.playbook = "client.yml"
         end
     end
 
@@ -37,7 +47,6 @@ Vagrant.configure("2") do |config|
         sut.vm.hostname = "mail-sink.theirdomain.test"
         sut.vm.network "private_network", ip: "10.0.3.20"
         sut.vm.provision :ansible do |ansible|
-            ansible.force_remote_user = true
             ansible.compatibility_mode = "2.0"
             ansible.verbose = true
             ansible.playbook = "mail-sink.yml"

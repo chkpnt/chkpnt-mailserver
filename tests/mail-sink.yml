@@ -3,5 +3,5 @@
   become: yes
   roles:
   - common
-  - mail-sink
   - { role: use-nameserver, with_ip: "10.0.3.2", domain: "theirdomain.test" }
+  - mail-sink
