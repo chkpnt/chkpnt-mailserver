@@ -1,0 +1,52 @@
+---
+- name: 'setup (mail-sink)'
+  hosts: mail-sink
+  tasks:
+    - copy: >
+        dest=/tmp/maildump content=""
+        owner=postfix group=postfix mode='644'
+      become: yes
+
+- hosts: sut
+  tasks:
+    - name: 'Send test mail from client to mail-sink via SUT with authentication'
+      shell: |
+        echo "Test-Body" | mailx -s "Test" \
+        -S ssl-verify=ignore \
+        -S smtp=smtps://sut.mydomain.test:465 \
+        -S smtp-auth=plain \
+        -S smtp-auth-user=john.doe@mydomain.test \
+        -S smtp-auth-password=changeme \
+        test@mail-sink.theirdomain.test
+
+- hosts: mail-sink
+  tasks:
+    - name: 'Assert mail has been received'
+      compare:
+        file: /tmp/maildump
+        with_content: |
+          X-Client-Addr: 10.0.3.10
+          X-Client-Proto: ESMTP
+          X-Helo-Args: sut.mydomain.test
+          X-Mail-Args: <vagrant@sut.mydomain.test>
+          X-Rcpt-Args: <test@mail-sink.theirdomain.test> ORCPT=rfc822;test@mail-sink.theirdomain.test
+          Received: from sut.mydomain.test ([10.0.3.10])
+          $$ \t $$by smtp-sink (smtp-sink) with ESMTP id $$ .* $$;
+          $$ .* $$
+          Received: from sut.mydomain.test (sut.mydomain.test [127.0.0.1])
+          $$ \t $$(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+          $$ \t $$(No client certificate requested)
+          $$ \t $$by sut.mydomain.test (Postfix) with ESMTPSA id $$ .* $$
+          $$ \t $$for <test@mail-sink.theirdomain.test>; $$ .* $$
+          Date: $$ .* $$
+          From: vagrant@sut.mydomain.test
+          To: test@mail-sink.theirdomain.test
+          Subject: Test
+          Message-ID: $$ .* $$
+          User-Agent: $$ .* $$
+          MIME-Version: 1.0
+          Content-Type: text/plain; charset=us-ascii
+          Content-Transfer-Encoding: 7bit
+          
+          Test-Body
+      
