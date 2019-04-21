@@ -2,7 +2,9 @@
 - name: 'setup (mail-sink)'
   hosts: mail-sink
   tasks:
-    - shell: '> /tmp/maildump'
+    - copy: >
+        dest=/tmp/maildump content=""
+        owner=postfix group=postfix mode='644'
       become: yes
 
 - hosts: sut

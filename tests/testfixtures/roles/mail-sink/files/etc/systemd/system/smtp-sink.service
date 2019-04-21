@@ -7,7 +7,6 @@ Conflicts=postfix.service
 
 [Service]
 Type=simple
-ExecStartPre=/bin/sh -c '> /tmp/maildump'
 ExecStartPre=/bin/echo 'Starting mail service (smtp-sink)'
 ExecStart=/usr/sbin/smtp-sink -v -D /tmp/maildump -u postfix :25 10
 
