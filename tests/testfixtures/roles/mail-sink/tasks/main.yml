@@ -3,4 +3,23 @@
     name: postfix
     state: present
 
-#- name: Ensure, smpt-sink is started
+- name: Disable postfix and make sure it is not running
+  systemd:
+    name: postfix
+    enabled: no
+    state: stopped
+
+- name: Install systemd service for smtp-sink
+  copy:
+    src: etc/systemd/system/smtp-sink.service
+    dest: /etc/systemd/system/smtp-sink.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable smtp-sink and make sure it is running
+  systemd:
+    name: smtp-sink
+    enabled: yes
+    state: started
+    daemon_reload: yes
