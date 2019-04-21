@@ -1,5 +1,23 @@
 ---
 
+- name: Ensure openSUSE will not override our config (see /usr/sbin/config.postfix)
+  block:
+    - lineinfile:
+        path: /etc/sysconfig/mail
+        regexp: '^MAIL_CREATE_CONFIG='
+        line: 'MAIL_CREATE_CONFIG="no"'
+    - copy:
+        # see /etc/postfix/system/config_postfix, which is called by /usr/lib/systemd/system/postfix.service
+        dest: /var/adm/postfix.configured
+        content: ""
+        force: no
+
+- name: Ensure the maps will be only updated by ansible and not by openSUSE (see /etc/postfix/system/update_postmaps, which is called by /usr/lib/systemd/system/postfix.service)
+  lineinfile:
+    path: /etc/sysconfig/postfix
+    regexp: '^POSTFIX_UPDATE_MAPS='
+    line: 'POSTFIX_UPDATE_MAPS="no"'
+
 - name: Configure Postfix
   template:
     src: etc/postfix/main.cf.j2
