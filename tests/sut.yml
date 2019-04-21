@@ -1,5 +1,6 @@
 ---
 - hosts: sut
+  become: yes
   roles:
   - common
   - { role: use-nameserver, with_ip: "10.0.3.2", domain: "mydomain.test" }
