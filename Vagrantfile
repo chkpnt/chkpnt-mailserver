@@ -15,7 +15,6 @@ Vagrant.configure("2") do |config|
         ansible.compatibility_mode = "2.0"
         ansible.verbose = true
         ansible.playbook = "playbook.yml"
-        ansible.tags = "postfix"
     end
 
     config.vm.network :forwarded_port, host: 10025, guest: 25    # smtp
