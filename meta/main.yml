@@ -1,6 +1,7 @@
 galaxy_info:
-  author: Gregor Dschung
+  role_name: mailserver
   description: your description
+  author: Gregor Dschung
   company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the
