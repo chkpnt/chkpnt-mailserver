@@ -1,0 +1,37 @@
+---
+- name: 'setup (mail-sink)'
+  hosts: mail-sink
+  tasks:
+    - shell: '> ~/dead.letter'
+    - shell: '> ~/mail.err'
+
+- hosts: mail-sink
+  tasks:
+    - name: 'Send test mail from mail-sink via SUT without authentication'
+      shell: |
+        echo "Test-Body" | mailx -s "Test" \
+        -S smtp=smtp://sut.mydomain.test \
+        test@mail-sink.theirdomain.test 2> ~/mail.err
+
+- name: 'Assert mail could not be sent'
+  hosts: mail-sink
+  tasks:
+    - compare:
+        file: ~/mail.err
+        with_content: |
+          smtp-server: 554 5.7.1 <test@mail-sink.theirdomain.test>: Relay access denied
+          . . . message not sent.
+    - compare:
+        file: ~/dead.letter
+        with_content: |
+          Date: $$ .* $$
+          From: vagrant@mail-sink.theirdomain.test
+          To: test@mail-sink.theirdomain.test
+          Subject: Test
+          Message-ID: $$ .* $$
+          User-Agent: $$ .* $$
+          MIME-Version: 1.0
+          Content-Type: text/plain; charset=us-ascii
+          Content-Transfer-Encoding: 7bit
+
+          Test-Body
