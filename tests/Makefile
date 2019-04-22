@@ -4,7 +4,7 @@ usage:
 	@echo ""
 	@echo "Targets:"
 	@echo "  setup   Starts and provisions the vagrant environment"
-	@echo "  test    Execute tests"
+	@echo "  tests   Execute tests"
 	@echo "  clean   Destroys the vagrant environmen"
 	@echo ""
 
@@ -22,5 +22,5 @@ all-tests := $(wildcard tests/*/test.yml)
 $(all-tests):
 	ansible-playbook $@
 
-.PHONY: test
-test: $(all-tests)
+.PHONY: tests
+tests: $(all-tests)

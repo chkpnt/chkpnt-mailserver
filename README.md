@@ -61,7 +61,7 @@ rDNS: `ip-10.0.3.201.someisp.test`
 
 Vagrant and VirtualBox is needed to run the tests, which are simple Ansible playbooks under [`tests/tests/*`](tests/tests/).
 
-There is a [`Makefile`](tests/Makefile) which can be used to setup the Vagrant environment (`make setup`) and to run the tests (`make test`).
+There is a [`Makefile`](tests/Makefile) which can be used to setup the Vagrant environment (`make setup`) and to run the tests (`make tests`).
 
 ## License
 
