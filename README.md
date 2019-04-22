@@ -31,7 +31,7 @@ There are some tests, which use a Vagrant environment composed of four VMs:
 ### Virtual machines
 
 #### `ns.test`
-A custom nameserver is needed as we need other RRs than simple A-RRs. The role `nameserver` is used which configures `bind` with the zone-files needed for the test environment.
+A custom nameserver is needed as we need other RRs than simple A-RRs. The role `nameserver` is used which configures `bind` with the [zone-files](tests/testfixtures/roles/nameserver/files/var/lib/named/) needed for the test environment.
 
 Hostname: `ns.test` <br>
 FQDN: `ns.test` <br>
