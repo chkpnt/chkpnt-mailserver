@@ -46,10 +46,12 @@ def compare(file, expected_content, regex_start_delimiter, regex_end_delimiter):
         content = f.read().splitlines()
     
     result = []
+    line_number = 0
     for line, expected_line in itertools.izip_longest(content, expected_content.splitlines(), fillvalue=""):
+        line_number += 1
         escaped_expected_line = __escape(expected_line, regex_start_delimiter, regex_end_delimiter)
         if not re.search("^{}$".format(escaped_expected_line), line):
-            result.append("'{}' does not match '{}'".format(line, escaped_expected_line))
+            result.append("Line {}: '{}' does not match '{}'".format(line_number, line, expected_line))
 
     return len(result) == 0, result
 
