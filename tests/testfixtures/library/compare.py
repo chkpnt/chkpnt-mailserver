@@ -54,48 +54,37 @@ def compare(file, expected_content, regex_start_delimiter, regex_end_delimiter, 
     with open(file) as f:
         content = f.read().splitlines()
     
-    if skip_line_pattern == None:
-        result = []
-        line_number = 0
-        for line, expected_line in itertools.izip_longest(content, expected_content.splitlines(), fillvalue=""):
-            line_number += 1
-            escaped_expected_line = __escape(expected_line, regex_start_delimiter, regex_end_delimiter)
-            if not re.search("^{}$".format(escaped_expected_line), line):
-                result.append("Line {}: '{}' does not match '{}'".format(line_number, line, expected_line))
+    expected_lines_iter = _pairwise(expected_content.splitlines())
+    expected_line, expected_next_line = next(expected_lines_iter, (None, None))
+    result = []
+    line_number = 0
+    for line in content:
+        line_number += 1
+        escaped_expected_line = __escape(expected_line, regex_start_delimiter, regex_end_delimiter)
+        escaped_expected_next_line = __escape(expected_next_line, regex_start_delimiter, regex_end_delimiter)
 
-        return len(result) == 0, result
-    else:
-        expected_lines_iter = _pairwise(expected_content.splitlines())
+        if escaped_expected_line != None and re.search("^{}$".format(escaped_expected_line), line):
+            expected_line, expected_next_line = next(expected_lines_iter, (None, None))
+            continue
+        
+        if escaped_expected_next_line != None and re.search("^{}$".format(escaped_expected_next_line), line):
+            next(expected_lines_iter, (None, None))
+            expected_line, expected_next_line = next(expected_lines_iter, (None, None))
+            continue
+        
+        if expected_line == skip_line_pattern:
+            continue
+        
+        result.append("Line {}: '{}' does not match '{}'".format(line_number, line, expected_line))
         expected_line, expected_next_line = next(expected_lines_iter, (None, None))
-        result = []
-        line_number = 0
-        for line in content:
-            line_number += 1
-            escaped_expected_line = __escape(expected_line, regex_start_delimiter, regex_end_delimiter)
-            escaped_expected_next_line = __escape(expected_next_line, regex_start_delimiter, regex_end_delimiter)
+        
+    while expected_line != None:
+        if expected_line == skip_line_pattern and expected_next_line == None:
+            break
+        result.append("Line {}: EOF does not match '{}'".format(line_number + 1, expected_line))
+        expected_line, expected_next_line = next(expected_lines_iter, (None, None))
 
-            if escaped_expected_line != None and re.search("^{}$".format(escaped_expected_line), line):
-                expected_line, expected_next_line = next(expected_lines_iter, (None, None))
-                continue
-            
-            if escaped_expected_next_line != None and re.search("^{}$".format(escaped_expected_next_line), line):
-                next(expected_lines_iter, (None, None))
-                expected_line, expected_next_line = next(expected_lines_iter, (None, None))
-                continue
-            
-            if expected_line == skip_line_pattern:
-                continue
-            
-            result.append("Line {}: '{}' does not match '{}'".format(line_number, line, expected_line))
-            expected_line, expected_next_line = next(expected_lines_iter, (None, None))
-            
-        while expected_line != None:
-            if expected_line == skip_line_pattern and expected_next_line == None:
-                break
-            result.append("Line {}: EOF does not match '{}'".format(line_number + 1, expected_line))
-            expected_line, expected_next_line = next(expected_lines_iter, (None, None))
-
-        return len(result) == 0, result
+    return len(result) == 0, result
 
 def main():
     fields = {
