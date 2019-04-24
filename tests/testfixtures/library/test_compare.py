@@ -98,6 +98,7 @@ Test-Body
     is_matching, result = compare(file_with_actual_content, excepted_content, "$$ ", " $$")
 
     assert is_matching == False
+    assert len(result) == 1
     assert result[0] == r"Line 1: 'Date: Wed, 24 Apr 2019 00:01:35 +0200' does not match 'Date: Wed, $$ \d{1,2} Jan \d{4} \d\d:\d\d:\d\d $$ +0200'"
 
 @pytest.fixture
@@ -128,7 +129,7 @@ Date: $$ .* $$, 24 Apr 2019 $$ .* $$ +0200$$ .*
 
     assert is_matching == False
     assert result[0] == r"Line 1: 'Date: Wed, 24 Apr 2019 00:01:35 +0200' does not match 'Date: $$ .* $$, 24 Apr 2019 $$ .* $$ +0200$$ .*'"
-    
+
 def test_other_delimiters(file_with_only_date_header):
     excepted_content = u"""\
 Date: AUF \w{3} ZU, 24 Apr 2019 AUF \d\d:\d\d:\d\d ZU +0200
@@ -138,4 +139,110 @@ Date: AUF \w{3} ZU, 24 Apr 2019 AUF \d\d:\d\d:\d\d ZU +0200
 
     assert is_matching == True
     assert result == []
+
+def test_skip_lines_match1(file_with_actual_content):
+    excepted_content = u"""\
+...
+To: test@mail-sink.theirdomain.test
+Subject: Test
+...
+"""
+    is_matching, result = compare(file_with_actual_content, excepted_content, "$$ ", " $$", skip_line_pattern="...")
+
+    assert is_matching == True
+    assert result == []
+
+def test_skip_lines_match2(file_with_actual_content):
+    excepted_content = u"""\
+...
+To: test@mail-sink.theirdomain.test
+Subject: Test
+...
+Content-Transfer-Encoding: 7bit
+...
+"""
+    is_matching, result = compare(file_with_actual_content, excepted_content, "$$ ", " $$", skip_line_pattern="...")
+
+    assert is_matching == True
+    assert result == []
+
+def test_skip_lines_match3(file_with_actual_content):
+    excepted_content = u"""\
+...
+To: test@mail-sink.theirdomain.test
+Subject: Test
+...
+Content-Transfer-Encoding: 7bit
+...
+Test-Body
+"""
+    is_matching, result = compare(file_with_actual_content, excepted_content, "$$ ", " $$", skip_line_pattern="...")
+
+    assert is_matching == True
+    assert result == []
+
+def test_skip_lines_match4(file_with_actual_content):
+    excepted_content = u"""\
+...
+To: $$ .+@.+ $$
+Subject: Test
+...
+Content-Transfer-Encoding: $$ .* $$
+...
+Test-Body
+"""
+    is_matching, result = compare(file_with_actual_content, excepted_content, "$$ ", " $$", skip_line_pattern="...")
+
+    assert is_matching == True
+    assert result == []
+
+def test_skip_lines_no_match1(file_with_actual_content):
+    excepted_content = u"""\
+...
+To: test@mail-sink.theirdomain.test
+Subject: Does not match
+...
+"""
+    is_matching, result = compare(file_with_actual_content, excepted_content, "$$ ", " $$", skip_line_pattern="...")
+
+    assert is_matching == False
+    assert len(result) == 1
+    assert result[0] == "Line 4: 'Subject: Test' does not match 'Subject: Does not match'"
+
+def test_skip_lines_no_match2(file_with_actual_content):
+    excepted_content = u"""\
+...
+To: test@mail-sink.theirdomain.test
+Subject: Does not match
+...
+Content-Transfer-Encoding: 42bit
+...
+"""
+    is_matching, result = compare(file_with_actual_content, excepted_content, "$$ ", " $$", skip_line_pattern="...")
+
+    assert is_matching == False
+    # The line with the wrong "Content-Transfer-Encoding" is not matched because
+    # the "..." after the Subject line is greedy.
+    assert len(result) == 3
+    assert result[0] == "Line 4: 'Subject: Test' does not match 'Subject: Does not match'"
+    assert result[1] == "Line 12: EOF does not match '...'"
+    assert result[2] == "Line 12: EOF does not match 'Content-Transfer-Encoding: 42bit'"
+
+def test_skip_lines_no_match3(file_with_actual_content):
+    excepted_content = u"""\
+...
+To: test@mail-sink.theirdomain.test
+Subject: Test
+...
+Content-Transfer-Encoding: 42bit
+...
+"""
+    is_matching, result = compare(file_with_actual_content, excepted_content, "$$ ", " $$", skip_line_pattern="...")
+
+    assert is_matching == False
+    # The line with the wrong "Content-Transfer-Encoding" is not matched because
+    # the "..." after the Subject line is greedy.
+    assert len(result) == 2
+    assert result[0] == "Line 12: EOF does not match '...'"
+    assert result[1] == "Line 12: EOF does not match 'Content-Transfer-Encoding: 42bit'"
 
