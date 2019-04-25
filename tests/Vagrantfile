@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
             ansible.force_remote_user = true
             ansible.compatibility_mode = "2.0"
             ansible.verbose = true
-            ansible.playbook = "nameserver.yml"
+            ansible.playbook = "testfixtures/vms/nameserver.yml"
         end
     end
 
@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
         sut.vm.provision :ansible do |ansible|
             ansible.compatibility_mode = "2.0"
             ansible.verbose = true
-            ansible.playbook = "sut.yml"
+            ansible.playbook = "testfixtures/vms/sut.yml"
         end
     end
 
@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
         sut.vm.provision :ansible do |ansible|
             ansible.compatibility_mode = "2.0"
             ansible.verbose = true
-            ansible.playbook = "client.yml"
+            ansible.playbook = "testfixtures/vms/client.yml"
         end
     end
 
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
         sut.vm.provision :ansible do |ansible|
             ansible.compatibility_mode = "2.0"
             ansible.verbose = true
-            ansible.playbook = "mail-sink.yml"
+            ansible.playbook = "testfixtures/vms/mail-sink.yml"
         end
     end
 

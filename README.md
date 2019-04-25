@@ -18,7 +18,7 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver.
 
 ## Example Playbook
 
-Please have a look at [tests/sut.yml](tests/sut.yml) and [tests/manual/playbook.yml](tests/manual/playbook.yml).
+Please have a look at [tests/testfixtures/vms/sut.yml](tests/testfixtures/vms/sut.yml) and [tests/manual/playbook.yml](tests/manual/playbook.yml).
 
 ## Tests
 There are some tests, which use a Vagrant environment composed of four VMs:
@@ -33,7 +33,7 @@ FQDN: `ns.test` <br>
 IP: `10.0.3.2`
 
 #### `sut.mydomain.test`
-This VM is the *system-under-test* which gets the role `chkpnt-mailserver` with all the relevant settings we want to test.
+This VM is the *system-under-test* which gets the role `chkpnt.mailserver` with all the relevant settings we want to test.
 
 Hostname / FQDN: `sut.mydomain.test` <br>
 IP: `10.0.3.10`
