@@ -28,10 +28,6 @@
           From: vagrant@client.localdomain
           To: test@mail-sink.theirdomain.test
           Subject: Test
-          Message-ID: $$ .* $$
-          User-Agent: $$ .* $$
-          MIME-Version: 1.0
-          Content-Type: text/plain; charset=us-ascii
-          Content-Transfer-Encoding: 7bit
+          ...
 
           Test-Body

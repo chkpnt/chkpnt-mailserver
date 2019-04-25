@@ -18,24 +18,15 @@
       compare:
         file: /tmp/maildump
         with_content: |+
-          X-Client-Addr: 10.0.3.10
-          X-Client-Proto: ESMTP
-          X-Helo-Args: sut.mydomain.test
-          X-Mail-Args: <vagrant@sut.mydomain.test>
-          X-Rcpt-Args: <test@mail-sink.theirdomain.test> ORCPT=rfc822;test@mail-sink.theirdomain.test
+          ...
           Received: from sut.mydomain.test ([10.0.3.10])
-          $$ \t $$by smtp-sink (smtp-sink) with ESMTP id $$ .* $$;
-          $$ .* $$
+          ...
           Received: by sut.mydomain.test (Postfix, from userid 1000)
-          $$ .* $$
+          ...
           Date: $$ .* $$
           To: test@mail-sink.theirdomain.test
           Subject: Test
-          User-Agent: $$ .* $$
-          MIME-Version: 1.0
-          Content-Type: text/plain; charset=us-ascii
-          Content-Transfer-Encoding: 7bit
-          Message-Id: $$ .* $$
+          ...
           From: vagrant@sut.mydomain.test
           
           Test-Body
