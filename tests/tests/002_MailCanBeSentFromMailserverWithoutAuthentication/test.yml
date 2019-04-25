@@ -17,7 +17,7 @@
     - name: 'Assert mail has been received'
       compare:
         file: /tmp/maildump
-        with_content: |
+        with_content: |+
           X-Client-Addr: 10.0.3.10
           X-Client-Proto: ESMTP
           X-Helo-Args: sut.mydomain.test
@@ -39,4 +39,4 @@
           From: vagrant@sut.mydomain.test
           
           Test-Body
-      
+          
