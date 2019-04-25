@@ -21,7 +21,8 @@
         - { user: 'john.doe@mydomain.test', password: '{BLF-CRYPT}$2y$10$6W9VYuRklwLg8y2UoP6YHuK5Q8g7g.LOJdSa7K4CgoVMmARNYMVMK' } # Password: changeme
       mail_mailboxes:
         - { name: 'john.doe@mydomain.test', path: '/srv/mail/john' }
-      mail_aliases: []
+      mail_aliases:
+        - { for: '@mydomain.test', destination: 'john.doe@example.com' }
       mail_recipient_access:
-        - for: 'reject@example.com'
+        - for: 'reject@mydomain.test'
           action: 'REJECT This address is not supposed to receive mails!'

@@ -1,10 +1,10 @@
-- name: Install postfix, which provides sendmail
+- name: Install postfix, which provides a MUA (sendmail) and acts as the local MTA 
   zypper:
     name: postfix
     state: present
 
-- name: Disable postfix and make sure it is not running
+- name: Enable postfix and make sure it is running
   systemd:
     name: postfix
-    enabled: no
-    state: stopped
+    enabled: yes
+    state: started

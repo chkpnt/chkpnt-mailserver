@@ -1,0 +1,22 @@
+---
+- name: 'setup (mail-sink)'
+  hosts: client
+  tasks:
+    - shell: '> /var/mail/vagrant'
+
+- hosts: client
+  tasks:
+    - name: 'Send a mail from client to an address that is rejected'
+      shell: echo "Test-Body" | mailx -s "Test" reject@mydomain.test
+
+- hosts: client
+  tasks:
+    - name: 'Assert client has received a DSN containing reject informations'
+      compare:
+        file: /var/mail/vagrant
+        with_content: |
+          ...
+          Remote-MTA: dns; sut.mydomain.test
+          Diagnostic-Code: smtp; 554 5.7.1 <reject@mydomain.test>: Recipient address
+              rejected: This address is not supposed to receive mails!
+          ...
