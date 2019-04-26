@@ -2,10 +2,9 @@
 
 - name: Install common packages
   zypper:
-    name: "{{ item }}"
+    name:
+      - command-not-found
+      - htop
+      - man
+      - telnet
     state: present
-  with_items:
-    - command-not-found
-    - htop
-    - man
-    - telnet
