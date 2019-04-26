@@ -1,15 +1,9 @@
 ---
-- name: 'setup (mail-sink)'
-  hosts: mail-sink
-  tasks:
-    - copy: >
-        dest=/tmp/maildump content=""
-        owner=postfix group=postfix mode='644'
-      become: yes
+- import_playbook: ../prepare/mail-sink.yml
 
 - hosts: sut
   tasks:
-    - name: 'Send test mail from client to mail-sink via SUT with authentication'
+    - name: Send test mail from client to mail-sink via SUT with authentication
       shell: |
         echo "Test-Body" | mailx -s "Test" \
         -S ssl-verify=ignore \
@@ -21,7 +15,7 @@
 
 - hosts: mail-sink
   tasks:
-    - name: 'Assert mail has been received'
+    - name: Assert mail has been received
       compare:
         file: /tmp/maildump
         with_content: |+

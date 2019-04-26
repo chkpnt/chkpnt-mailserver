@@ -1,0 +1,7 @@
+---
+- name: Prepare client
+  hosts: client
+  tasks:
+    - shell: '> ~/dead.letter'
+    - shell: '> ~/mail.err'
+    - shell: '> /var/mail/vagrant'

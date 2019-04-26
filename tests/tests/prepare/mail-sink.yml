@@ -1,0 +1,9 @@
+---
+- name: Prepare mail-sink
+  hosts: mail-sink
+  tasks:
+    - copy: >
+        dest=/tmp/maildump content=""
+        owner=postfix group=postfix mode='644'
+      become: yes
+    - shell: '> /var/mail/vagrant'
