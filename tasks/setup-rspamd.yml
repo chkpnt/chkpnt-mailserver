@@ -44,6 +44,18 @@
   notify:
     - restart rspamd
 
+- name: Ensure directory for the private keys exists
+  file: >
+    path="{{ item.private_key | dirname }}" state=directory recurse=yes
+    owner=_rspamd group=_rspamd mode=0500
+  loop: "{{ mail_dkim_keys | json_query('[?copy_from]') }}"
+
+- name: Copy keys for DKIM-signing
+  copy: >
+    src="{{ item.copy_from }}" dest="{{ item.private_key }}"
+    owner=_rspamd group=_rspamd mode=0400
+  loop: "{{ mail_dkim_keys | json_query('[?copy_from]') }}"
+
 # Notice: Keys have to be accessible for user _rspamd
 - name: Check if keys for DKIM-signing are present
   block:

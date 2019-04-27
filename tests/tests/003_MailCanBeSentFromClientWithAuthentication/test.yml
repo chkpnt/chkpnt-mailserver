@@ -5,7 +5,7 @@
   tasks:
     - name: Send test mail from client to mail-sink via SUT with authentication
       shell: |
-        echo "Test-Body" | mailx -s "Test" \
+        echo "Test-Body" | mailx -s "Test" -r "john.doe@mydomain.test" \
         -S ssl-verify=ignore \
         -S smtp=smtps://sut.mydomain.test:465 \
         -S smtp-auth=plain \
@@ -26,7 +26,7 @@
           Received: from sut.mydomain.test (sut.mydomain.test [127.0.0.1])
           ...
           Date: $$ .* $$
-          From: vagrant@sut.mydomain.test
+          From: john.doe@mydomain.test
           To: test@mail-sink.theirdomain.test
           Subject: Test
           ...
