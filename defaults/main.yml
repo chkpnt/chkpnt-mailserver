@@ -17,9 +17,9 @@ mail_ssl:
   generate_certificate_for_test: yes
 
 mail_dkim_keys:
-  - { domain: example.com, selector: 'key', private_key: '/etc/ssl/private/key1._domainkey.example.com.privkey.pem' }
-  - { domain: example.org, selector: 'key', private_key: '/etc/ssl/private/key1._domainkey.example.org.privkey.pem' }
-  - { domain: example.net, selector: 'key', private_key: '/etc/ssl/private/key1._domainkey.example.net.privkey.pem' }
+  - { domain: example.com, selector: 'key1', private_key: '/var/lib/rspamd/dkim/example.com.key1.key' }
+  - { domain: example.org, selector: 'key1', private_key: '/var/lib/rspamd/dkim/example.org.key1.key' }
+  - { domain: example.net, selector: 'key1', private_key: '/var/lib/rspamd/dkim/example.net.key1.key' }
 
 # Hash can be computated with doveadm.
 # I recommend using Blowfish as the hashing schema, the ideal number of rounds depends on your system.

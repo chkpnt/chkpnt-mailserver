@@ -27,3 +27,12 @@
 - name: postmap recipient_access
   command: postmap hash:/etc/postfix/recipient_access
   notify: restart postfix
+
+- name: print error_messages
+  debug:
+    var: error_messages
+  failed_when: True
+
+- name: print everything alright
+  debug:
+    msg: Nothing special happened during the configuration. The mailserver should work properly.

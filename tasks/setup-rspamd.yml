@@ -44,6 +44,27 @@
   notify:
     - restart rspamd
 
+# Notice: Keys have to be accessible for user _rspamd
+- name: Check if keys for DKIM-signing are present
+  block:
+    - stat:
+        path: "{{ item }}"
+      loop: "{{ mail_dkim_keys | map(attribute='private_key') | list | unique }}"
+      register: check_dkim_keys
+    - set_fact:
+        error_messages: >-
+          {%- set keys_not_found = mail_dkim_keys | json_query("[?private_key=='" ~ item ~ "']") -%}
+          {%- set new_messages = [] -%}
+          {%- for key_not_found in keys_not_found -%}
+            {%- if new_messages.append(
+              "ERROR: DKIM-signing for " ~ key_not_found.domain ~ " will not work as the expected key is missing. " ~
+              "To generate a key and an appropriate TXT-RR, you may want to call " ~
+              "'rspamadm dkim_keygen -d " ~ key_not_found.domain ~ " -s " ~ key_not_found.selector ~ " -k " ~ key_not_found.private_key ~ "'")
+            -%}{%- endif -%}
+          {%- endfor -%}
+          {{ error_messages + new_messages }}
+      loop: "{{ check_dkim_keys | json_query('results[?stat.exists==`false`].item') }}"
+
 - name: Configure spam actions
   template:
     src: etc/rspamd/local.d/actions.conf.j2
