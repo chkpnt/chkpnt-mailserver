@@ -1,0 +1,27 @@
+---
+- import_playbook: ../prepare/mail-sink.yml
+
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address that is relayed to another SMTP
+      shell: |
+        echo "Test-Body" | mailx -s "Test" remote-delivery@mydomain.test
+
+- hosts: mail-sink
+  tasks:
+    - name: Assert mail is received by the next SMTP hop
+      compare:
+        file: /tmp/maildump
+        with_content: |+
+          ...
+          Received: from sut.mydomain.test ([10.0.3.10])
+          ...
+          Received: from client.localdomain (unknown [10.0.3.201])
+          ...
+          To: remote-delivery@mydomain.test
+          Subject: Test
+          ...
+          From: vagrant@client.localdomain
+
+          Test-Body
+

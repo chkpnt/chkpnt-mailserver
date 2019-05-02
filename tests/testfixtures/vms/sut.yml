@@ -22,7 +22,13 @@
       mail_mailboxes:
         - { name: 'john.doe@mydomain.test', path: '/srv/mail/john' }
       mail_aliases:
-        - { for: '@mydomain.test', destination: 'john.doe@example.com' }
+        # Needed for mail_transports, otherwise the catch-all would match:
+        - { for: 'remote-delivery@mydomain.test', destination: 'remote-delivery@mydomain.test' }
+        # Catch-all:
+        - { for: '@mydomain.test', destination: 'john.doe@ydomain.test' }
       mail_recipient_access:
         - for: 'reject@mydomain.test'
           action: 'REJECT This address is not supposed to receive mails!'
+      mail_transports:
+        - for: 'remote-delivery@mydomain.test'
+          nexthop: 'smtp:theirdomain.test'
