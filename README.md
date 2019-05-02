@@ -2,7 +2,21 @@
 
 # mailserver
 
-The purpose of this Ansible role is to fulfill my demands on my own mailserver.
+The purpose of this Ansible role is to fulfill my demands on my own mailserver:
+
+- [x] Supports openSUSE Leap 15.0
+- [x] Orchestration of Postfix (MTA), Dovecot (MDA) and Rspamd
+- [x] Postfix uses Dovecot for authentication (SMTP AUTH through Dovecot SASL)
+- [x] No databases, just plain files
+- [x] Outgoing mails are DKIM signed
+- [x] Mails to specific addresses can be relayed to another MTA
+- [x] Mails to specific addresses can be rejected
+- [x] Catch-all accounts can be configured
+- [ ] (should work, not tested yet) Multiple domains are supported
+- [ ] (should work, not tested yet) Spam is rejected
+- [ ] (should work, not tested yet) Potiantial spam is greylisted
+- [ ] Integration of VirusTotal.com
+- [ ] Nice reports
 
 ## Requirements
 
