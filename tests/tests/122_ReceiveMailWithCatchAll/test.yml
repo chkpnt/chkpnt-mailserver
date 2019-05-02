@@ -1,0 +1,33 @@
+---
+- import_playbook: ../prepare/sut.yml
+
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address SUT is responsible for
+      shell: |
+        echo "Test-Body" | mailx -s "Test" does-not-exist@mydomain.test
+
+- hosts: sut
+  tasks:
+    - name: Get path of mail in maildir
+      find:
+        paths: /srv/mail/john/Maildir/new/
+      register: find_result
+      become: yes
+      become_user: vmail
+      
+    - name: Assert mail is received by SUT and delivered to the catch-all account
+      compare:
+        file: "{{ find_result.files[0].path }}"
+        with_content: |
+          Return-Path: <vagrant@client.localdomain>
+          Delivered-To: john.doe@mydomain.test
+          ...
+          To: does-not-exist@mydomain.test
+          Subject: Test
+          ...
+          From: vagrant@client.localdomain
+          
+          Test-Body
+      become: yes
+      become_user: vmail

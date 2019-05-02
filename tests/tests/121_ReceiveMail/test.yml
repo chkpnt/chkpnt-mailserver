@@ -1,0 +1,43 @@
+---
+- import_playbook: ../prepare/sut.yml
+
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address SUT is responsible for
+      shell: |
+        echo "Test-Body" | mailx -s "Test" jane.doe@mydomain.test
+
+- hosts: sut
+  tasks:
+    - name: Get path of mail in maildir
+      find:
+        paths: /srv/mail/jane/Maildir/new/
+      register: find_result
+      become: yes
+      become_user: vmail
+      
+    - name: Assert mail is received and delivered at SUT
+      compare:
+        file: "{{ find_result.files[0].path }}"
+        with_content: |
+          Return-Path: <vagrant@client.localdomain>
+          Delivered-To: jane.doe@mydomain.test
+          Received: from sut.mydomain.test
+          $$ \t $$by sut.mydomain.test with LMTP
+          $$ \t $$id $$ .* $$
+          $$ \t $$(envelope-from <vagrant@client.localdomain>)
+          $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
+          Received: from client.localdomain (ip-10.0.3.201.someisp.test [10.0.3.201])
+          $$ \t $$by sut.mydomain.test (Postfix) with ESMTP id $$ .* $$
+          $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
+          Received: by client.localdomain (Postfix, from userid 1000)
+          ...
+          Date: $$ .* $$
+          To: jane.doe@mydomain.test
+          Subject: Test
+          ...
+          From: vagrant@client.localdomain
+          
+          Test-Body
+      become: yes
+      become_user: vmail
