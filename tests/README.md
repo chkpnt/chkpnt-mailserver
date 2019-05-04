@@ -16,6 +16,7 @@ There is a [`Makefile`](Makefile) which can be used to setup the Vagrant environ
 | 11* | Postfix remote delivery        |
 | 12* | Mail delivery                  |
 | 22* | DKIM stuff                     |
+| 30* | IMAP                           |
 
 ### Vagrant environment
 

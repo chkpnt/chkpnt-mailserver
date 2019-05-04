@@ -8,3 +8,8 @@
     name: postfix
     enabled: yes
     state: started
+
+- name: Install expect needed for some tests
+  zypper:
+    name: expect
+    state: present

@@ -1,0 +1,38 @@
+---
+- import_playbook: ../prepare/client.yml
+
+- hosts: client
+  tasks:
+    - name: Login to Dovecot as john.doe@mydomain.test with wrong password
+      shell: |
+        log_file -noappend imap.log
+        spawn openssl s_client -crlf -connect sut.mydomain.test:993
+        expect "\* OK * Dovecot ready."
+
+        send "a001 login john.doe@mydomain.test wrong_password\r"
+        expect -exact "a001 NO \[AUTHENTICATIONFAILED\] Authentication failed."
+
+        send "a002 logout\r"
+        expect eof
+
+        exit 0
+      args:
+        executable: /usr/bin/expect
+    - name: Clean up imap.log
+      replace: path=imap.log regexp='^([^\r]*)\r+$' replace='\1'
+
+- hosts: client
+  tasks:
+    - name: Assert imap login failed
+      compare:
+        file: imap.log
+        with_content: |
+          spawn openssl s_client -crlf -connect sut.mydomain.test:993
+          ...
+          * OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE LITERAL+ AUTH=PLAIN] Dovecot ready.
+          a001 login john.doe@mydomain.test wrong_password
+          a001 NO [AUTHENTICATIONFAILED] Authentication failed.
+          a002 logout
+          * BYE Logging out
+          a002 OK Logout completed.
+          closed
