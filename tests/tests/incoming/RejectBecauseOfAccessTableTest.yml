@@ -1,5 +1,5 @@
 ---
-- import_playbook: ../prepare/client.yml
+- import_playbook: ../_prepare/client.yml
 
 - hosts: client
   tasks:

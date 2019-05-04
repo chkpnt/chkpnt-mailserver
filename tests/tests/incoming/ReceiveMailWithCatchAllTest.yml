@@ -1,5 +1,5 @@
 ---
-- import_playbook: ../prepare/sut.yml
+- import_playbook: ../_prepare/sut.yml
 
 - hosts: client
   tasks:

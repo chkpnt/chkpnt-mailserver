@@ -16,7 +16,7 @@ setup:
 clean:
 	vagrant destroy -f
 
-all-tests := $(wildcard tests/*/test.yml)
+all-tests := $(wildcard tests/*/*Test.yml)
 .NOTPARALLEL: $(all-tests)
 .PHONY: $(all-tests)
 $(all-tests):
