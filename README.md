@@ -12,7 +12,7 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver:
 - [x] Mails to specific addresses can be relayed to another MTA
 - [x] Mails to specific addresses can be rejected
 - [x] Catch-all accounts can be configured
-- [ ] (should work, not tested yet) Multiple domains are supported
+- [x] Multiple domains are supported
 - [ ] (should work, not tested yet) Spam is rejected
 - [ ] (should work, not tested yet) Potiantial spam is greylisted
 - [ ] Integration of VirusTotal.com

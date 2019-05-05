@@ -11,6 +11,7 @@
       mail_mailname: sut.mydomain.test
       mail_mailbox_domains:
         - mydomain.test
+        - myotherdomain.test
       mail_ssl:
         certificate: '/etc/ssl/servercerts/mydomain.test.pem'
         private_key: '/etc/ssl/private/mydomain.test.key'
@@ -23,6 +24,7 @@
       mail_mailboxes:
         - { name: 'john.doe@mydomain.test', path: '/srv/mail/john' }
         - { name: 'jane.doe@mydomain.test', path: '/srv/mail/jane' }
+        - { name: 'erika.m@myotherdomain.test', path: '/srv/mail/erika' }
       mail_aliases:
         # Needed as otherwise the catch-all would match:
         - { for: 'remote-delivery@mydomain.test', destination: 'remote-delivery@mydomain.test' }

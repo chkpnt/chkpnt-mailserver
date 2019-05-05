@@ -33,7 +33,7 @@
           ...
           virtual_alias_maps = hash:/etc/postfix/virtual_aliases
           ...
-          virtual_mailbox_domains = mydomain.test
+          virtual_mailbox_domains = mydomain.test, myotherdomain.test
           ...
           virtual_mailbox_maps = hash:/etc/postfix/virtual_mailboxes
           ...
@@ -61,6 +61,7 @@
           ...
           john.doe@mydomain.test    OK
           jane.doe@mydomain.test    OK
+          erika.m@myotherdomain.test    OK
 
     - name: Assert virtual aliases map is configured as expected
       compare:

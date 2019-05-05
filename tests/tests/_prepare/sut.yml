@@ -6,4 +6,5 @@
       become: yes
     - file: path=/srv/mail/jane/Maildir state=absent
       become: yes
-    
+    - file: path=/srv/mail/erika/Maildir state=absent
+      become: yes

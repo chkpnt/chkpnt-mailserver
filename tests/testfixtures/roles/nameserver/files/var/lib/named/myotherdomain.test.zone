@@ -1,0 +1,7 @@
+; Ansible managed
+
+$TTL 300
+@                       IN SOA  ns.test.  root.test. ( 2019050500 1D 2H 1W 300 )
+                        IN NS   ns.test.
+                        IN MX   10 sut.mydomain.test.
+
