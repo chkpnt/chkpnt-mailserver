@@ -48,7 +48,7 @@ mail_aliases:
   - { for: '@example.org', destination: 'john.doe@example.org' }
   - { for: '@example.net', destination: 'john.doe@example.net' }
 
-mail_recipient_access:
+mail_recipient_restrictions:
   - for: 'reject@example.com'
     action: 'REJECT This address is not supposed to receive mails!'
 

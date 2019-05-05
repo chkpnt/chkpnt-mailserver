@@ -1,6 +1,7 @@
 # {{ ansible_managed }}
+# http://www.postfix.org/postconf.5.html#smtpd_recipient_restrictions
 # http://www.postfix.org/access.5.html
 
-{% for entry in mail_recipient_access %}
+{% for entry in mail_recipient_restrictions %}
 {{ entry.for.ljust(30) }}   {{ entry.action }}
 {% endfor %}

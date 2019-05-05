@@ -113,7 +113,7 @@ smtpd_sender_restrictions = hash:/etc/postfix/access
 smtpd_relay_restrictions = permit_mynetworks,
                            permit_sasl_authenticated,
                            reject_unauth_destination 
-smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_access
+smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_restrictions
 
 smtpd_tls_security_level = may
 smtpd_tls_auth_only = yes

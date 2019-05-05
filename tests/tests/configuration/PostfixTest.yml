@@ -14,7 +14,7 @@
           inet_interfaces = all
           inet_protocols = all
           ...
-          smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_access
+          smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_restrictions
           ...
           smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
           ...
@@ -47,9 +47,9 @@
           ...
           remote-delivery@mydomain.test    smtp:theirdomain.test
 
-    - name: Assert recipient restrinction map is configured as expected
+    - name: Assert recipient restriction map is configured as expected
       compare:
-        file: /etc/postfix/recipient_access
+        file: /etc/postfix/recipient_restrictions
         with_content: |
           ...
           reject@mydomain.test             REJECT This address is not supposed to receive mails!

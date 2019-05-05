@@ -29,7 +29,7 @@
         - { for: 'jane.doe@mydomain.test', destination: 'jane.doe@mydomain.test' }
         # Catch-all:
         - { for: '@mydomain.test', destination: 'john.doe@mydomain.test' }
-      mail_recipient_access:
+      mail_recipient_restrictions:
         - for: 'reject@mydomain.test'
           action: 'REJECT This address is not supposed to receive mails!'
       mail_transports:

@@ -62,9 +62,9 @@
   notify:
     - postmap transport
 
-- name: Configure access-db for recipient-checks
+- name: Configure recipient restrictions map
   template:
-    src: etc/postfix/recipient_access.j2
-    dest: /etc/postfix/recipient_access
+    src: etc/postfix/recipient_restrictions.j2
+    dest: /etc/postfix/recipient_restrictions
   notify:
-    - postmap recipient_access
+    - postmap recipient_restrictions
