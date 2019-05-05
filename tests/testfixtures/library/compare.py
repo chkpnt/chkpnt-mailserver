@@ -109,12 +109,32 @@ class FileComparer(object):
 def main():
     fields = {
         "file": { "required": True, "type": "str" },
-        "with_content": { "required": True, "type": "str" },
+        "with_content": { "type": "str" },
+        "with_file": { "type": "str" },
         "regex_start_delimiter": { "required": False, "type": "str", "default": "$$ " },
         "regex_end_delimiter": { "required": False, "type": "str", "default": " $$" },
         "skip_line_pattern": { "required": False, "type": "str", "default": "..."}
     }
-    module = AnsibleModule(argument_spec=fields)
+    module = AnsibleModule(
+        argument_spec=fields,
+        required_one_of=[
+            ['with_content', 'with_file']
+        ],
+        mutually_exclusive=[
+            ['with_content', 'with_file']
+        ]
+    )
+
+    # TODO: This is executed on the host.
+    # I'd like to compare 'file' with a local 'file', I still have
+    # to figure out how.
+    # Till then, a work-around is to use 'with_content: "{{ lookup('file', 'path/to/local/file') }}"'
+    if module.params['with_file'] is not None:
+        with open(module.params['with_file']) as f:
+            expected_content = f.read().splitlines()
+
+    if module.params['with_content'] is not None:
+        expected_content = module.params['with_content']
 
     comparer = FileComparer(
         regex_start_delimiter=module.params['regex_start_delimiter'],
@@ -123,7 +143,7 @@ def main():
     )
     is_matching, result = comparer.matches(
         module.params['file'],
-        module.params['with_content'],
+        expected_content,
     )
     if is_matching:
         module.exit_json(changed=False, meta=result)

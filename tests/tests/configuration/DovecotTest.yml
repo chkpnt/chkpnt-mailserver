@@ -1,0 +1,8 @@
+---
+
+- hosts: sut
+  tasks:
+    - name: Assert Dovecot is configured as expected
+      compare:
+        file: /etc/dovecot/dovecot.conf
+        with_content: "{{ lookup('file', 'assets/expected_dovecot.conf') }}"

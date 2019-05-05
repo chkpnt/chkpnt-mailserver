@@ -1,0 +1,72 @@
+---
+
+- hosts: sut
+  tasks:
+    - name: Export Postfix configuration
+      shell: postconf > /tmp/postfix.conf
+      become: yes
+
+    - name: Assert Postfix is configured as expected
+      compare:
+        file: /tmp/postfix.conf
+        with_content: |
+          ...
+          inet_interfaces = all
+          inet_protocols = all
+          ...
+          smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_access
+          ...
+          smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+          ...
+          smtpd_tls_cert_file = /etc/ssl/servercerts/mydomain.test.pem
+          ...
+          smtpd_tls_mandatory_ciphers = high
+          smtpd_tls_mandatory_exclude_ciphers =
+          smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
+          smtpd_tls_protocols = !SSLv2, !SSLv3
+          ...
+          smtpd_tls_security_level = may
+          ...
+          transport_maps = hash:/etc/postfix/transport
+          ...
+          virtual_alias_domains = $virtual_alias_maps
+          ...
+          virtual_alias_maps = hash:/etc/postfix/virtual_aliases
+          ...
+          virtual_mailbox_domains = mydomain.test
+          ...
+          virtual_mailbox_maps = hash:/etc/postfix/virtual_mailboxes
+          ...
+          virtual_transport = lmtp:unix:private/dovecot-lmtp
+          ...
+
+    - name: Assert transport map is configured as expected
+      compare:
+        file: /etc/postfix/transport
+        with_content: |
+          ...
+          remote-delivery@mydomain.test    smtp:theirdomain.test
+
+    - name: Assert recipient restrinction map is configured as expected
+      compare:
+        file: /etc/postfix/recipient_access
+        with_content: |
+          ...
+          reject@mydomain.test             REJECT This address is not supposed to receive mails!
+
+    - name: Assert virtual mailbox map is configured as expected
+      compare:
+        file: /etc/postfix/virtual_mailboxes
+        with_content: |
+          ...
+          john.doe@mydomain.test    OK
+          jane.doe@mydomain.test    OK
+
+    - name: Assert virtual aliases map is configured as expected
+      compare:
+        file: /etc/postfix/virtual_aliases
+        with_content: |
+          ...
+          remote-delivery@mydomain.test      remote-delivery@mydomain.test
+          jane.doe@mydomain.test             jane.doe@mydomain.test
+          @mydomain.test                     john.doe@mydomain.test
