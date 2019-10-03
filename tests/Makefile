@@ -11,6 +11,10 @@ usage:
 .PHONY: setup
 setup:
 	vagrant up --provision
+	@echo "As long as 'hostname' isn't part of the base boxes or https://github.com/hashicorp/vagrant/pull/11100"
+	@echo "is merged, the VMs need to be restarted once to use the correct hostname:"
+	vagrant halt
+	vagrant up
 
 .PHONY: clean
 clean:
