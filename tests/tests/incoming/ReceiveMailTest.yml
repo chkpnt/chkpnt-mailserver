@@ -20,23 +20,23 @@
       compare:
         file: "{{ find_result.files[0].path }}"
         with_content: |
-          Return-Path: <vagrant@client.localdomain>
+          Return-Path: <vagrant@localhost>
           Delivered-To: jane.doe@mydomain.test
           Received: from sut.mydomain.test
           $$ \t $$by sut.mydomain.test with LMTP
           $$ \t $$id $$ .* $$
-          $$ \t $$(envelope-from <vagrant@client.localdomain>)
+          $$ \t $$(envelope-from <vagrant@localhost>)
           $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
-          Received: from client.localdomain (ip-10.0.3.201.someisp.test [10.0.3.201])
+          Received: from localhost (ip-10.0.3.201.someisp.test [10.0.3.201])
           $$ \t $$by sut.mydomain.test (Postfix) with ESMTP id $$ .* $$
           $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
-          Received: by client.localdomain (Postfix, from userid 1000)
+          Received: by localhost (Postfix, from userid 1000)
           ...
           Date: $$ .* $$
           To: jane.doe@mydomain.test
           Subject: Test
           ...
-          From: vagrant@client.localdomain
+          From: vagrant@localhost
           
           Test-Body
       become: yes
