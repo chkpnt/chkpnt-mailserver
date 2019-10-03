@@ -4,7 +4,7 @@
 
 The purpose of this Ansible role is to fulfill my demands on my own mailserver:
 
-- [x] Supports openSUSE Leap 15.0
+- [x] Supports openSUSE Leap 15.1
 - [x] Orchestration of Postfix (MTA), Dovecot (MDA) and Rspamd
 - [x] Postfix uses Dovecot for authentication (SMTP AUTH through Dovecot SASL)
 - [x] No databases, just plain files

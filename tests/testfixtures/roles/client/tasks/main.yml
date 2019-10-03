@@ -1,4 +1,4 @@
-- name: Install postfix, which provides a MUA (sendmail) and acts as the local MTA 
+- name: Install postfix, which provides sendmail that acts as the local MTA 
   zypper:
     name: postfix
     state: present
@@ -8,6 +8,11 @@
     name: postfix
     enabled: yes
     state: started
+
+- name: Install mailx (MUA)
+  zypper:
+    name: mailx
+    state: present
 
 - name: Install expect needed for some tests
   zypper:

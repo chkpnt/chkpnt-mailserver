@@ -9,7 +9,8 @@ Vagrant.configure("2") do |config|
       end
     
     config.vm.define "ns" do |sut|
-        sut.vm.box = "opensuse/openSUSE-15.0-x86_64"
+        sut.vm.box = "Leap-15.1.x86_64"
+        sut.vm.box_url = "https://download.opensuse.org/repositories/Virtualization:/Appliances:/Images:/openSUSE-Leap-15.1/images/boxes/Leap-15.1.x86_64.json"
         sut.vm.hostname = "ns.test"
         sut.vm.network "private_network", ip: "10.0.3.2"
         sut.vm.provision :ansible do |ansible|
@@ -21,7 +22,8 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "sut" do |sut|
-        sut.vm.box = "opensuse/openSUSE-15.0-x86_64"
+        sut.vm.box = "Leap-15.1.x86_64"
+        sut.vm.box_url = "https://download.opensuse.org/repositories/Virtualization:/Appliances:/Images:/openSUSE-Leap-15.1/images/boxes/Leap-15.1.x86_64.json"
         sut.vm.hostname = "sut.mydomain.test"
         sut.vm.network "private_network", ip: "10.0.3.10"
         sut.vm.provision :ansible do |ansible|
@@ -32,7 +34,8 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "client" do |sut|
-        sut.vm.box = "opensuse/openSUSE-15.0-x86_64"
+        sut.vm.box = "Leap-15.1.x86_64"
+        sut.vm.box_url = "https://download.opensuse.org/repositories/Virtualization:/Appliances:/Images:/openSUSE-Leap-15.1/images/boxes/Leap-15.1.x86_64.json"
         sut.vm.hostname = "client.localdomain" # doens't match the DNS-RR by purpose
         sut.vm.network "private_network", ip: "10.0.3.201"
         sut.vm.provision :ansible do |ansible|
@@ -43,7 +46,8 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "mail-sink" do |sut|
-        sut.vm.box = "opensuse/openSUSE-15.0-x86_64"
+        sut.vm.box = "Leap-15.1.x86_64"
+        sut.vm.box_url = "https://download.opensuse.org/repositories/Virtualization:/Appliances:/Images:/openSUSE-Leap-15.1/images/boxes/Leap-15.1.x86_64.json"
         sut.vm.hostname = "mail-sink.theirdomain.test"
         sut.vm.network "private_network", ip: "10.0.3.20"
         sut.vm.provision :ansible do |ansible|

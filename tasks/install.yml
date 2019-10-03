@@ -1,9 +1,10 @@
 ---
-    
+
+# provides rspamd and clamav-unofficial-sigs
 - name: Install repository home:chkpnt:mailserver
   zypper_repository:
     name: home_chkpnt_mailserver
-    repo: 'https://download.opensuse.org/repositories/home:/chkpnt:/mailserver/openSUSE_Leap_15.0/'
+    repo: 'https://download.opensuse.org/repositories/home:/chkpnt:/mailserver/openSUSE_Leap_15.1/'
     state: present
     auto_import_keys: yes
 
@@ -11,14 +12,15 @@
   zypper:
     name:
       - postfix
+      - mailx 
       #- postgrey
-      - dovecot # openSUSE Leap 42.3: 2.2, openSUSE Leap 15: 2.3
+      - dovecot # openSUSE Leap 42.3: 2.2, openSUSE Leap 15.1: 2.3
       #- amavisd-new
       #- spamassassin
       - rspamd
       - redis
       - clamav
-      - clamav-unofficial-sigs # installed from home:chkpnt:mailserver
+      - clamav-unofficial-sigs
       - acl
       - python2-pyOpenSSL # needed for ansible-module openssl_certificate
     state: present
