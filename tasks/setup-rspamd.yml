@@ -89,3 +89,9 @@
     name: rspamd
     enabled: yes
     state: started
+
+- name: Enable clamd and make sure it is running
+  systemd:
+    name: clamd
+    enabled: yes
+    state: started
