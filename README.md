@@ -15,6 +15,7 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver:
 - [x] Multiple domains are supported
 - [ ] (should work, not tested yet) Spam is rejected
 - [ ] (should work, not tested yet) Potiantial spam is greylisted
+- [x] Viruses are rejected
 - [ ] Integration of VirusTotal.com
 - [ ] Nice reports
 
