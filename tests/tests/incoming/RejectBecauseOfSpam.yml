@@ -1,0 +1,40 @@
+---
+- import_playbook: ../_prepare/client.yml
+
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address that is rejected
+      shell: |
+        cat <<' EOF' | mailx -s "Test" jane.doe@mydomain.test
+        This is the GTUBE, the
+          Generic
+          Test for
+          Unsolicited
+          Bulk
+          Email
+
+        If your spam filter supports it, the GTUBE provides a test by which you
+        can verify that the filter is installed correctly and is detecting incoming
+        spam. You can send yourself a test mail containing the following string of
+        characters (in upper case and with no white spaces and line breaks).
+
+        XJS*C4JDBQADN1.NSBN3*2IDNEN*GTUBE-STANDARD-ANTI-UBE-TEST-EMAIL*C.34X
+
+        You should send this test mail from an account outside of your network.
+        EOF
+
+- hosts: client
+  tasks:
+    - name: Assert client has received a DSN containing reject informations
+      compare:
+        file: /var/mail/vagrant
+        with_content: |
+          ...
+          Subject: Undelivered Mail Returned to Sender
+          ...
+          I'm sorry to have to inform you that your message could not
+          be delivered to one or more recipients. It's attached below.
+          ...
+          <jane.doe@mydomain.test>: host sut.mydomain.test[10.0.3.10] said: 554 5.7.1
+              Gtube pattern (in reply to end of DATA command)
+          ...
