@@ -3,6 +3,7 @@
   become: yes
   roles:
   - common
+  - use-apparmor
   - { role: use-nameserver, with_ip: "10.0.3.2", domain: "mydomain.test" }
   - role: mailserver
     vars:

@@ -1,0 +1,13 @@
+---
+
+- name: Install AppArmor
+  zypper:
+    name: apparmor
+    type: pattern
+    state: present
+
+- name: Enable AppArmor and make sure it is running
+  systemd:
+    name: apparmor
+    enabled: yes
+    state: started

@@ -12,6 +12,9 @@
 - name: restart postfix
   systemd: name=postfix state=restarted
 
+- name: restart apparmor
+  systemd: name=apparmor state=restarted
+
 - name: postmap virtual_aliases
   command: postmap hash:/etc/postfix/virtual_aliases
   notify: restart postfix

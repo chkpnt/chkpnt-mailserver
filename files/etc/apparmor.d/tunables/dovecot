@@ -1,0 +1,6 @@
+# Ansible managed
+
+# @{DOVECOT_MAILSTORE} is a space-separated list of all directories
+# where dovecot is allowed to store and read mails
+
+@{DOVECOT_MAILSTORE}=/srv/mail/

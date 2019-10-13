@@ -1,0 +1,19 @@
+---
+
+- name: Is AppArmor active?
+  block:
+    - shell: systemctl is-enabled apparmor.service
+      register: systemstatus_apparmor
+    - set_fact:
+        apparmor_active: "{{ systemstatus_apparmor.stdout == 'enabled' }}"
+
+- name: Configure AppArmor for dovecot
+  copy:
+    src: etc/apparmor.d/tunables/dovecot
+    dest: /etc/apparmor.d/tunables/dovecot
+    owner: root
+    group: root
+    mode: 0644
+  when: apparmor_active
+  notify:
+    - restart apparmor
