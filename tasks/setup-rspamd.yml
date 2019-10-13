@@ -46,7 +46,7 @@
 
 - name: Ensure directory for the private keys exists
   file: >
-    path="{{ item.private_key | dirname }}" state=directory recurse=yes
+    path="{{ item.private_key | dirname }}" state=directory
     owner=_rspamd group=_rspamd mode=0500
   loop: "{{ mail_dkim_keys | json_query('[?copy_from]') }}"
 
