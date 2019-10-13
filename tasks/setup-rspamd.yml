@@ -90,6 +90,16 @@
     enabled: yes
     state: started
 
+- name: Enable clamav-unofficial-sigs
+  lineinfile:
+    path: /etc/clamav-unofficial-sigs/user.conf
+    regexp: '#user_configuration_complete='
+    line: 'user_configuration_complete="yes"'
+
+# clamd won't start if /var/lib/clamav doesn't contain databases
+- name: Execute freshclam
+  shell: freshclam
+
 - name: Enable clamd and make sure it is running
   systemd:
     name: clamd
