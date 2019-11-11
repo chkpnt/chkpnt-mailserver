@@ -1,7 +1,7 @@
 ---
 
 - name: Generate Diffie-Hellman parameters
-  command: openssl dhparam -dsaparam -out /etc/dovecot/dh.pem 4096
+  command: "openssl dhparam{{ ' -dsaparam' if not (mail_ssl.generate_safe_primes_for_dh | default(true) | bool) else '' }} -out /etc/dovecot/dh.pem 4096"
   args:
     creates: /etc/dovecot/dh.pem
 

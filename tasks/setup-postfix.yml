@@ -35,6 +35,16 @@
   notify:
     - restart postfix
 
+- name: Generate Diffie-Hellman parameters for non-export ciphers (4096 bit)
+  command: "openssl dhparam{{ ' -dsaparam' if not (mail_ssl.generate_safe_primes_for_dh | default(true) | bool) }} -out /etc/postfix/dh_4096.pem 4096"
+  args:
+    creates: /etc/postfix/dh_4096.pem
+
+- name: Generate Diffie-Hellman parameters for export ciphers (512 bit)
+  command: "openssl dhparam{{ ' -dsaparam' if not (mail_ssl.generate_safe_primes_for_dh | default(true) | bool) }} -out /etc/postfix/dh_512.pem 512"
+  args:
+    creates: /etc/postfix/dh_512.pem
+
 - name: Ensure user postfix is member of group _rspamd, so /var/run/rspamd/worker-proxy.socket can be accessed
   user:
     name: postfix

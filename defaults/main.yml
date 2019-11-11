@@ -15,6 +15,7 @@ mail_ssl:
   certificate: '/etc/ssl/servercerts/example.com.pem'
   private_key: '/etc/ssl/private/example.com.key'
   generate_certificate_for_test: yes
+  generate_safe_primes_for_dh: yes # https://www.openssl.org/news/secadv/20160128.txt
 
 mail_dkim_keys:
   - { domain: example.com, selector: 'key1', private_key: '/var/lib/rspamd/dkim/example.com.key1.key' }
