@@ -30,6 +30,12 @@
     enabled: yes
     state: started
 
+- name: Enable local resolver (unbound) and make sure it is running
+  systemd:
+    name: unbound
+    enabled: yes
+    state: started
+ 
 - name: Configure rspamd (static config)
   copy:
     src: etc/rspamd/

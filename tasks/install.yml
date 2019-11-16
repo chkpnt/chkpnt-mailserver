@@ -19,6 +19,7 @@
       #- spamassassin
       - rspamd
       - redis
+      - unbound # using a local resolver is highly recommended for RBLs
       - clamav
       - clamav-unofficial-sigs
       - acl

@@ -1,3 +1,4 @@
 # Ansible managed
-
-# Nothing to override yet.
+dns {
+    nameserver = ["127.0.0.1"];
+}
