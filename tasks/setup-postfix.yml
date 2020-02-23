@@ -2,11 +2,11 @@
 
 - name: Ensure openSUSE will not override our config (see /usr/sbin/config.postfix)
   block:
-    - lineinfile:
+    - lineinfile: # noqa 502
         path: /etc/sysconfig/mail
         regexp: '^MAIL_CREATE_CONFIG='
         line: 'MAIL_CREATE_CONFIG="no"'
-    - copy:
+    - copy: # noqa 502
         # see /etc/postfix/system/config_postfix, which is called by /usr/lib/systemd/system/postfix.service
         dest: /var/adm/postfix.configured
         content: ""

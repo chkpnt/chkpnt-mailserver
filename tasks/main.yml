@@ -1,6 +1,6 @@
 ---
 
-- name: Initialize variable 
+- name: Initialize variable
   set_fact:
     error_messages: []
 

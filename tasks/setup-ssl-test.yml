@@ -76,11 +76,11 @@
 
 - name: "Copy mailserver certificate to {{ mail_ssl.certificate }}"
   block:
-    - file:
+    - file: # noqa 502
         path: "{{ mail_ssl.certificate | dirname }}"
         state: directory
         recurse: yes
-    - copy:
+    - copy: # noqa 502
         src: /etc/ssl/mailserver-ca/server.crt
         dest: "{{ mail_ssl.certificate }}"
         remote_src: yes
@@ -90,11 +90,11 @@
 
 - name: "Copy mailserver private key to {{ mail_ssl.private_key }}"
   block:
-    - file:
+    - file: # noqa 502
         path: "{{ mail_ssl.private_key | dirname }}"
         state: directory
         recurse: yes
-    - copy:
+    - copy: # noqa 502
         src: /etc/ssl/mailserver-ca/server.key
         dest: "{{ mail_ssl.private_key }}"
         remote_src: yes

@@ -8,11 +8,11 @@
     state: present
     auto_import_keys: yes
 
-- name: Install packages for mailserver 
+- name: Install packages for mailserver
   zypper:
     name:
       - postfix
-      - mailx 
+      - mailx
       #- postgrey
       - dovecot # openSUSE Leap 42.3: 2.2, openSUSE Leap 15.1: 2.3
       #- amavisd-new

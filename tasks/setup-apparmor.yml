@@ -2,9 +2,9 @@
 
 - name: Is AppArmor active?
   block:
-    - shell: systemctl is-enabled apparmor.service
+    - shell: systemctl is-enabled apparmor.service # noqa 303 305 502
       register: systemstatus_apparmor
-    - set_fact:
+    - set_fact: # noqa 502
         apparmor_active: "{{ systemstatus_apparmor.stdout == 'enabled' }}"
 
 - name: Configure AppArmor for dovecot

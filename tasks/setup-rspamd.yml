@@ -35,7 +35,7 @@
     name: unbound
     enabled: yes
     state: started
- 
+
 - name: Configure rspamd (static config)
   copy:
     src: etc/rspamd/
@@ -65,11 +65,11 @@
 # Notice: Keys have to be accessible for user _rspamd
 - name: Check if keys for DKIM-signing are present
   block:
-    - stat:
+    - stat: # noqa 502
         path: "{{ item }}"
       loop: "{{ mail_dkim_keys | map(attribute='private_key') | list | unique }}"
       register: check_dkim_keys
-    - set_fact:
+    - set_fact: # noqa 502
         error_messages: >-
           {%- set keys_not_found = mail_dkim_keys | json_query("[?private_key=='" ~ item ~ "']") -%}
           {%- set new_messages = [] -%}
