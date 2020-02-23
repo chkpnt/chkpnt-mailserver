@@ -1,0 +1,53 @@
+---
+- import_playbook: ../_prepare/sut.yml
+
+- hosts: sut
+  tasks:
+    - name: Create IMAP-folder "Junk"
+      shell:
+        doveadm mailbox create -u jane.doe@mydomain.test Junk
+      become: yes
+    - name: Configure Sieve rule, which moves mail which has a subject "SPAM" into folder "Junk"
+      copy:
+        dest: /srv/mail/jane/.dovecot.sieve
+        owner: vmail
+        group: vmail
+        mode: '0600'
+        content: |
+          require ["fileinto"];
+          if header :contains "subject" "SPAM"
+          {
+            fileinto "Junk";
+          }
+      become: yes
+      become_user: vmail
+
+          
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address SUT is responsible for and should be handled by the Sieve rule
+      shell: |
+        echo "Test-Body" | mailx -s "SPAM" jane.doe@mydomain.test
+
+- hosts: sut
+  tasks:
+    - name: Get path of mail in maildir
+      find:
+        paths: /srv/mail/jane/Maildir/.Junk/new/
+      register: find_result
+      become: yes
+      become_user: vmail
+      
+    - name: Assert mail is received and delivered at SUT in folder "Junk"
+      compare:
+        file: "{{ find_result.files[0].path }}"
+        with_content: |
+          ...
+          To: jane.doe@mydomain.test
+          Subject: SPAM
+          ...
+          From: vagrant@localhost
+          
+          Test-Body
+      become: yes
+      become_user: vmail

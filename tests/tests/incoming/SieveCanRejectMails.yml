@@ -1,0 +1,45 @@
+---
+# Tests client --smtp--> postfix --lmtp--> dovecot -> sieve --smtp--> mailsink
+
+- import_playbook: ../_prepare/sut.yml
+- import_playbook: ../_prepare/mail-sink.yml
+
+- hosts: sut
+  tasks:
+    - name: Configure Sieve rule, which rejects mail which has a subject "SPAM"
+      copy:
+        dest: /srv/mail/jane/.dovecot.sieve
+        owner: vmail
+        group: vmail
+        mode: '0600'
+        content: |
+          require ["reject"];
+          if header :contains "subject" "SPAM"
+          {
+            reject "I do not like spam";
+          }
+      become: yes
+      become_user: vmail
+
+          
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address SUT is responsible for
+      shell: |
+        echo "Test-Body" | mailx -s "SPAM" -r test@theirdomain.test jane.doe@mydomain.test
+
+- hosts: mail-sink
+  tasks:
+    - name: Assert received mail has an DKIM-signature
+      compare:
+        file: /tmp/maildump
+        with_content: |
+          ...
+          From: Postmaster <postmaster@mydomain.test>
+          To: <test@theirdomain.test>
+          ...
+          Subject: Rejected: SPAM
+          ...
+          Your message to <jane.doe@mydomain.test> was automatically rejected:
+          I do not like spam
+          ...

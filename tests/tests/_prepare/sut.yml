@@ -2,9 +2,6 @@
 - name: Prepare SUT
   hosts: sut
   tasks:
-    - file: path=/srv/mail/john/Maildir state=absent
+    - file: path="/srv/mail/{{ item }}" state=absent
       become: yes
-    - file: path=/srv/mail/jane/Maildir state=absent
-      become: yes
-    - file: path=/srv/mail/erika/Maildir state=absent
-      become: yes
+      loop: "{{ ['john', 'jane', 'erika'] | product(['Maildir', '.dovecot.sieve']) | map('join', '/') | list }}"

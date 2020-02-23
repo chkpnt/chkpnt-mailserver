@@ -13,6 +13,7 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver:
 - [x] Mails to specific addresses can be rejected
 - [x] Catch-all accounts can be configured
 - [x] Multiple domains are supported
+- [x] Sieve rules can be used
 - [x] Spam is rejected
 - [ ] (should work, not tested yet) Potiantial spam is greylisted
 - [x] Viruses are rejected
