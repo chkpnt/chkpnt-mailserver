@@ -23,7 +23,7 @@
   file:
     path: /etc/ssl/mailserver-ca/ca.crt
     state: absent
-  when: openssl_ca_config.changed
+  when: openssl_ca_config.changed # noqa 503
 
 - name: Generate private key for Mailserver CA
   command: openssl genrsa -out ca.key 2048
@@ -54,7 +54,7 @@
   file:
     path: /etc/ssl/mailserver-ca/server.crt
     state: absent
-  when: openssl_ca_config.changed or openssl_server_config.changed
+  when: openssl_ca_config.changed or openssl_server_config.changed # noqa 503
 
 - name: Generate private key for Mailserver
   command: openssl genrsa -out server.key 2048

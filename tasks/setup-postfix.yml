@@ -12,7 +12,8 @@
         content: ""
         force: no
 
-- name: Ensure the maps will be only updated by ansible and not by openSUSE (see /etc/postfix/system/update_postmaps, which is called by /usr/lib/systemd/system/postfix.service)
+# see /etc/postfix/system/update_postmaps, which is called by /usr/lib/systemd/system/postfix.service
+- name: Ensure the maps will be only updated by ansible and not by openSUSE
   lineinfile:
     path: /etc/sysconfig/postfix
     regexp: '^POSTFIX_UPDATE_MAPS='
