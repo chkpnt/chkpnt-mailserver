@@ -17,7 +17,7 @@ galaxy_info:
   # - CC-BY
   license: license (GPLv2, CC-BY, etc)
 
-  min_ansible_version: 2.4
+  min_ansible_version: 2.7
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -39,7 +39,7 @@ galaxy_info:
   platforms:
     - name: openSUSE
       versions:
-      - Leap 15.1
+      - 15.1
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes
