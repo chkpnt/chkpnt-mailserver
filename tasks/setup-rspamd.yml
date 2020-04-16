@@ -43,6 +43,13 @@
   notify:
     - restart rspamd
 
+- name: Configure rspamd Controller worker
+  template:
+    src: etc/rspamd/local.d/worker-controller.inc.j2
+    dest: /etc/rspamd/local.d/worker-controller.inc
+  notify:
+    - restart rspamd
+
 - name: Configure DKIM-signing
   template:
     src: etc/rspamd/local.d/dkim_signing.conf.j2
