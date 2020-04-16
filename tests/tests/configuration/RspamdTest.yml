@@ -1,0 +1,245 @@
+---
+
+- hosts: sut
+  tasks:
+    - name: Prepare filter for jq to normalize json documents
+      copy:
+        dest: /tmp/normalize.jq
+        # jq -S isn't sorting recursive, so a custom filter is needed
+        # walk is build-in in jq 1.6, but openSUSE Leap 15.1 contains jq 1.5 only
+        content: |
+          def walk(f):
+            . as $in
+            | if type == "object" then
+                reduce keys_unsorted[] as $key
+                  ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f
+            elif type == "array" then map( walk(f) ) | f
+            else f
+            end;
+          
+          def sort_by_keys:
+            to_entries | sort_by(.key) | from_entries;
+          
+          walk(if type == "object" then sort_by_keys else . end)
+
+    - name: Export relevant configuration sections of rspamd
+      # config is output as json, so it can be sorted
+      shell: "rspamadm configdump -j {{ item }} | jq -f /tmp/normalize.jq > /tmp/rspamdconfig_{{ item }}"
+      become: yes
+      with_items:
+        - worker
+        - redis
+        - antivirus
+        - actions
+        - dkim_signing
+        - options
+        - classifier
+        - greylist
+
+    - name: Assert workers are configured as expected
+      compare:
+        file: /tmp/rspamdconfig_worker
+        with_content: |
+          {
+            "normal": {
+          ...
+              "enabled": false,
+          ...
+            }
+          }
+          {
+            "controller": {
+              "bind_socket": "*:11334",
+              "count": 1,
+              "password": "$2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb",
+              "secure_ip": [
+                "127.0.0.1",
+                "::1"
+              ],
+              "static_dir": "/srv/www/webapps/rspamd"
+            }
+          }
+          {
+            "rspamd_proxy": {
+              "bind_socket": "/run/rspamd/worker-proxy.socket mode=0660",
+              "count": 1,
+              "discard_on_reject": false,
+              "max_retries": 5,
+              "milter": true,
+              "quarantine_on_reject": false,
+              "reject_message": "Spam message rejected",
+              "spam_header": "X-Spam",
+              "timeout": 120,
+              "upstream": {
+                "local": {
+                  "default": true,
+                  "hosts": "localhost",
+                  "self_scan": true
+                }
+              }
+            }
+          }
+          {
+            "fuzzy": {
+          ...
+              "count": -1,
+          ...
+          }
+  
+    - name: Assert Redis backend is configured as expected
+      compare:
+        file: /tmp/rspamdconfig_redis
+        with_content: |
+          {
+            "servers": "/var/run/redis/rspamd.sock"
+          }
+
+    - name: Assert antivirus is configured as expected
+      compare:
+        file: /tmp/rspamdconfig_antivirus
+        with_content: |
+          {
+            "clamav": {
+              "action": "reject",
+              "servers": "/var/run/clamav/clamd-socket"
+            }
+          }
+
+    - name: Assert thresholds (actions) are configured as expected
+      compare:
+        file: /tmp/rspamdconfig_actions
+        with_content: |
+          {
+            "add_header": 6,
+            "greylist": 4,
+            "reject": 15
+          }
+
+    - name: Assert DKIM-signing is configured as expected
+      compare:
+        file: /tmp/rspamdconfig_dkim_signing
+        with_content: |
+          {
+            "allow_envfrom_empty": true,
+            "allow_hdrfrom_mismatch": false,
+            "allow_hdrfrom_multiple": false,
+            "allow_username_mismatch": false,
+            "domain": {
+              "mydomain.test": {
+                "path": "/var/lib/rspamd/dkim/mydomain.test.key1.key",
+                "selector": "key1"
+              }
+            },
+            "key_prefix": "DKIM_KEYS",
+            "selector": "dkim",
+            "sign_authenticated": true,
+            "sign_local": true,
+            "sign_networks": [
+              "127.2.4.7"
+            ],
+            "symbol": "DKIM_SIGNED",
+            "try_fallback": true,
+            "use_domain": "header",
+            "use_esld": true,
+            "use_redis": false
+          }
+
+    - name: Assert basic rspamd configuration is as expected
+      compare:
+        file: /tmp/rspamdconfig_options
+        with_content: |
+          {
+            "allow_raw_input": true,
+            "cache_file": "/var/lib/rspamd/symbols.cache",
+            "check_all_filters": true,
+            "classify_headers": [
+              "User-Agent",
+              "X-Mailer",
+              "Content-Type",
+              "X-MimeOLE"
+            ],
+            "control_socket": "/var/lib/rspamd/rspamd.sock mode=0600",
+            "dns": {
+              "nameserver": [
+                "127.0.0.1"
+              ],
+              "retransmits": 5,
+              "sockets": 16,
+              "timeout": 1
+            },
+            "dns_max_requests": 64,
+            "dynamic_conf": "/var/lib/rspamd/rspamd_dynamic",
+            "explicit_modules": [
+              "settings",
+              "bayes_expiry"
+            ],
+            "filters": "chartable,dkim,regexp,fuzzy_check",
+            "history_file": "/var/lib/rspamd/rspamd.history",
+            "history_rows": 200,
+            "hs_cache_dir": "/var/lib/rspamd/",
+            "local_addrs": [
+              "192.168.0.0/16",
+              "10.0.0.0/8",
+              "172.16.0.0/12",
+              "fd00::/8",
+              "169.254.0.0/16",
+              "fe80::/10",
+              "127.2.4.7"
+            ],
+            "map_file_watch_multiplier": 0.1,
+            "map_watch_interval": 300,
+            "max_lua_urls": 1024,
+            "max_urls": 10240,
+            "one_shot": false,
+            "pidfile": "/var/run/rspamd/rspamd.pid",
+            "raw_mode": false,
+            "rrd": "/var/lib/rspamd/rspamd.rrd",
+            "soft_reject_on_timeout": false,
+            "stats_file": "/var/lib/rspamd/stats.ucl",
+            "task_timeout": 8,
+            "tempdir": "/tmp",
+            "url_tld": "/usr/share/rspamd/effective_tld_names.dat",
+            "words_decay": 600
+          }
+
+    - name: Assert bayes expiry module (statistics classifier) is configured as expected
+      compare:
+        file: /tmp/rspamdconfig_classifier
+        with_content: |
+          {
+            "bayes": {
+              "backend": "redis",
+              "cache": {},
+              "learn_condition": "return require(\"lua_bayes_learn\").can_learn",
+              "min_learns": 200,
+              "min_tokens": 11,
+              "new_schema": true,
+              "signatures": false,
+              "statfile": [
+                {
+                  "spam": false,
+                  "symbol": "BAYES_HAM"
+                },
+                {
+                  "spam": true,
+                  "symbol": "BAYES_SPAM"
+                }
+              ],
+              "store_tokens": false,
+              "tokenizer": {
+                "name": "osb"
+              }
+            }
+          }
+
+    - name: Assert greylisting module is configured as expected
+      compare:
+        file: /tmp/rspamdconfig_greylist
+        with_content: |
+          {
+            "action": "soft reject",
+          ...
+            "message": "Try again later",
+            "timeout": 300,
+          ...
+          }
