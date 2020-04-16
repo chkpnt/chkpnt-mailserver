@@ -15,10 +15,11 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver:
 - [x] Multiple domains are supported
 - [x] Sieve rules can be used
 - [x] Spam is rejected
-- [ ] (should work, not tested yet) Potiantial spam is greylisted
+- [ ] Potiantial spam is greylisted (works in production, no automated test yet)
+- [ ] Spam can be learnt by dragging the mail into a special IMAP folder
 - [x] Viruses are rejected
 - [ ] Integration of VirusTotal.com
-- [ ] Nice reports
+- [x] Nice reports (rspamd WebUI is sufficient for me)
 
 ## Requirements
 
