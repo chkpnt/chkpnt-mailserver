@@ -5,6 +5,8 @@ There are some tests, which use a Vagrant environment composed of four VMs.
 
 Vagrant and VirtualBox is needed to run the tests, which are simple Ansible playbooks under [`tests/*`](tests/).
 
+This is a [dead link](tests/testfixtures/vms/sut.yml).
+
 There is a [`Makefile`](Makefile) which can be used to setup the Vagrant environment (`make -j setup`) and to run the test suite (`make tests`).
 
 ### Vagrant environment
