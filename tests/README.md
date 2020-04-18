@@ -32,6 +32,11 @@ IP: `10.0.3.20`
 #### `client.localdomain`
 This VM is used to be the Mail User Agent (MUA).
 
+The mismatch in hostname and rDNS is by purpose to simulate a client sending mails from 
+a regular internet connection at home:
+- The client is allowed to send mails if it [is authenticated](tests/outgoing/MailCanBeSentFromClientWithAuthenticationTest.yml)
+- Mails sent via the local MTA is tagged as Spam if it is [received by the mailserver](tests/incoming/ReceiveMailTest.yml)
+
 Hostname: `client.localdomain` <br>
 FQDN: `-` <br>
 IP: `10.0.3.201` <br>
