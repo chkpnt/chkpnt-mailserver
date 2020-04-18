@@ -178,12 +178,6 @@
             "history_rows": 200,
             "hs_cache_dir": "/var/lib/rspamd/",
             "local_addrs": [
-              "192.168.0.0/16",
-              "10.0.0.0/8",
-              "172.16.0.0/12",
-              "fd00::/8",
-              "169.254.0.0/16",
-              "fe80::/10",
               "127.2.4.7"
             ],
             "map_file_watch_multiplier": 0.1,

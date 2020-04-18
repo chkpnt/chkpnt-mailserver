@@ -37,6 +37,7 @@
           Subject: Test
           ...
           From: vagrant@localhost
+          ...
           
           Test-Body
       become: yes

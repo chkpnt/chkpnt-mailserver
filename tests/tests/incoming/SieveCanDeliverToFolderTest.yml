@@ -47,6 +47,7 @@
           Subject: SPAM
           ...
           From: vagrant@localhost
+          ...
           
           Test-Body
       become: yes
