@@ -32,7 +32,6 @@ Vagrant.configure("2") do |config|
     config.vm.define "sut" do |sut|
         sut.vm.hostname = "sut.mydomain.test"
         sut.vm.network "private_network", ip: "10.0.3.10"
-        sut.vm.network "forwarded_port", guest: 11334, host: 11334, auto_correct: true # rspamd Webinterface
         sut.vm.provision "ansible" do |ansible|
             ansible.compatibility_mode = "2.0"
             ansible.verbose = false

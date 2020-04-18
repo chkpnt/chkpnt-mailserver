@@ -18,6 +18,7 @@ IP: `10.0.3.2`
 
 #### `sut.mydomain.test`
 This VM is the *system-under-test* which gets the role `chkpnt.mailserver` with all the relevant settings we want to test.
+The rspamd WebUI can be accessed via [http://10.0.3.10:11334/](http://10.0.3.10:11334/) and password [*changeme*](testfixtures/vms/sut.yml#L49-L50).
 
 Hostname / FQDN: `sut.mydomain.test` <br>
 IP: `10.0.3.10`
