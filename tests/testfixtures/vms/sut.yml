@@ -48,3 +48,16 @@
         controller:
           password: '$2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb' # Password: changeme
           bind_socket: '*:11334' 
+
+- hosts: sut
+  become: yes
+  tasks:
+  - name: Apply some test environment specific settings for rspamd
+    copy:
+      src: sut/rspamd/settings.conf
+      dest: /etc/rspamd/local.d/settings.conf
+    notify:
+      - restart rspamd
+  handlers:
+  - name: restart rspamd
+    systemd: name=rspamd state=restarted

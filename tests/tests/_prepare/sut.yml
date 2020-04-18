@@ -2,6 +2,11 @@
 - name: Prepare SUT
   hosts: sut
   tasks:
-    - file: path="/srv/mail/{{ item }}" state=absent
+    - name: Reset maildirs
+      file: path="/srv/mail/{{ item }}" state=absent
       become: yes
       loop: "{{ ['john', 'jane', 'erika'] | product(['Maildir', '.dovecot.sieve']) | map('join', '/') | list }}"
+
+    - name: Reset Redis-DB used by rspamd 
+      command: redis-cli -s /var/run/redis/rspamd.sock flushall
+      become: yes

@@ -1,0 +1,41 @@
+---
+- import_playbook: ../_prepare/sut.yml
+
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address which will be greylisted
+      shell: |
+        echo "Test-Body" | mailx -s "Test" greylist@mydomain.test
+
+- hosts: sut
+  tasks:
+    - name: Get path of mail in maildir
+      find:
+        paths: /srv/mail/john/Maildir/new/
+      register: find_result
+      become: yes
+      become_user: vmail
+      
+    - name: Assert no mail is received yet
+      assert:
+        that: find_result.matched == 0
+        fail_msg: Greylisting didn't worked
+ 
+- hosts: client
+  tasks:
+    - name: Assert the sent mail is defered and still in the client's mail queue
+      block:
+      - shell: postqueue -p > /tmp/postqueue
+        become: yes
+      - compare:
+          file: /tmp/postqueue
+          with_content: |
+            -Queue ID-  --Size-- ----Arrival Time---- -Sender/Recipient-------
+            $$ .* $$  vagrant@localhost
+            (host sut.mydomain.test[10.0.3.10] said: 451 4.7.1 Try again later (in reply to end of DATA command))
+                                                     greylist@mydomain.test
+            ...
+    - name: Clean-up client's mail queue
+      shell: postsuper -d ALL
+      become: yes
+      
