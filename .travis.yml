@@ -21,9 +21,13 @@ install:
 # Install vagrant-libvirt Vagrant plugin
 - sudo vagrant plugin install vagrant-libvirt
 
+# Install required (and locked) dependecies with pipenv
+- pip install pipenv
+- pipenv install --dev
+
 script:
 - cd tests
-- sudo vagrant up --provider=libvirt ns
+- make -j -e PROVIDER=libvirt
 - sudo vagrant ssh -c "echo 'hello world!'"
 
 
