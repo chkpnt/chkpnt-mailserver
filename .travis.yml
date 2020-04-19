@@ -48,6 +48,8 @@ after_failure:
 - vagrant ssh -c "dig mydomain.test MX" client
 - vagrant ssh -c "ping -c 3 10.0.3.10" client
 - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u named" ns
+- vagrant ssh -c "systemctl --no-page list-units --type=service" sut
+- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u clamd" sut
 - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u postfix" sut
 - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u rspamd" sut
 - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u dovecot" sut
