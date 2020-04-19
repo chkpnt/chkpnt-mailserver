@@ -38,9 +38,15 @@ install:
 
 script:
 - cd tests
-- make -j -e PROVIDER=libvirt setup
-- make tests
-- vagrant ssh -c "echo 'hello world!'" ns
+- vagrant up --provider=libvirt
+- vagrant ssh -c "ip addr show" ns
+- vagrant ssh -c "ip addr show" sut
+- vagrant ssh -c "ip addr show" client
+- vagrant ssh -c "ip addr show" mail-sink
+- vagrant ssh -c "cat /etc/resolv.conf" sut
+#- make -j -e PROVIDER=libvirt setup
+#- make tests
+#- vagrant ssh -c "echo 'hello world!'" ns
 
 
 # Mmh.... don't know yet how to deal with copyright notice when using open sourced code snippets
