@@ -1,0 +1,56 @@
+---
+dist: bionic
+language: python
+
+# Cache the big Vagrant boxes
+cache:
+    directories:
+    - /home/travis/.vagrant.d/boxes
+
+install:
+# Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
+- sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev
+
+# Download Vagrant & Install Vagrant package
+- sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb
+- sudo dpkg -i vagrant_2.2.7_x86_64.deb
+
+# Vagrant correctly installed?
+- vagrant --version
+
+# Install vagrant-libvirt Vagrant plugin
+- sudo vagrant plugin install vagrant-libvirt
+
+script:
+- cd tests
+- sudo vagrant up --provider=libvirt ns
+- sudo vagrant ssh -c "echo 'hello world!'"
+
+
+# Mmh.... don't know yet how to deal with copyright notice when using open sourced code snippets
+# and where to put the license header.
+#
+# Source:
+# https://github.com/jonashackt/vagrant-travisci-libvrt/blob/2b02f3f3f47b6f0671dbbc54fa940aa9595d410a/.travis.yml
+#
+# MIT License
+# 
+# Copyright (c) 2020 Jonas Hecht
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
