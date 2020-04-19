@@ -1,11 +1,13 @@
 ---
 dist: bionic
 language: python
+python:
+  - "3.7"
 
 # Cache the big Vagrant boxes
 cache:
-    directories:
-    - /home/travis/.vagrant.d/boxes
+  directories:
+  - /home/travis/.vagrant.d/boxes
 
 install:
 # Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
@@ -36,6 +38,7 @@ install:
 script:
 - cd tests
 - make -j -e PROVIDER=libvirt setup
+- make tests
 - vagrant ssh -c "echo 'hello world!'" ns
 
 
