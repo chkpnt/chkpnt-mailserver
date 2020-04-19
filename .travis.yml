@@ -46,6 +46,7 @@ script:
 - vagrant ssh -c "dig mydomain.test MX" client
 - vagrant ssh -c "cat /etc/resolv.conf" sut
 - vagrant ssh -c "systemctl list-units --type=service" sut
+- vagrant ssh -c "ping -c 3 10.0.3.10" client
 #- make tests
 #- vagrant ssh -c "echo 'hello world!'" ns
 
