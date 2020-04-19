@@ -13,7 +13,7 @@ install:
 
 # Add user travis to group libvirt
 - sudo adduser travis libvirt
-- newgrp libvirt
+#- newgrp libvirt
 
 - ls -al /var/run/libvirt/libvirt-sock
 - id $(whoami)
@@ -33,6 +33,7 @@ install:
 - pipenv install --dev
 
 script:
+- newgrp libvirt
 - cd tests
 - make -j -e PROVIDER=libvirt setup
 - vagrant ssh -c "echo 'hello world!'" ns
