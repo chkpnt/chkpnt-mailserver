@@ -38,13 +38,14 @@ install:
 
 script:
 - cd tests
-- vagrant up --provider=libvirt
+- make -j -e PROVIDER=libvirt setup
 - vagrant ssh -c "ip addr show" ns
 - vagrant ssh -c "ip addr show" sut
 - vagrant ssh -c "ip addr show" client
 - vagrant ssh -c "ip addr show" mail-sink
+- vagrant ssh -c "dig mydomain.test MX" client
 - vagrant ssh -c "cat /etc/resolv.conf" sut
-#- make -j -e PROVIDER=libvirt setup
+- vagrant ssh -c "systemctl list-units --type=service" sut
 #- make tests
 #- vagrant ssh -c "echo 'hello world!'" ns
 
