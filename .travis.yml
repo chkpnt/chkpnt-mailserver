@@ -33,9 +33,12 @@ install:
 - pip install pipenv
 - pipenv install --dev
 
-script:
+before_script:
 - cd tests
+- vagrant box update
 - make -j -e PROVIDER=libvirt setup
+
+script:
 - make tests
 
 after_failure:
@@ -55,8 +58,8 @@ after_failure:
 - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u dovecot" sut
 
 
-# Mmh.... don't know yet how to deal with copyright notice when using open sourced code snippets
-# and where to put the license header.
+# Mmh.... don't know yet how to deal with copyright notice when using
+# open sourced code snippets and where to put the license header.
 #
 # Source:
 # https://github.com/jonashackt/vagrant-travisci-libvrt/blob/2b02f3f3f47b6f0671dbbc54fa940aa9595d410a/.travis.yml
