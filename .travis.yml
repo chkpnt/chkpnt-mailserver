@@ -33,7 +33,6 @@ install:
 - pipenv install --dev
 
 script:
-- newgrp libvirt
 - cd tests
 - make -j -e PROVIDER=libvirt setup
 - vagrant ssh -c "echo 'hello world!'" ns
