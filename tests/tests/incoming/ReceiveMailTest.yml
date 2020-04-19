@@ -10,9 +10,13 @@
 - hosts: sut
   tasks:
     - name: Get path of mail in maildir
-      find:
-        paths: /srv/mail/jane/Maildir/new/
-      register: find_result
+      block:
+      - wait_for:
+          path: /srv/mail/jane/Maildir/new/
+          timeout: 5
+      - find:
+          paths: /srv/mail/jane/Maildir/new/
+        register: find_result
       become: yes
       become_user: vmail
       

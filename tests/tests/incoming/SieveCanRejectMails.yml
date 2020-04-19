@@ -20,7 +20,6 @@
           }
       become: yes
       become_user: vmail
-
           
 - hosts: client
   tasks:
