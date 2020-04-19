@@ -30,6 +30,7 @@ install:
 
 # Install vagrant-libvirt Vagrant plugin
 - vagrant plugin install vagrant-libvirt
+- find ~/.vagrant.d/gems/
 
 # Install required (and locked) dependecies with pipenv
 - pip install pipenv
