@@ -2,6 +2,8 @@
 
 # mailserver
 
+[![Build Status](https://img.shields.io/travis/com/chkpnt/chkpnt-mailserver/master?label=Tests&style=flat-square)](https://travis-ci.com/chkpnt/chkpnt-mailserver)
+
 The purpose of this Ansible role is to fulfill my demands on my own mailserver:
 
 - [x] Supports openSUSE Leap 15.1
@@ -20,6 +22,7 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver:
 - [x] Viruses are rejected
 - [ ] Integration of VirusTotal.com
 - [x] Nice reports (rspamd WebUI is sufficient for me)
+- [x] Tests are executed by a CI system
 
 ## Requirements
 
