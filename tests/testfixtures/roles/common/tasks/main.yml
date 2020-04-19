@@ -4,6 +4,7 @@
   zypper:
     name:
       - command-not-found
+      - dig
       - jq
       - htop
       - man
