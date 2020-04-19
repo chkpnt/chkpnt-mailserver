@@ -11,6 +11,10 @@ install:
 # Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
 - sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev
 
+# Add user travis to group libvirt
+- sudo adduser travis libvirt
+- newgrp libvirt
+
 - ls -al /var/run/libvirt/libvirt-sock
 - id $(whoami)
 
