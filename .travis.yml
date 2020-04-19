@@ -34,6 +34,7 @@ install:
 # Install required (and locked) dependecies with pipenv
 - pip install pipenv
 - pipenv install --dev
+- pip list
 
 script:
 - cd tests
