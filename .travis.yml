@@ -50,7 +50,7 @@ script:
 - vagrant ssh -c "cat /etc/resolv.conf" sut
 - vagrant ssh -c "systemctl --no-page list-units --type=service" sut
 - vagrant ssh -c "ping -c 3 10.0.3.10" client
-#- make tests
+- make tests
 #- vagrant ssh -c "echo 'hello world!'" ns
 
 
