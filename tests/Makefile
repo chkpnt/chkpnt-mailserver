@@ -18,7 +18,7 @@ $(vms): ns
 clean:
 	vagrant destroy -f
 
-all-tests := $(wildcard tests/*/*Test.yml)
+all-tests := $(wildcard tests/*/*Test.yml) $(wildcard unittests/*_tests.yml)
 .PHONY: $(all-tests)
 $(all-tests):
 	ansible-playbook $@
