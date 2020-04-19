@@ -19,7 +19,7 @@ install:
 - vagrant --version
 
 # Install vagrant-libvirt Vagrant plugin
-- sudo vagrant plugin install vagrant-libvirt
+- vagrant plugin install vagrant-libvirt
 
 # Install required (and locked) dependecies with pipenv
 - pip install pipenv
