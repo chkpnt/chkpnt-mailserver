@@ -1,3 +1,5 @@
+PROVIDER = virtualbox
+
 .PHONY: usage
 usage:
 	@echo "Basic usage"
@@ -12,7 +14,7 @@ vms := ns sut client mail-sink
 .PHONY: setup $(vms)
 setup: $(vms)
 $(vms): ns
-	vagrant up --provision $@
+	vagrant up --provision --provider=$(PROVIDER) $@
 
 .PHONY: clean
 clean:
