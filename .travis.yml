@@ -56,6 +56,7 @@ script:
 - ls -al /srv/mail/jane/Maildir/new/
 - vagrant ssh -c "sudo journalctl --no-pager -n 100 -u postfix" sut
 - vagrant ssh -c "sudo journalctl --no-pager -n 100 -u rspamd" sut
+- vagrant ssh -c "sudo journalctl --no-pager -n 100 -u dovecot" sut
 
 #- vagrant ssh -c "echo 'hello world!'" ns
 
