@@ -4,7 +4,7 @@
   zypper:
     name:
       - command-not-found
-      - dig
+      - bind-utils # contains dig
       - jq
       - htop
       - man
