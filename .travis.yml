@@ -39,7 +39,7 @@ before_script:
 - make -j -e PROVIDER=libvirt setup
 
 script:
-- make tests
+- make -k tests
 
 after_failure:
 # Some useful information in case the tests fail
