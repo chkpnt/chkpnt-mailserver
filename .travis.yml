@@ -18,9 +18,6 @@ install:
 #- newgrp libvrt
 - sudo chmod o+rwx /var/run/libvirt/libvirt-sock
 
-- ls -al /var/run/libvirt/libvirt-sock
-- id $(whoami)
-
 # Download Vagrant & Install Vagrant package
 - sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb
 - sudo dpkg -i vagrant_2.2.7_x86_64.deb
@@ -35,30 +32,25 @@ install:
 # Install required (and locked) dependecies with pipenv
 - pip install pipenv
 - pipenv install --dev
-- pip list
 
 script:
 - cd tests
 - make -j -e PROVIDER=libvirt setup
+- make tests
+
+after_failure:
+# Some useful information in case the tests fail
+- pip list
 - vagrant ssh -c "ip addr show" ns
 - vagrant ssh -c "ip addr show" sut
 - vagrant ssh -c "ip addr show" client
 - vagrant ssh -c "ip addr show" mail-sink
-- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u named" ns 
-- vagrant ssh -c "sudo systemctl --no-pager status named" ns 
 - vagrant ssh -c "dig mydomain.test MX" client
-- vagrant ssh -c "cat /etc/resolv.conf" sut
-- vagrant ssh -c "systemctl --no-page list-units --type=service" sut
-- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u clamd" sut
-- vagrant ssh -c "sudo journalctl --no-pager -n 100 -u postfix" sut
 - vagrant ssh -c "ping -c 3 10.0.3.10" client
-- make tests
-- ls -al /srv/mail/jane/Maildir/new/
-- vagrant ssh -c "sudo journalctl --no-pager -n 100 -u postfix" sut
-- vagrant ssh -c "sudo journalctl --no-pager -n 100 -u rspamd" sut
-- vagrant ssh -c "sudo journalctl --no-pager -n 100 -u dovecot" sut
-
-#- vagrant ssh -c "echo 'hello world!'" ns
+- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u named" ns
+- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u postfix" sut
+- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u rspamd" sut
+- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u dovecot" sut
 
 
 # Mmh.... don't know yet how to deal with copyright notice when using open sourced code snippets
