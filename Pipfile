@@ -9,6 +9,7 @@ yamllint = "*"
 
 [packages]
 ansible = ">=2.7"
+jmespath = "*"
 
 [requires]
 python_version = "3.7"
