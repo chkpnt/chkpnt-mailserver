@@ -39,7 +39,7 @@ Please have a look at [tests/testfixtures/vms/sut.yml](tests/testfixtures/vms/su
 
 ## License
 
-*tbd*
+Apache-2.0 
 
 ## Author Information
 
