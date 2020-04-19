@@ -27,8 +27,8 @@ install:
 
 script:
 - cd tests
-- make -j -e PROVIDER=libvirt
-- sudo vagrant ssh -c "echo 'hello world!'"
+- make -j -e PROVIDER=libvirt setup
+- vagrant ssh -c "echo 'hello world!'" ns
 
 
 # Mmh.... don't know yet how to deal with copyright notice when using open sourced code snippets
