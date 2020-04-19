@@ -43,6 +43,8 @@ script:
 - vagrant ssh -c "ip addr show" sut
 - vagrant ssh -c "ip addr show" client
 - vagrant ssh -c "ip addr show" mail-sink
+- vagrant ssh -c "sudo journalctl -u named" ns 
+- vagrant ssh -c "sudo systemctl status named" ns 
 - vagrant ssh -c "dig mydomain.test MX" client
 - vagrant ssh -c "cat /etc/resolv.conf" sut
 - vagrant ssh -c "systemctl list-units --type=service" sut
