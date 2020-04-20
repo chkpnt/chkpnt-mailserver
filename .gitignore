@@ -1,17 +1,33 @@
-# Created by https://www.gitignore.io/api/vagrant,ansible
+
+# Created by https://www.gitignore.io/api/vagrant,ansible,sonarqube
+# Edit at https://www.gitignore.io/?templates=vagrant,ansible,sonarqube
 
 ### Ansible ###
 *.retry
 
+### SonarQube ###
+# SonarQube ignore files.
+#
+# https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
+# Sonar Scanner working directories
+.sonar/
+.scannerwork/
+
+# http://www.sonarlint.org/commandline/
+# SonarLint working directories, configuration files (including credentials)
+.sonarlint/
+
 ### Vagrant ###
 # General
-.vagrant/
+.vagrant/*
 
 # Log files (if you are creating logs in debug mode, uncomment this)
-# *.logs
+# *.log
 
+### Vagrant Patch ###
+*.box
 
-# End of https://www.gitignore.io/api/vagrant,ansible
+# End of https://www.gitignore.io/api/vagrant,ansible,sonarqube
 
 # Additional ignores:
 *.pyc

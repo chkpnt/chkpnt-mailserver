@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "35698f503276fe297ac33d2074e3e9b69bbf7fb7cd4e738f514f2c41de278bca"
+            "sha256": "fb5cadd49d77c70edbdbaff28dcfd6713e84ea31724943e08f06e393d582b4fe"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,10 +18,10 @@
     "default": {
         "ansible": {
             "hashes": [
-                "sha256:51ae50d33264eb644ecb79a0208a20569a1127ec3440e8de60eda3a2b3d9caa5"
+                "sha256:7222ce925536a25b2912364e13b03a3e21dbf2f96799ebff304f48509324de7b"
             ],
             "index": "pypi",
-            "version": "==2.9.5"
+            "version": "==2.9.7"
         },
         "cffi": {
             "hashes": [
@@ -167,10 +167,10 @@
     "develop": {
         "ansible": {
             "hashes": [
-                "sha256:51ae50d33264eb644ecb79a0208a20569a1127ec3440e8de60eda3a2b3d9caa5"
+                "sha256:7222ce925536a25b2912364e13b03a3e21dbf2f96799ebff304f48509324de7b"
             ],
             "index": "pypi",
-            "version": "==2.9.5"
+            "version": "==2.9.7"
         },
         "ansible-lint": {
             "hashes": [
@@ -243,6 +243,20 @@
                 "sha256:f0a4641d3cf955324a89c04f3d94663aa4d638abe8f733ecd3582848e1c37035"
             ],
             "version": "==2.11.2"
+        },
+        "junit-xml": {
+            "hashes": [
+                "sha256:ec5ca1a55aefdd76d28fcc0b135251d156c7106fa979686a4b48d62b761b4732"
+            ],
+            "index": "pypi",
+            "version": "==1.9"
+        },
+        "junit2html": {
+            "hashes": [
+                "sha256:2160977bec4168babd323da4cf86f5b33ae0220007df0f94abc3f0a57e6d9cdd"
+            ],
+            "index": "pypi",
+            "version": "==22"
         },
         "markupsafe": {
             "hashes": [
@@ -354,11 +368,11 @@
         },
         "yamllint": {
             "hashes": [
-                "sha256:7318e189027951983c3cb4d6bcaa1e75deef7c752320ca3ce84e407f2551e8ce",
-                "sha256:76912b6262fd7e0815d7b14c4c2bb2642c754d0aa38f2d3e4b4e21c77872a3bf"
+                "sha256:0fa69bf8a86182b7fe14918bdd3a30354c869966bbc7cbfff176af71bda9c806",
+                "sha256:59f3ff77f44e7f46be6aecdb985830f73a1c51e290b7082a7d38c2ae1940f4a9"
             ],
             "index": "pypi",
-            "version": "==1.20.0"
+            "version": "==1.23.0"
         }
     }
 }

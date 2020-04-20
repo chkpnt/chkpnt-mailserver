@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 ansible-lint = "*"
 yamllint = "*"
+junit-xml = "*"
+junit2html = "*"
 
 [packages]
 ansible = ">=2.7"

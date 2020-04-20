@@ -1,0 +1,427 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="7" time="5.706731081008911">
+	<testsuite disabled="0" errors="0" failures="0" name="ReceiveMailTest" skipped="0" tests="7" time="5.706731081008911">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/sut.yml:5" name="[sut] Prepare SUT: Reset maildirs path=/srv/mail/{{ item }}, state=absent" time="2.691575">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;msg&quot;: &quot;All items completed&quot;,
+&quot;results&quot;: [
+{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/john/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;john/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/john/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/john/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;john/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/john/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;jane/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;jane/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;diff&quot;: {
+&quot;after&quot;: {
+&quot;path&quot;: &quot;/srv/mail/erika/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+&quot;before&quot;: {
+&quot;path&quot;: &quot;/srv/mail/erika/Maildir&quot;,
+&quot;path_content&quot;: {
+&quot;directories&quot;: [
+&quot;/srv/mail/erika/Maildir/new&quot;,
+&quot;/srv/mail/erika/Maildir/cur&quot;,
+&quot;/srv/mail/erika/Maildir/tmp&quot;
+],
+&quot;files&quot;: [
+&quot;/srv/mail/erika/Maildir/dovecot-uidlist&quot;,
+&quot;/srv/mail/erika/Maildir/maildirfolder&quot;,
+&quot;/srv/mail/erika/Maildir/dovecot.index.log&quot;,
+&quot;/srv/mail/erika/Maildir/dovecot-uidvalidity&quot;,
+&quot;/srv/mail/erika/Maildir/dovecot.index.cache&quot;,
+&quot;/srv/mail/erika/Maildir/dovecot.list.index.log&quot;,
+&quot;/srv/mail/erika/Maildir/dovecot-uidvalidity.5e9cc5bc&quot;,
+&quot;/srv/mail/erika/Maildir/new/1587332540.M312620P4364.sut,S=1461,W=1505&quot;
+]
+},
+&quot;state&quot;: &quot;directory&quot;
+}
+},
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/erika/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;erika/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/erika/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/erika/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;erika/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/erika/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+}
+],
+&quot;warnings&quot;: [
+&quot;Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/sut.yml:10" name="[sut] Prepare SUT: Reset Redis-DB used by rspamd _raw_params=redis-cli -s /var/run/redis/rspamd.sock flushall" time="0.513365">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: [
+&quot;redis-cli&quot;,
+&quot;-s&quot;,
+&quot;/var/run/redis/rspamd.sock&quot;,
+&quot;flushall&quot;
+],
+&quot;delta&quot;: &quot;0:00:00.004513&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:25.778675&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:25.774162&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;OK&quot;,
+&quot;stdout_lines&quot;: [
+&quot;OK&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/ReceiveMailTest.yml:6" name="[client] client: Send a mail from client to an address SUT is responsible for _raw_params=echo &quot;Test-Body&quot; | mailx -s &quot;Test&quot; jane.doe@mydomain.test
+" time="0.481313">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;echo \&quot;Test-Body\&quot; | mailx -s \&quot;Test\&quot; jane.doe@mydomain.test\n&quot;,
+&quot;delta&quot;: &quot;0:00:00.020882&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:26.266092&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:26.245210&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host client is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/ReceiveMailTest.yml:14" name="[sut] sut: wait_for path=/srv/mail/jane/Maildir/new/, timeout=5" time="0.541851">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;elapsed&quot;: 0,
+&quot;gid&quot;: 5000,
+&quot;group&quot;: &quot;vmail&quot;,
+&quot;match_groupdict&quot;: {},
+&quot;match_groups&quot;: [],
+&quot;mode&quot;: &quot;0700&quot;,
+&quot;owner&quot;: &quot;vmail&quot;,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir/new/&quot;,
+&quot;port&quot;: null,
+&quot;search_regex&quot;: null,
+&quot;size&quot;: 4096,
+&quot;state&quot;: &quot;directory&quot;,
+&quot;uid&quot;: 5000
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/ReceiveMailTest.yml:17" name="[sut] sut: find paths=/srv/mail/jane/Maildir/new/" time="0.537595">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;examined&quot;: 1,
+&quot;files&quot;: [
+{
+&quot;atime&quot;: 1587332546.439,
+&quot;ctime&quot;: 1587332546.443,
+&quot;dev&quot;: 2049,
+&quot;gid&quot;: 5000,
+&quot;gr_name&quot;: &quot;vmail&quot;,
+&quot;inode&quot;: 917573,
+&quot;isblk&quot;: false,
+&quot;ischr&quot;: false,
+&quot;isdir&quot;: false,
+&quot;isfifo&quot;: false,
+&quot;isgid&quot;: false,
+&quot;islnk&quot;: false,
+&quot;isreg&quot;: true,
+&quot;issock&quot;: false,
+&quot;isuid&quot;: false,
+&quot;mode&quot;: &quot;0600&quot;,
+&quot;mtime&quot;: 1587332546.439,
+&quot;nlink&quot;: 1,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir/new/1587332546.M437533P4364.sut,S=1445,W=1489&quot;,
+&quot;pw_name&quot;: &quot;vmail&quot;,
+&quot;rgrp&quot;: false,
+&quot;roth&quot;: false,
+&quot;rusr&quot;: true,
+&quot;size&quot;: 1445,
+&quot;uid&quot;: 5000,
+&quot;wgrp&quot;: false,
+&quot;woth&quot;: false,
+&quot;wusr&quot;: true,
+&quot;xgrp&quot;: false,
+&quot;xoth&quot;: false,
+&quot;xusr&quot;: false
+}
+],
+&quot;matched&quot;: 1,
+&quot;msg&quot;: &quot;&quot;
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/ReceiveMailTest.yml:23" name="[sut] sut: Assert mail is received and delivered at SUT file={{ find_result.files[0].path }}, with_content=Return-Path: &lt;vagrant@localhost&gt;
+Delivered-To: jane.doe@mydomain.test
+Received: from sut.mydomain.test
+$$ \t $$by sut.mydomain.test with LMTP
+$$ \t $$id $$ .* $$
+$$ \t $$(envelope-from &lt;vagrant@localhost&gt;)
+$$ \t $$for &lt;jane.doe@mydomain.test&gt;; $$ .* $$
+Received: from localhost (ip-10.0.3.201.someisp.test [10.0.3.201])
+$$ \t $$by sut.mydomain.test (Postfix) with ESMTP id $$ .* $$
+$$ \t $$for &lt;jane.doe@mydomain.test&gt;; $$ .* $$
+Received: by localhost (Postfix, from userid 1000)
+...
+Date: $$ .* $$
+To: jane.doe@mydomain.test
+Subject: Test
+...
+From: vagrant@localhost
+...
+
+Test-Body
+" time="0.538662">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/ReceiveMailTest.yml:50" name="[sut] sut: Assert the received mail is tagged as Spam due to sending from client with hostname localhost (ip-10.0.3.201.someisp.test) file={{ find_result.files[0].path }}, with_content=...
+To: jane.doe@mydomain.test
+Subject: Test
+...
+$$ \t $$ HFILTER_FROMHOST_NOT_FQDN(3.00)[localhost];
+...
+$$ \t $$ HFILTER_HELO_5(3.00)[localhost];
+...
+X-Rspamd-Server: sut
+X-Spam: Yes
+
+Test-Body
+" time="0.402370">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

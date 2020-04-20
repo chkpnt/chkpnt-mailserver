@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="6" time="2.701629638671875">
+	<testsuite disabled="0" errors="0" failures="0" name="PostfixTest" skipped="0" tests="6" time="2.701629638671875">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/PostfixTest.yml:5" name="[sut] sut: Export Postfix configuration _raw_params=postconf &gt; /tmp/postfix.conf" time="0.666387">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;postconf &gt; /tmp/postfix.conf&quot;,
+&quot;delta&quot;: &quot;0:00:00.011178&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:37.604622&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:37.593444&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/PostfixTest.yml:9" name="[sut] sut: Assert Postfix is configured as expected file=/tmp/postfix.conf, with_content=...
+inet_interfaces = all
+inet_protocols = all
+...
+smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_restrictions
+...
+smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+...
+smtpd_tls_cert_file = /etc/ssl/servercerts/mydomain.test.pem
+...
+smtpd_tls_mandatory_ciphers = high
+smtpd_tls_mandatory_exclude_ciphers =
+smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
+smtpd_tls_protocols = !SSLv2, !SSLv3
+...
+smtpd_tls_security_level = may
+...
+transport_maps = hash:/etc/postfix/transport
+...
+virtual_alias_domains = $virtual_alias_maps
+...
+virtual_alias_maps = hash:/etc/postfix/virtual_aliases
+...
+virtual_mailbox_domains = mydomain.test, myotherdomain.test
+...
+virtual_mailbox_maps = hash:/etc/postfix/virtual_mailboxes
+...
+virtual_transport = lmtp:unix:private/dovecot-lmtp
+...
+" time="0.544658">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/PostfixTest.yml:43" name="[sut] sut: Assert transport map is configured as expected file=/etc/postfix/transport, with_content=...
+remote-delivery@mydomain.test    smtp:theirdomain.test
+" time="0.368127">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/PostfixTest.yml:50" name="[sut] sut: Assert recipient restriction map is configured as expected file=/etc/postfix/recipient_restrictions, with_content=...
+reject@mydomain.test             REJECT This address is not supposed to receive mails!
+" time="0.375080">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/PostfixTest.yml:57" name="[sut] sut: Assert virtual mailbox map is configured as expected file=/etc/postfix/virtual_mailboxes, with_content=...
+john.doe@mydomain.test    OK
+jane.doe@mydomain.test    OK
+erika.m@myotherdomain.test    OK
+" time="0.386906">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/PostfixTest.yml:66" name="[sut] sut: Assert virtual aliases map is configured as expected file=/etc/postfix/virtual_aliases, with_content=...
+remote-delivery@mydomain.test      remote-delivery@mydomain.test
+jane.doe@mydomain.test             jane.doe@mydomain.test
+@mydomain.test                     john.doe@mydomain.test" time="0.360472">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="5" time="2.9318554401397705">
+	<testsuite disabled="0" errors="0" failures="0" name="MailCanBeSentFromMailserverWithoutAuthenticationTest" skipped="0" tests="5" time="2.9318554401397705">
+		<testcase classname="tests/tests/_prepare/mail-sink.yml" name="[mail-sink] Prepare mail-sink: copy dest=/tmp/maildump, content=, owner=postfix, group=postfix, mode=644" time="1.091956">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;checksum&quot;: &quot;da39a3ee5e6b4b0d3255bfef95601890afd80709&quot;,
+&quot;dest&quot;: &quot;/tmp/maildump&quot;,
+&quot;gid&quot;: 51,
+&quot;group&quot;: &quot;postfix&quot;,
+&quot;md5sum&quot;: &quot;d41d8cd98f00b204e9800998ecf8427e&quot;,
+&quot;mode&quot;: &quot;0644&quot;,
+&quot;owner&quot;: &quot;postfix&quot;,
+&quot;size&quot;: 0,
+&quot;src&quot;: &quot;/home/vagrant/.ansible/tmp/ansible-tmp-1587332580.185888-44204-261494791280780/source&quot;,
+&quot;state&quot;: &quot;file&quot;,
+&quot;uid&quot;: 51,
+&quot;warnings&quot;: [
+&quot;Platform linux on host mail-sink is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="tests/tests/_prepare/mail-sink.yml:9" name="[mail-sink] Prepare mail-sink: shell _raw_params=&gt; /var/mail/vagrant" time="0.492173">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; /var/mail/vagrant&quot;,
+&quot;delta&quot;: &quot;0:00:00.003954&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:01.672907&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:01.668953&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="tests/tests/_prepare/mail-sink.yml:10" name="[mail-sink] Prepare mail-sink: shell _raw_params=&gt; /tmp/mailcheck" time="0.341635">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; /tmp/mailcheck&quot;,
+&quot;delta&quot;: &quot;0:00:00.003351&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:02.018732&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:02.015381&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/MailCanBeSentFromMailserverWithoutAuthenticationTest.yml:6" name="[sut] sut: Send test mail from SUT _raw_params=echo &quot;Test-Body&quot; | mailx -s &quot;Test&quot; test@mail-sink.theirdomain.test" time="0.533459">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;echo \&quot;Test-Body\&quot; | mailx -s \&quot;Test\&quot; test@mail-sink.theirdomain.test&quot;,
+&quot;delta&quot;: &quot;0:00:00.021345&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:02.559085&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:02.537740&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="tests/tests/outgoing/MailCanBeSentFromMailserverWithoutAuthenticationTest.yml:11" name="[mail-sink] mail-sink: Assert mail has been received file=/tmp/maildump, with_content=...
+Received: from sut.mydomain.test ([10.0.3.10])
+...
+Received: by sut.mydomain.test (Postfix, from userid 1000)
+...
+Date: $$ .* $$
+To: test@mail-sink.theirdomain.test
+Subject: Test
+...
+From: vagrant@sut.mydomain.test
+
+Test-Body
+
+" time="0.472633">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

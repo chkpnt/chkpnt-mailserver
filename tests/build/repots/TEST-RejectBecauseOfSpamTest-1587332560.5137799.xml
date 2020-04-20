@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="6" time="2.316455125808716">
+	<testsuite disabled="0" errors="0" failures="0" name="RejectBecauseOfSpamTest" skipped="0" tests="6" time="2.316455125808716">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/client.yml:5" name="[client] Prepare client: shell _raw_params=&gt; ~/dead.letter" time="0.558905">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; ~/dead.letter&quot;,
+&quot;delta&quot;: &quot;0:00:00.003131&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:38.679830&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:38.676699&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host client is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/client.yml:6" name="[client] Prepare client: shell _raw_params=&gt; ~/mail.err" time="0.315971">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; ~/mail.err&quot;,
+&quot;delta&quot;: &quot;0:00:00.002681&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:39.003831&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:39.001150&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/client.yml:7" name="[client] Prepare client: shell _raw_params=&gt; ~/imap.log" time="0.327551">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; ~/imap.log&quot;,
+&quot;delta&quot;: &quot;0:00:00.003179&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:39.335712&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:39.332533&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/client.yml:8" name="[client] Prepare client: shell _raw_params=&gt; /var/mail/vagrant" time="0.316933">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; /var/mail/vagrant&quot;,
+&quot;delta&quot;: &quot;0:00:00.002818&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:39.653288&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:39.650470&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/RejectBecauseOfSpamTest.yml:6" name="[client] client: Send a mail from client to an address that is rejected _raw_params=cat &lt;&lt;' EOF' | mailx -s &quot;Test&quot; jane.doe@mydomain.test
+This is the GTUBE, the
+  Generic
+  Test for
+  Unsolicited
+  Bulk
+  Email
+
+If your spam filter supports it, the GTUBE provides a test by which you
+can verify that the filter is installed correctly and is detecting incoming
+spam. You can send yourself a test mail containing the following string of
+characters (in upper case and with no white spaces and line breaks).
+
+XJS*C4JDBQADN1.NSBN3*2IDNEN*GTUBE-STANDARD-ANTI-UBE-TEST-EMAIL*C.34X
+
+You should send this test mail from an account outside of your network.
+EOF
+" time="0.341320">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;cat &lt;&lt;' EOF' | mailx -s \&quot;Test\&quot; jane.doe@mydomain.test\nThis is the GTUBE, the\n  Generic\n  Test for\n  Unsolicited\n  Bulk\n  Email\n\nIf your spam filter supports it, the GTUBE provides a test by which you\ncan verify that the filter is installed correctly and is detecting incoming\nspam. You can send yourself a test mail containing the following string of\ncharacters (in upper case and with no white spaces and line breaks).\n\nXJS*C4JDBQADN1.NSBN3*2IDNEN*GTUBE-STANDARD-ANTI-UBE-TEST-EMAIL*C.34X\n\nYou should send this test mail from an account outside of your network.\nEOF\n&quot;,
+&quot;delta&quot;: &quot;0:00:00.021030&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:39.996331&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:39.975301&quot;,
+&quot;stderr&quot;: &quot;/bin/sh: line 16: warning: here-document at line 0 delimited by end-of-file (wanted ` EOF')&quot;,
+&quot;stderr_lines&quot;: [
+&quot;/bin/sh: line 16: warning: here-document at line 0 delimited by end-of-file (wanted ` EOF')&quot;
+],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/RejectBecauseOfSpamTest.yml:28" name="[client] client: Assert client has received a DSN containing reject informations file=/var/mail/vagrant, with_content=...
+Subject: Undelivered Mail Returned to Sender
+...
+I'm sorry to have to inform you that your message could not
+be delivered to one or more recipients. It's attached below.
+...
+&lt;jane.doe@mydomain.test&gt;: host sut.mydomain.test[10.0.3.10] said: 554 5.7.1
+    Gtube pattern (in reply to end of DATA command)
+..." time="0.455775">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="1" time="0.8585238456726074">
+	<testsuite disabled="0" errors="0" failures="0" name="DovecotTest" skipped="0" tests="1" time="0.8585238456726074">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/DovecotTest.yml:5" name="[sut] sut: Assert Dovecot is configured as expected file=/etc/dovecot/dovecot.conf, with_content={{ lookup('file', 'assets/expected_dovecot.conf') }}" time="0.858524">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: false,
+&quot;meta&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

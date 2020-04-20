@@ -1,0 +1,496 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="10" time="9.278005361557007">
+	<testsuite disabled="0" errors="0" failures="0" name="RspamdTest" skipped="0" tests="10" time="9.278005361557007">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:5" name="[sut] sut: Prepare filter for jq to normalize json documents dest=/tmp/normalize.jq, content=def walk(f):
+  . as $in
+  | if type == &quot;object&quot; then
+      reduce keys_unsorted[] as $key
+        ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f
+  elif type == &quot;array&quot; then map( walk(f) ) | f
+  else f
+  end;
+
+def sort_by_keys:
+  to_entries | sort_by(.key) | from_entries;
+
+walk(if type == &quot;object&quot; then sort_by_keys else . end)
+" time="1.015013">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: false,
+&quot;checksum&quot;: &quot;bde12f5b59186ada060ff915f2cf19771fd7bfa4&quot;,
+&quot;dest&quot;: &quot;/tmp/normalize.jq&quot;,
+&quot;gid&quot;: 1000,
+&quot;group&quot;: &quot;vagrant&quot;,
+&quot;mode&quot;: &quot;0644&quot;,
+&quot;owner&quot;: &quot;vagrant&quot;,
+&quot;path&quot;: &quot;/tmp/normalize.jq&quot;,
+&quot;size&quot;: 332,
+&quot;state&quot;: &quot;file&quot;,
+&quot;uid&quot;: 1000,
+&quot;warnings&quot;: [
+&quot;Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:25" name="[sut] sut: Export relevant configuration sections of rspamd _raw_params=rspamadm configdump -j {{ item }} | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_{{ item }}" time="5.182336">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;msg&quot;: &quot;All items completed&quot;,
+&quot;results&quot;: [
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;rspamadm configdump -j worker | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_worker&quot;,
+&quot;delta&quot;: &quot;0:00:00.295141&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:42.251848&quot;,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_raw_params&quot;: &quot;rspamadm configdump -j worker | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_worker&quot;,
+&quot;_uses_shell&quot;: true,
+&quot;argv&quot;: null,
+&quot;chdir&quot;: null,
+&quot;creates&quot;: null,
+&quot;executable&quot;: null,
+&quot;removes&quot;: null,
+&quot;stdin&quot;: null,
+&quot;stdin_add_newline&quot;: true,
+&quot;strip_empty_ends&quot;: true,
+&quot;warn&quot;: true
+}
+},
+&quot;item&quot;: &quot;worker&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:41.956707&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;rspamadm configdump -j redis | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_redis&quot;,
+&quot;delta&quot;: &quot;0:00:00.282636&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:42.902309&quot;,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_raw_params&quot;: &quot;rspamadm configdump -j redis | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_redis&quot;,
+&quot;_uses_shell&quot;: true,
+&quot;argv&quot;: null,
+&quot;chdir&quot;: null,
+&quot;creates&quot;: null,
+&quot;executable&quot;: null,
+&quot;removes&quot;: null,
+&quot;stdin&quot;: null,
+&quot;stdin_add_newline&quot;: true,
+&quot;strip_empty_ends&quot;: true,
+&quot;warn&quot;: true
+}
+},
+&quot;item&quot;: &quot;redis&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:42.619673&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;rspamadm configdump -j antivirus | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_antivirus&quot;,
+&quot;delta&quot;: &quot;0:00:00.293256&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:43.561741&quot;,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_raw_params&quot;: &quot;rspamadm configdump -j antivirus | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_antivirus&quot;,
+&quot;_uses_shell&quot;: true,
+&quot;argv&quot;: null,
+&quot;chdir&quot;: null,
+&quot;creates&quot;: null,
+&quot;executable&quot;: null,
+&quot;removes&quot;: null,
+&quot;stdin&quot;: null,
+&quot;stdin_add_newline&quot;: true,
+&quot;strip_empty_ends&quot;: true,
+&quot;warn&quot;: true
+}
+},
+&quot;item&quot;: &quot;antivirus&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:43.268485&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;rspamadm configdump -j actions | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_actions&quot;,
+&quot;delta&quot;: &quot;0:00:00.248233&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:44.147315&quot;,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_raw_params&quot;: &quot;rspamadm configdump -j actions | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_actions&quot;,
+&quot;_uses_shell&quot;: true,
+&quot;argv&quot;: null,
+&quot;chdir&quot;: null,
+&quot;creates&quot;: null,
+&quot;executable&quot;: null,
+&quot;removes&quot;: null,
+&quot;stdin&quot;: null,
+&quot;stdin_add_newline&quot;: true,
+&quot;strip_empty_ends&quot;: true,
+&quot;warn&quot;: true
+}
+},
+&quot;item&quot;: &quot;actions&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:43.899082&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;rspamadm configdump -j dkim_signing | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_dkim_signing&quot;,
+&quot;delta&quot;: &quot;0:00:00.246580&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:44.737704&quot;,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_raw_params&quot;: &quot;rspamadm configdump -j dkim_signing | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_dkim_signing&quot;,
+&quot;_uses_shell&quot;: true,
+&quot;argv&quot;: null,
+&quot;chdir&quot;: null,
+&quot;creates&quot;: null,
+&quot;executable&quot;: null,
+&quot;removes&quot;: null,
+&quot;stdin&quot;: null,
+&quot;stdin_add_newline&quot;: true,
+&quot;strip_empty_ends&quot;: true,
+&quot;warn&quot;: true
+}
+},
+&quot;item&quot;: &quot;dkim_signing&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:44.491124&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;rspamadm configdump -j options | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_options&quot;,
+&quot;delta&quot;: &quot;0:00:00.258703&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:45.328133&quot;,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_raw_params&quot;: &quot;rspamadm configdump -j options | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_options&quot;,
+&quot;_uses_shell&quot;: true,
+&quot;argv&quot;: null,
+&quot;chdir&quot;: null,
+&quot;creates&quot;: null,
+&quot;executable&quot;: null,
+&quot;removes&quot;: null,
+&quot;stdin&quot;: null,
+&quot;stdin_add_newline&quot;: true,
+&quot;strip_empty_ends&quot;: true,
+&quot;warn&quot;: true
+}
+},
+&quot;item&quot;: &quot;options&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:45.069430&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;rspamadm configdump -j classifier | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_classifier&quot;,
+&quot;delta&quot;: &quot;0:00:00.251197&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:45.916564&quot;,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_raw_params&quot;: &quot;rspamadm configdump -j classifier | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_classifier&quot;,
+&quot;_uses_shell&quot;: true,
+&quot;argv&quot;: null,
+&quot;chdir&quot;: null,
+&quot;creates&quot;: null,
+&quot;executable&quot;: null,
+&quot;removes&quot;: null,
+&quot;stdin&quot;: null,
+&quot;stdin_add_newline&quot;: true,
+&quot;strip_empty_ends&quot;: true,
+&quot;warn&quot;: true
+}
+},
+&quot;item&quot;: &quot;classifier&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:45.665367&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;rspamadm configdump -j greylist | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_greylist&quot;,
+&quot;delta&quot;: &quot;0:00:00.285029&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:41:46.574913&quot;,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_raw_params&quot;: &quot;rspamadm configdump -j greylist | jq -f /tmp/normalize.jq &gt; /tmp/rspamdconfig_greylist&quot;,
+&quot;_uses_shell&quot;: true,
+&quot;argv&quot;: null,
+&quot;chdir&quot;: null,
+&quot;creates&quot;: null,
+&quot;executable&quot;: null,
+&quot;removes&quot;: null,
+&quot;stdin&quot;: null,
+&quot;stdin_add_newline&quot;: true,
+&quot;strip_empty_ends&quot;: true,
+&quot;warn&quot;: true
+}
+},
+&quot;item&quot;: &quot;greylist&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:41:46.289884&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:39" name="[sut] sut: Assert workers are configured as expected file=/tmp/rspamdconfig_worker, with_content={
+  &quot;normal&quot;: {
+...
+    &quot;enabled&quot;: false,
+...
+  }
+}
+{
+  &quot;controller&quot;: {
+    &quot;bind_socket&quot;: &quot;*:11334&quot;,
+    &quot;count&quot;: 1,
+    &quot;password&quot;: &quot;$2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb&quot;,
+    &quot;secure_ip&quot;: [
+      &quot;127.0.0.1&quot;,
+      &quot;::1&quot;
+    ],
+    &quot;static_dir&quot;: &quot;/srv/www/webapps/rspamd&quot;
+  }
+}
+{
+  &quot;rspamd_proxy&quot;: {
+    &quot;bind_socket&quot;: &quot;/run/rspamd/worker-proxy.socket mode=0660&quot;,
+    &quot;count&quot;: 1,
+    &quot;discard_on_reject&quot;: false,
+    &quot;max_retries&quot;: 5,
+    &quot;milter&quot;: true,
+    &quot;quarantine_on_reject&quot;: false,
+    &quot;reject_message&quot;: &quot;Spam message rejected&quot;,
+    &quot;spam_header&quot;: &quot;X-Spam&quot;,
+    &quot;timeout&quot;: 120,
+    &quot;upstream&quot;: {
+      &quot;local&quot;: {
+        &quot;default&quot;: true,
+        &quot;hosts&quot;: &quot;localhost&quot;,
+        &quot;self_scan&quot;: true
+      }
+    }
+  }
+}
+{
+  &quot;fuzzy&quot;: {
+...
+    &quot;count&quot;: -1,
+...
+}
+" time="0.525565">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:89" name="[sut] sut: Assert Redis backend is configured as expected file=/tmp/rspamdconfig_redis, with_content={
+  &quot;servers&quot;: &quot;/var/run/redis/rspamd.sock&quot;
+}
+" time="0.362759">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:97" name="[sut] sut: Assert antivirus is configured as expected file=/tmp/rspamdconfig_antivirus, with_content={
+  &quot;clamav&quot;: {
+    &quot;action&quot;: &quot;reject&quot;,
+    &quot;servers&quot;: &quot;/var/run/clamav/clamd-socket&quot;
+  }
+}
+" time="0.363611">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:108" name="[sut] sut: Assert thresholds (actions) are configured as expected file=/tmp/rspamdconfig_actions, with_content={
+  &quot;add_header&quot;: 6,
+  &quot;greylist&quot;: 4,
+  &quot;reject&quot;: 15
+}
+" time="0.367870">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:118" name="[sut] sut: Assert DKIM-signing is configured as expected file=/tmp/rspamdconfig_dkim_signing, with_content={
+  &quot;allow_envfrom_empty&quot;: true,
+  &quot;allow_hdrfrom_mismatch&quot;: false,
+  &quot;allow_hdrfrom_multiple&quot;: false,
+  &quot;allow_username_mismatch&quot;: false,
+  &quot;domain&quot;: {
+    &quot;mydomain.test&quot;: {
+      &quot;path&quot;: &quot;/var/lib/rspamd/dkim/mydomain.test.key1.key&quot;,
+      &quot;selector&quot;: &quot;key1&quot;
+    }
+  },
+  &quot;key_prefix&quot;: &quot;DKIM_KEYS&quot;,
+  &quot;selector&quot;: &quot;dkim&quot;,
+  &quot;sign_authenticated&quot;: true,
+  &quot;sign_local&quot;: true,
+  &quot;sign_networks&quot;: [
+    &quot;127.2.4.7&quot;
+  ],
+  &quot;symbol&quot;: &quot;DKIM_SIGNED&quot;,
+  &quot;try_fallback&quot;: true,
+  &quot;use_domain&quot;: &quot;header&quot;,
+  &quot;use_esld&quot;: true,
+  &quot;use_redis&quot;: false
+}
+" time="0.354067">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:147" name="[sut] sut: Assert basic rspamd configuration is as expected file=/tmp/rspamdconfig_options, with_content={
+  &quot;allow_raw_input&quot;: true,
+  &quot;cache_file&quot;: &quot;/var/lib/rspamd/symbols.cache&quot;,
+  &quot;check_all_filters&quot;: true,
+  &quot;classify_headers&quot;: [
+    &quot;User-Agent&quot;,
+    &quot;X-Mailer&quot;,
+    &quot;Content-Type&quot;,
+    &quot;X-MimeOLE&quot;
+  ],
+  &quot;control_socket&quot;: &quot;/var/lib/rspamd/rspamd.sock mode=0600&quot;,
+  &quot;dns&quot;: {
+    &quot;nameserver&quot;: [
+      &quot;127.0.0.1&quot;
+    ],
+    &quot;retransmits&quot;: 5,
+    &quot;sockets&quot;: 16,
+    &quot;timeout&quot;: 1
+  },
+  &quot;dns_max_requests&quot;: 64,
+  &quot;dynamic_conf&quot;: &quot;/var/lib/rspamd/rspamd_dynamic&quot;,
+  &quot;explicit_modules&quot;: [
+    &quot;settings&quot;,
+    &quot;bayes_expiry&quot;
+  ],
+  &quot;filters&quot;: &quot;chartable,dkim,regexp,fuzzy_check&quot;,
+  &quot;history_file&quot;: &quot;/var/lib/rspamd/rspamd.history&quot;,
+  &quot;history_rows&quot;: 200,
+  &quot;hs_cache_dir&quot;: &quot;/var/lib/rspamd/&quot;,
+  &quot;local_addrs&quot;: [
+    &quot;127.2.4.7&quot;
+  ],
+  &quot;map_file_watch_multiplier&quot;: 0.1,
+  &quot;map_watch_interval&quot;: 300,
+  &quot;max_lua_urls&quot;: 1024,
+  &quot;max_urls&quot;: 10240,
+  &quot;one_shot&quot;: false,
+  &quot;pidfile&quot;: &quot;/var/run/rspamd/rspamd.pid&quot;,
+  &quot;raw_mode&quot;: false,
+  &quot;rrd&quot;: &quot;/var/lib/rspamd/rspamd.rrd&quot;,
+  &quot;soft_reject_on_timeout&quot;: false,
+  &quot;stats_file&quot;: &quot;/var/lib/rspamd/stats.ucl&quot;,
+  &quot;task_timeout&quot;: 8,
+  &quot;tempdir&quot;: &quot;/tmp&quot;,
+  &quot;url_tld&quot;: &quot;/usr/share/rspamd/effective_tld_names.dat&quot;,
+  &quot;words_decay&quot;: 600
+}
+" time="0.371884">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:199" name="[sut] sut: Assert bayes expiry module (statistics classifier) is configured as expected file=/tmp/rspamdconfig_classifier, with_content={
+  &quot;bayes&quot;: {
+    &quot;backend&quot;: &quot;redis&quot;,
+    &quot;cache&quot;: {},
+    &quot;learn_condition&quot;: &quot;return require(\&quot;lua_bayes_learn\&quot;).can_learn&quot;,
+    &quot;min_learns&quot;: 200,
+    &quot;min_tokens&quot;: 11,
+    &quot;new_schema&quot;: true,
+    &quot;signatures&quot;: false,
+    &quot;statfile&quot;: [
+      {
+        &quot;spam&quot;: false,
+        &quot;symbol&quot;: &quot;BAYES_HAM&quot;
+      },
+      {
+        &quot;spam&quot;: true,
+        &quot;symbol&quot;: &quot;BAYES_SPAM&quot;
+      }
+    ],
+    &quot;store_tokens&quot;: false,
+    &quot;tokenizer&quot;: {
+      &quot;name&quot;: &quot;osb&quot;
+    }
+  }
+}
+" time="0.369020">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/configuration/RspamdTest.yml:229" name="[sut] sut: Assert greylisting module is configured as expected file=/tmp/rspamdconfig_greylist, with_content={
+  &quot;action&quot;: &quot;soft reject&quot;,
+...
+  &quot;message&quot;: &quot;Try again later&quot;,
+  &quot;timeout&quot;: 300,
+...
+}" time="0.365881">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

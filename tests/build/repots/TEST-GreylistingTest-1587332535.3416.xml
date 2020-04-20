@@ -1,0 +1,380 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="1" tests="7" time="5.126988649368286">
+	<testsuite disabled="0" errors="0" failures="1" name="GreylistingTest" skipped="0" tests="7" time="5.126988649368286">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/sut.yml:5" name="[sut] Prepare SUT: Reset maildirs path=/srv/mail/{{ item }}, state=absent" time="2.695591">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;msg&quot;: &quot;All items completed&quot;,
+&quot;results&quot;: [
+{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/john/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;john/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/john/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/john/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;john/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/john/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;diff&quot;: {
+&quot;after&quot;: {
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+&quot;before&quot;: {
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir&quot;,
+&quot;path_content&quot;: {
+&quot;directories&quot;: [
+&quot;/srv/mail/jane/Maildir/new&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk&quot;,
+&quot;/srv/mail/jane/Maildir/cur&quot;,
+&quot;/srv/mail/jane/Maildir/tmp&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk/new&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk/cur&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk/tmp&quot;
+],
+&quot;files&quot;: [
+&quot;/srv/mail/jane/Maildir/dovecot-uidlist&quot;,
+&quot;/srv/mail/jane/Maildir/dovecot-uidvalidity.5e9cc48d&quot;,
+&quot;/srv/mail/jane/Maildir/dovecot.index.log&quot;,
+&quot;/srv/mail/jane/Maildir/dovecot-uidvalidity&quot;,
+&quot;/srv/mail/jane/Maildir/dovecot.list.index.log&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk/dovecot-uidlist&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk/maildirfolder&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk/dovecot.index.log&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk/dovecot.index.cache&quot;,
+&quot;/srv/mail/jane/Maildir/.Junk/new/1587332238.M202292P23928.sut,S=1471,W=1516&quot;
+]
+},
+&quot;state&quot;: &quot;directory&quot;
+}
+},
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;jane/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;diff&quot;: {
+&quot;after&quot;: {
+&quot;path&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+&quot;before&quot;: {
+&quot;path&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;file&quot;
+}
+},
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;jane/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/erika/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;erika/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/erika/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/erika/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;erika/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/erika/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+}
+],
+&quot;warnings&quot;: [
+&quot;Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/sut.yml:10" name="[sut] Prepare SUT: Reset Redis-DB used by rspamd _raw_params=redis-cli -s /var/run/redis/rspamd.sock flushall" time="0.517087">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: [
+&quot;redis-cli&quot;,
+&quot;-s&quot;,
+&quot;/var/run/redis/rspamd.sock&quot;,
+&quot;flushall&quot;
+],
+&quot;delta&quot;: &quot;0:00:00.003567&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:13.333519&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:13.329952&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;OK&quot;,
+&quot;stdout_lines&quot;: [
+&quot;OK&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/GreylistingTest.yml:6" name="[client] client: Send a mail from client to an address which will be greylisted _raw_params=echo &quot;Test-Body&quot; | mailx -s &quot;Test&quot; greylist@mydomain.test
+" time="0.480466">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;echo \&quot;Test-Body\&quot; | mailx -s \&quot;Test\&quot; greylist@mydomain.test\n&quot;,
+&quot;delta&quot;: &quot;0:00:00.017433&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:13.805497&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:13.788064&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host client is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/GreylistingTest.yml:12" name="[sut] sut: Get path of mail in maildir paths=/srv/mail/john/Maildir/new/" time="0.517934">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;examined&quot;: 0,
+&quot;files&quot;: [],
+&quot;matched&quot;: 0,
+&quot;msg&quot;: &quot;/srv/mail/john/Maildir/new/ was skipped as it does not seem to be a valid directory or it cannot be accessed\n&quot;
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/GreylistingTest.yml:19" name="[sut] sut: Assert no mail is received yet that=find_result.matched == 0, fail_msg=Greylisting didn't worked" time="0.043316">
+			<system-out>{
+    &quot;changed&quot;: false,
+    &quot;msg&quot;: &quot;All assertions passed&quot;
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/GreylistingTest.yml:28" name="[client] client: shell _raw_params=postqueue -p &gt; /tmp/postqueue" time="0.402720">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;postqueue -p &gt; /tmp/postqueue&quot;,
+&quot;delta&quot;: &quot;0:00:00.011426&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:14.813772&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:14.802346&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/GreylistingTest.yml:30" name="[client] client: compare file=/tmp/postqueue, with_content=-Queue ID-  --Size-- ----Arrival Time---- -Sender/Recipient-------
+$$ .* $$  vagrant@localost
+(host sut.mydomain.test[10.0.3.10] said: 451 4.7.1 Try again later (in reply to end of DATA command))
+                                         greylist@mydomain.test
+...
+" time="0.469875">
+			<failure message="[&quot;Line 2: 'C85B61A0575      417 Sun Apr 19 23:42:13  vagrant@localhost' does not match '$$ .* $$  vagrant@localost'&quot;]" type="failure">{
+&quot;changed&quot;: false,
+&quot;msg&quot;: [
+&quot;Line 2: 'C85B61A0575      417 Sun Apr 19 23:42:13  vagrant@localhost' does not match '$$ .* $$  vagrant@localost'&quot;
+]
+}</failure>
+		</testcase>
+	</testsuite>
+</testsuites>

@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="7" time="3.45304799079895">
+	<testsuite disabled="0" errors="0" failures="0" name="RejectBecauseOfVirusTest" skipped="0" tests="7" time="3.45304799079895">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/client.yml:5" name="[client] Prepare client: shell _raw_params=&gt; ~/dead.letter" time="0.582793">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; ~/dead.letter&quot;,
+&quot;delta&quot;: &quot;0:00:00.002894&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:41.643142&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:41.640248&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host client is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/client.yml:6" name="[client] Prepare client: shell _raw_params=&gt; ~/mail.err" time="0.348647">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; ~/mail.err&quot;,
+&quot;delta&quot;: &quot;0:00:00.002903&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:42.003219&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:42.000316&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/client.yml:7" name="[client] Prepare client: shell _raw_params=&gt; ~/imap.log" time="0.360149">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; ~/imap.log&quot;,
+&quot;delta&quot;: &quot;0:00:00.002829&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:42.356970&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:42.354141&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/client.yml:8" name="[client] Prepare client: shell _raw_params=&gt; /var/mail/vagrant" time="0.434914">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; /var/mail/vagrant&quot;,
+&quot;delta&quot;: &quot;0:00:00.003971&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:42.795651&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:42.791680&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/RejectBecauseOfVirusTest.yml:6" name="[client] client: Write EICAR into file content=X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*, dest=eicar.com" time="0.887789">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;checksum&quot;: &quot;3395856ce81f2b7382dee72602f798b642f14140&quot;,
+&quot;dest&quot;: &quot;eicar.com&quot;,
+&quot;gid&quot;: 1000,
+&quot;group&quot;: &quot;vagrant&quot;,
+&quot;mode&quot;: &quot;0644&quot;,
+&quot;owner&quot;: &quot;vagrant&quot;,
+&quot;path&quot;: &quot;eicar.com&quot;,
+&quot;size&quot;: 68,
+&quot;state&quot;: &quot;file&quot;,
+&quot;uid&quot;: 1000
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/RejectBecauseOfVirusTest.yml:10" name="[client] client: Send a mail with an attached virus from client to an address SUT is responsible for _raw_params=echo &quot;Test-Body&quot; | mailx -s &quot;Test&quot; -a eicar.com jane.doe@mydomain.test" time="0.364728">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;echo \&quot;Test-Body\&quot; | mailx -s \&quot;Test\&quot; -a eicar.com jane.doe@mydomain.test&quot;,
+&quot;delta&quot;: &quot;0:00:00.017902&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:44.065649&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:44.047747&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/RejectBecauseOfVirusTest.yml:15" name="[client] client: Assert client has received a DSN containing reject informations file=/var/mail/vagrant, with_content=...
+Subject: Undelivered Mail Returned to Sender
+...
+I'm sorry to have to inform you that your message could not
+be delivered to one or more recipients. It's attached below.
+...
+&lt;jane.doe@mydomain.test&gt;: host sut.mydomain.test[10.0.3.10] said: 554 5.7.1
+    Spam message rejected (in reply to end of DATA command)
+...
+" time="0.474028">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

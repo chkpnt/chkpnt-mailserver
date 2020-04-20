@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="2" time="0.075042724609375">
+	<testsuite disabled="0" errors="0" failures="0" name="format_list_tests" skipped="0" tests="2" time="0.075042724609375">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/unittests/format_list_tests.yml:10" name="[localhost] localhost: Testing format_list... msg={{ list_of_hosts | format_list(&quot;'.%s'&quot;) | join(&quot;, &quot;) }}" time="0.036168">
+			<system-out>{
+    &quot;changed&quot;: false,
+    &quot;msg&quot;: &quot;'.example.com', '.example.org'&quot;
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/unittests/format_list_tests.yml:15" name="[localhost] localhost: Testing format_list... asserting that=['result.msg == &quot;\'.example.com\', \'.example.org\'&quot;']" time="0.038875">
+			<system-out>{
+    &quot;changed&quot;: false,
+    &quot;msg&quot;: &quot;All assertions passed&quot;
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

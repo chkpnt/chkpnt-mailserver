@@ -1,0 +1,122 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="7" time="3.9659085273742676">
+	<testsuite disabled="0" errors="0" failures="0" name="OutgoingMailsAreDKIMSignedTest" skipped="0" tests="7" time="3.9659085273742676">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:5" name="[mail-sink] Prepare mail-sink: copy dest=/tmp/maildump, content=, owner=postfix, group=postfix, mode=644" time="1.104815">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;checksum&quot;: &quot;da39a3ee5e6b4b0d3255bfef95601890afd80709&quot;,
+&quot;dest&quot;: &quot;/tmp/maildump&quot;,
+&quot;gid&quot;: 51,
+&quot;group&quot;: &quot;postfix&quot;,
+&quot;md5sum&quot;: &quot;d41d8cd98f00b204e9800998ecf8427e&quot;,
+&quot;mode&quot;: &quot;0644&quot;,
+&quot;owner&quot;: &quot;postfix&quot;,
+&quot;size&quot;: 0,
+&quot;src&quot;: &quot;/home/vagrant/.ansible/tmp/ansible-tmp-1587332583.863876-44260-162659734087659/source&quot;,
+&quot;state&quot;: &quot;file&quot;,
+&quot;uid&quot;: 51,
+&quot;warnings&quot;: [
+&quot;Platform linux on host mail-sink is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:9" name="[mail-sink] Prepare mail-sink: shell _raw_params=&gt; /var/mail/vagrant" time="0.512520">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; /var/mail/vagrant&quot;,
+&quot;delta&quot;: &quot;0:00:00.002966&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:05.385129&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:05.382163&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:10" name="[mail-sink] Prepare mail-sink: shell _raw_params=&gt; /tmp/mailcheck" time="0.343892">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; /tmp/mailcheck&quot;,
+&quot;delta&quot;: &quot;0:00:00.002898&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:05.741528&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:05.738630&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/OutgoingMailsAreDKIMSignedTest.yml:6" name="[sut] sut: Send test mail from client to mail-sink via SUT with authentication _raw_params=echo &quot;Test-Body&quot; | mailx -s &quot;Test&quot; -r &quot;john.doe@mydomain.test&quot; -S ssl-verify=ignore -S smtp=smtps://sut.mydomain.test:465 -S smtp-auth=plain -S smtp-auth-user=john.doe@mydomain.test -S smtp-auth-password=changeme test@mail-sink.theirdomain.test
+" time="0.633441">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;echo \&quot;Test-Body\&quot; | mailx -s \&quot;Test\&quot; -r \&quot;john.doe@mydomain.test\&quot; -S ssl-verify=ignore -S smtp=smtps://sut.mydomain.test:465 -S smtp-auth=plain -S smtp-auth-user=john.doe@mydomain.test -S smtp-auth-password=changeme test@mail-sink.theirdomain.test\n&quot;,
+&quot;delta&quot;: &quot;0:00:00.162973&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:06.367296&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:06.204323&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/OutgoingMailsAreDKIMSignedTest.yml:18" name="[mail-sink] mail-sink: Assert received mail has an DKIM-signature file=/tmp/maildump, with_content=...
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mydomain.test;
+$$ \t $$s=key1; t=$$ \d+ $$;
+$$ \t $$h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+$$ \t $$ to:to:cc:mime-version:mime-version:content-type:content-type:
+$$ \t $$ content-transfer-encoding:content-transfer-encoding;
+$$ \t $$bh=$$ .* $$;
+$$ \t $$b=$$ .* $$
+...
+From: john.doe@mydomain.test
+To: test@mail-sink.theirdomain.test
+...
+
+Test-Body
+
+" time="0.495794">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/OutgoingMailsAreDKIMSignedTest.yml:39" name="[mail-sink] mail-sink: shell _raw_params=dkimverify.pl &lt; /tmp/maildump &gt; /tmp/mailcheck" time="0.521397">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;dkimverify.pl &lt; /tmp/maildump &gt; /tmp/mailcheck&quot;,
+&quot;delta&quot;: &quot;0:00:00.096876&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:07.404641&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:07.307765&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/OutgoingMailsAreDKIMSignedTest.yml:40" name="[mail-sink] mail-sink: compare file=/tmp/mailcheck, with_content=originator address: john.doe@mydomain.test
+signature identity: @mydomain.test
+verify result: pass
+sender policy result: accept
+author policy result: accept
+ADSP policy result: accept" time="0.354049">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

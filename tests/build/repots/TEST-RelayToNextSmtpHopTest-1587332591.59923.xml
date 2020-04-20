@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="5" time="3.0506842136383057">
+	<testsuite disabled="0" errors="0" failures="0" name="RelayToNextSmtpHopTest" skipped="0" tests="5" time="3.0506842136383057">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:5" name="[mail-sink] Prepare mail-sink: copy dest=/tmp/maildump, content=, owner=postfix, group=postfix, mode=644" time="1.112526">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;checksum&quot;: &quot;da39a3ee5e6b4b0d3255bfef95601890afd80709&quot;,
+&quot;dest&quot;: &quot;/tmp/maildump&quot;,
+&quot;gid&quot;: 51,
+&quot;group&quot;: &quot;postfix&quot;,
+&quot;md5sum&quot;: &quot;d41d8cd98f00b204e9800998ecf8427e&quot;,
+&quot;mode&quot;: &quot;0644&quot;,
+&quot;owner&quot;: &quot;postfix&quot;,
+&quot;size&quot;: 0,
+&quot;src&quot;: &quot;/home/vagrant/.ansible/tmp/ansible-tmp-1587332588.5645492-44332-85286819213856/source&quot;,
+&quot;state&quot;: &quot;file&quot;,
+&quot;uid&quot;: 51,
+&quot;warnings&quot;: [
+&quot;Platform linux on host mail-sink is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:9" name="[mail-sink] Prepare mail-sink: shell _raw_params=&gt; /var/mail/vagrant" time="0.546710">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; /var/mail/vagrant&quot;,
+&quot;delta&quot;: &quot;0:00:00.003348&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:10.122621&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:10.119273&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:10" name="[mail-sink] Prepare mail-sink: shell _raw_params=&gt; /tmp/mailcheck" time="0.391936">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;&gt; /tmp/mailcheck&quot;,
+&quot;delta&quot;: &quot;0:00:00.003030&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:10.525527&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:10.522497&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/RelayToNextSmtpHopTest.yml:6" name="[client] client: Send a mail from client to an address that is relayed to another SMTP _raw_params=echo &quot;Test-Body&quot; | mailx -s &quot;Test&quot; remote-delivery@mydomain.test
+" time="0.503123">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;echo \&quot;Test-Body\&quot; | mailx -s \&quot;Test\&quot; remote-delivery@mydomain.test\n&quot;,
+&quot;delta&quot;: &quot;0:00:00.033910&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:43:11.029296&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:43:10.995386&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host client is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/RelayToNextSmtpHopTest.yml:12" name="[mail-sink] mail-sink: Assert mail is received by the next SMTP hop file=/tmp/maildump, with_content=...
+Received: from sut.mydomain.test ([10.0.3.10])
+...
+Received: from localhost (ip-10.0.3.201.someisp.test [10.0.3.201])
+...
+To: remote-delivery@mydomain.test
+Subject: Test
+...
+From: vagrant@localhost
+...
+
+Test-Body
+
+" time="0.496389">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

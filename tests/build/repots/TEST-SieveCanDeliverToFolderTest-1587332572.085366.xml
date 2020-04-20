@@ -1,0 +1,432 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="0" tests="8" time="6.657091379165649">
+	<testsuite disabled="0" errors="0" failures="0" name="SieveCanDeliverToFolderTest" skipped="0" tests="8" time="6.657091379165649">
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/sut.yml:5" name="[sut] Prepare SUT: Reset maildirs path=/srv/mail/{{ item }}, state=absent" time="2.790319">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;msg&quot;: &quot;All items completed&quot;,
+&quot;results&quot;: [
+{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: true,
+&quot;diff&quot;: {
+&quot;after&quot;: {
+&quot;path&quot;: &quot;/srv/mail/john/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+&quot;before&quot;: {
+&quot;path&quot;: &quot;/srv/mail/john/Maildir&quot;,
+&quot;path_content&quot;: {
+&quot;directories&quot;: [
+&quot;/srv/mail/john/Maildir/new&quot;,
+&quot;/srv/mail/john/Maildir/cur&quot;,
+&quot;/srv/mail/john/Maildir/tmp&quot;
+],
+&quot;files&quot;: [
+&quot;/srv/mail/john/Maildir/dovecot-uidlist&quot;,
+&quot;/srv/mail/john/Maildir/dovecot-uidvalidity.5e9cc5c8&quot;,
+&quot;/srv/mail/john/Maildir/maildirfolder&quot;,
+&quot;/srv/mail/john/Maildir/dovecot.index.log&quot;,
+&quot;/srv/mail/john/Maildir/dovecot-uidvalidity&quot;,
+&quot;/srv/mail/john/Maildir/dovecot.index.cache&quot;,
+&quot;/srv/mail/john/Maildir/dovecot.list.index.log&quot;,
+&quot;/srv/mail/john/Maildir/new/1587332552.M933729P4364.sut,S=1457,W=1501&quot;
+]
+},
+&quot;state&quot;: &quot;directory&quot;
+}
+},
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/john/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;john/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/john/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/john/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;john/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/john/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;jane/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;jane/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/erika/Maildir&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;erika/Maildir&quot;,
+&quot;path&quot;: &quot;/srv/mail/erika/Maildir&quot;,
+&quot;state&quot;: &quot;absent&quot;
+},
+{
+&quot;ansible_loop_var&quot;: &quot;item&quot;,
+&quot;changed&quot;: false,
+&quot;failed&quot;: false,
+&quot;invocation&quot;: {
+&quot;module_args&quot;: {
+&quot;_diff_peek&quot;: null,
+&quot;_original_basename&quot;: null,
+&quot;access_time&quot;: null,
+&quot;access_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;attributes&quot;: null,
+&quot;backup&quot;: null,
+&quot;content&quot;: null,
+&quot;delimiter&quot;: null,
+&quot;directory_mode&quot;: null,
+&quot;follow&quot;: true,
+&quot;force&quot;: false,
+&quot;group&quot;: null,
+&quot;mode&quot;: null,
+&quot;modification_time&quot;: null,
+&quot;modification_time_format&quot;: &quot;%Y%m%d%H%M.%S&quot;,
+&quot;owner&quot;: null,
+&quot;path&quot;: &quot;/srv/mail/erika/.dovecot.sieve&quot;,
+&quot;recurse&quot;: false,
+&quot;regexp&quot;: null,
+&quot;remote_src&quot;: null,
+&quot;selevel&quot;: null,
+&quot;serole&quot;: null,
+&quot;setype&quot;: null,
+&quot;seuser&quot;: null,
+&quot;src&quot;: null,
+&quot;state&quot;: &quot;absent&quot;,
+&quot;unsafe_writes&quot;: null
+}
+},
+&quot;item&quot;: &quot;erika/.dovecot.sieve&quot;,
+&quot;path&quot;: &quot;/srv/mail/erika/.dovecot.sieve&quot;,
+&quot;state&quot;: &quot;absent&quot;
+}
+],
+&quot;warnings&quot;: [
+&quot;Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/sut.yml:10" name="[sut] Prepare SUT: Reset Redis-DB used by rspamd _raw_params=redis-cli -s /var/run/redis/rspamd.sock flushall" time="0.540575">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: [
+&quot;redis-cli&quot;,
+&quot;-s&quot;,
+&quot;/var/run/redis/rspamd.sock&quot;,
+&quot;flushall&quot;
+],
+&quot;delta&quot;: &quot;0:00:00.003156&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:48.658934&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:48.655778&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;OK&quot;,
+&quot;stdout_lines&quot;: [
+&quot;OK&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/SieveCanDeliverToFolderTest.yml:6" name="[sut] sut: Create IMAP-folder &quot;Junk&quot; _raw_params=doveadm mailbox create -u jane.doe@mydomain.test Junk" time="0.389321">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;doveadm mailbox create -u jane.doe@mydomain.test Junk&quot;,
+&quot;delta&quot;: &quot;0:00:00.017380&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:49.062180&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:49.044800&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: []
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/SieveCanDeliverToFolderTest.yml:10" name="[sut] sut: Configure Sieve rule, which moves mail which has a subject &quot;SPAM&quot; into folder &quot;Junk&quot; dest=/srv/mail/jane/.dovecot.sieve, owner=vmail, group=vmail, mode=0600, content=require [&quot;fileinto&quot;];
+if header :contains &quot;subject&quot; &quot;SPAM&quot;
+{
+  fileinto &quot;Junk&quot;;
+}
+" time="0.958168">
+			<system-out>{
+&quot;changed&quot;: true,
+&quot;checksum&quot;: &quot;c271dc1c7793e03f694e6af1c52a250f1cb088e9&quot;,
+&quot;dest&quot;: &quot;/srv/mail/jane/.dovecot.sieve&quot;,
+&quot;gid&quot;: 5000,
+&quot;group&quot;: &quot;vmail&quot;,
+&quot;md5sum&quot;: &quot;490ff8f9685844086caf1e15864e4dd8&quot;,
+&quot;mode&quot;: &quot;0600&quot;,
+&quot;owner&quot;: &quot;vmail&quot;,
+&quot;size&quot;: 82,
+&quot;src&quot;: &quot;/var/tmp/ansible-tmp-1587332569.1677032-44028-94915616058519/source&quot;,
+&quot;state&quot;: &quot;file&quot;,
+&quot;uid&quot;: 5000
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/SieveCanDeliverToFolderTest.yml:27" name="[client] client: Send a mail from client to an address SUT is responsible for and should be handled by the Sieve rule _raw_params=echo &quot;Test-Body&quot; | mailx -s &quot;SPAM&quot; jane.doe@mydomain.test
+" time="0.460528">
+			<system-out>{
+&quot;ansible_facts&quot;: {
+&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+},
+&quot;changed&quot;: true,
+&quot;cmd&quot;: &quot;echo \&quot;Test-Body\&quot; | mailx -s \&quot;SPAM\&quot; jane.doe@mydomain.test\n&quot;,
+&quot;delta&quot;: &quot;0:00:00.021665&quot;,
+&quot;end&quot;: &quot;2020-04-19 23:42:50.493659&quot;,
+&quot;rc&quot;: 0,
+&quot;start&quot;: &quot;2020-04-19 23:42:50.471994&quot;,
+&quot;stderr&quot;: &quot;&quot;,
+&quot;stderr_lines&quot;: [],
+&quot;stdout&quot;: &quot;&quot;,
+&quot;stdout_lines&quot;: [],
+&quot;warnings&quot;: [
+&quot;Platform linux on host client is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.&quot;
+]
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/SieveCanDeliverToFolderTest.yml:35" name="[sut] sut: wait_for path=/srv/mail/jane/Maildir/.Junk/new/, timeout=5" time="0.472012">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;elapsed&quot;: 0,
+&quot;gid&quot;: 5000,
+&quot;group&quot;: &quot;vmail&quot;,
+&quot;match_groupdict&quot;: {},
+&quot;match_groups&quot;: [],
+&quot;mode&quot;: &quot;0700&quot;,
+&quot;owner&quot;: &quot;vmail&quot;,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir/.Junk/new/&quot;,
+&quot;port&quot;: null,
+&quot;search_regex&quot;: null,
+&quot;size&quot;: 4096,
+&quot;state&quot;: &quot;directory&quot;,
+&quot;uid&quot;: 5000
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/SieveCanDeliverToFolderTest.yml:38" name="[sut] sut: find paths=/srv/mail/jane/Maildir/.Junk/new/" time="0.507654">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;examined&quot;: 1,
+&quot;files&quot;: [
+{
+&quot;atime&quot;: 1587332570.583,
+&quot;ctime&quot;: 1587332570.583,
+&quot;dev&quot;: 2049,
+&quot;gid&quot;: 5000,
+&quot;gr_name&quot;: &quot;vmail&quot;,
+&quot;inode&quot;: 917583,
+&quot;isblk&quot;: false,
+&quot;ischr&quot;: false,
+&quot;isdir&quot;: false,
+&quot;isfifo&quot;: false,
+&quot;isgid&quot;: false,
+&quot;islnk&quot;: false,
+&quot;isreg&quot;: true,
+&quot;issock&quot;: false,
+&quot;isuid&quot;: false,
+&quot;mode&quot;: &quot;0600&quot;,
+&quot;mtime&quot;: 1587332570.571,
+&quot;nlink&quot;: 1,
+&quot;path&quot;: &quot;/srv/mail/jane/Maildir/.Junk/new/1587332570.M574134P4364.sut,S=1471,W=1516&quot;,
+&quot;pw_name&quot;: &quot;vmail&quot;,
+&quot;rgrp&quot;: false,
+&quot;roth&quot;: false,
+&quot;rusr&quot;: true,
+&quot;size&quot;: 1471,
+&quot;uid&quot;: 5000,
+&quot;wgrp&quot;: false,
+&quot;woth&quot;: false,
+&quot;wusr&quot;: true,
+&quot;xgrp&quot;: false,
+&quot;xoth&quot;: false,
+&quot;xusr&quot;: false
+}
+],
+&quot;matched&quot;: 1,
+&quot;msg&quot;: &quot;&quot;
+}</system-out>
+		</testcase>
+		<testcase classname="/Users/ich/repos/chkpnt-mailserver/tests/tests/incoming/SieveCanDeliverToFolderTest.yml:44" name="[sut] sut: Assert mail is received and delivered at SUT in folder &quot;Junk&quot; file={{ find_result.files[0].path }}, with_content=...
+To: jane.doe@mydomain.test
+Subject: SPAM
+...
+From: vagrant@localhost
+...
+
+Test-Body
+" time="0.538515">
+			<system-out>{
+&quot;changed&quot;: false,
+&quot;meta&quot;: []
+}</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

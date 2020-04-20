@@ -1,0 +1,418 @@
+
+        <html>
+        <head>
+            <title>TEST-MailCanBeSentFromClientWithAuthenticationTest-1587332579.4455218.xml - Junit Test Report</title>
+            <style type="text/css">
+              h1 {
+    font-family: sans-serif;
+}
+h2 {
+    font-family: sans-serif;
+}
+
+li > a {
+    font-family: monospace;
+}
+
+body {
+    margin-bottom: 3em;
+}
+
+.testclass > td {
+    border-bottom: 1px solid silver;
+    color: #222222;
+    padding: 3px;
+    font-weight: bold;
+}
+
+.testclass > div {
+    padding-left: 1em;
+}
+
+.testclass > a > div {
+    font-size: 1.3em;
+    font-family: sans-serif;
+}
+
+.testcase > div {
+    border-left: 3px solid black;
+    padding-left: 1em;
+}
+
+.testcase pre {
+    display: block;
+    padding: 4px;
+    margin-right: 1em;
+    background-color: #121212;
+    color: #dedede;
+    white-space: pre-wrap;
+}
+
+.testcase .details b {
+    font-size: 1.2em;
+}
+
+.stdout, .stderr, .property {
+    margin-left: 1em;
+}
+
+.testcase-link {
+    text-decoration: none;
+}
+
+.testcase-cell {
+    height: 1.8em;
+    width: 1.8em;
+    vertical-align: middle;
+    text-align: center;
+}
+.testcase-cell a {
+    display: inline-block;
+    margin: -1em;
+    padding: 1em;
+}
+
+.testcase-combined {
+    white-space: pre;
+    padding-left: 1em;
+}
+
+.skipped {
+    background-color: gold;
+}
+
+.failed {
+    background-color: lightcoral;
+}
+
+.passed {
+    background-color: limegreen;
+}
+
+.tooltip {
+    visibility: hidden;
+    padding: 2px;
+    z-index: 1;
+    position: absolute;
+    background: cornsilk;
+    border: 1px solid black;
+    margin-top: 15px;
+    margin-left: 10px;
+    opacity: 0;
+}
+.tooltip-parent:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.testcase:hover {
+    background-color: gray;
+    color: white;
+}
+
+.result-stats {
+    margin: auto;
+}
+
+            </style>
+        </head><body><h1>Test Report</h1>
+        <div class="testsuite">
+            <h2>Test Suite: MailCanBeSentFromClientWithAuthenticationTest</h2><a name="ac62ed1e-9535-4c3c-81ee-63f177d6272c">
+            
+            
+            <table>
+            <tr><th align="left">Duration</th><td align="right">3.220672607421875 sec</td></tr>
+            <tr><th align="left">Test Cases</th><td align="right">5</td></tr>
+            <tr><th align="left">Failures</th><td align="right">0</td></tr>
+            
+            
+            </table>
+            <a name="toc"></a>
+            <h2>Results Index</h2>
+            
+        <ul>
+            
+            
+            <li>All Test Classes
+            <ul>
+            <li>
+                <a href="#7d008883-0aec-4b4e-98f8-3175d40860a2">/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:5</a>
+                <ul>
+                
+                    <li>
+                        <a href="#5f7fc66c-ccfb-49b9-b3bb-9496ff42e9d7">[mail-sink] Prepare mail-sink: copy dest=/tmp/maildump, content=, owner=postfix, group=postfix, mode=644</a>
+                    </li>
+                    
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#e9f594c1-aa3d-420e-9731-00d90a3926dd">/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:9</a>
+                <ul>
+                
+                    <li>
+                        <a href="#993caa8e-5ab7-4de5-8f11-100542c00d60">[mail-sink] Prepare mail-sink: shell _raw_params=&gt; /var/mail/vagrant</a>
+                    </li>
+                    
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#dd678f41-6576-4fbd-98a2-70b7d8a46f20">/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:10</a>
+                <ul>
+                
+                    <li>
+                        <a href="#12ff7c2c-cdc1-42e3-8f53-43c737091b78">[mail-sink] Prepare mail-sink: shell _raw_params=&gt; /tmp/mailcheck</a>
+                    </li>
+                    
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#d9054654-035b-4946-977b-8d8db9281350">/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/MailCanBeSentFromClientWithAuthenticationTest.yml:6</a>
+                <ul>
+                
+                    <li>
+                        <a href="#20c85efb-7325-457b-a852-cf0270fe4937">[sut] sut: Send test mail from client to mail-sink via SUT with authentication _raw_params=echo "Test-Body" | mailx -s "Test" -r "john.doe@mydomain.test" -S ssl-verify=ignore -S smtp=smtps://sut.mydomain.test:465 -S smtp-auth=plain -S smtp-auth-user=john.doe@mydomain.test -S smtp-auth-password=changeme test@mail-sink.theirdomain.test </a>
+                    </li>
+                    
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#5afbf428-660c-4f6b-bf76-5955f94dc057">/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/MailCanBeSentFromClientWithAuthenticationTest.yml:18</a>
+                <ul>
+                
+                    <li>
+                        <a href="#4a730ad5-b681-4284-a68f-66b6d02072aa">[mail-sink] mail-sink: Assert mail has been received file=/tmp/maildump, with_content=... Received: from sut.mydomain.test ([10.0.3.10]) $$ \t $$by smtp-sink (smtp-sink) with ESMTP id $$ .* $$; ... Received: from sut.mydomain.test (sut.mydomain.test [127.0.0.1]) ... Date: $$ .* $$ From: john.doe@mydomain.test To: test@mail-sink.theirdomain.test Subject: Test ...  Test-Body  </a>
+                    </li>
+                    
+                </ul>
+            </li>
+            </ul>
+            </li>
+        </ul>
+        
+            <hr size="2"/>
+            <h2>Test Results</h2>
+            <div class="testclasses">
+            
+        <hr size="2"/>
+        <a name="7d008883-0aec-4b4e-98f8-3175d40860a2">
+        <div class="testclass">
+            <div>Test Class: /Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:5</div>
+            <div class="testcases">
+            
+    <a name="5f7fc66c-ccfb-49b9-b3bb-9496ff42e9d7">
+        <div class="testcase">
+            <div class="details">
+                <span class="testname"><b>[mail-sink] Prepare mail-sink: copy dest=/tmp/maildump, content=, owner=postfix, group=postfix, mode=644</b></span><br/>
+                <span class="testclassname">/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:5</span><br/>
+                <span class="duration">Time Taken: 1.175103s</span>
+            </div>
+            
+            
+            <hr size="1"/>
+            
+            
+            <div class="stdout"><i>Stdout</i><br/>
+                <pre>{
+"ansible_facts": {
+"discovered_interpreter_python": "/usr/bin/python"
+},
+"changed": true,
+"checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+"dest": "/tmp/maildump",
+"gid": 51,
+"group": "postfix",
+"md5sum": "d41d8cd98f00b204e9800998ecf8427e",
+"mode": "0644",
+"owner": "postfix",
+"size": 0,
+"src": "/home/vagrant/.ansible/tmp/ansible-tmp-1587332576.341516-44145-203398713965221/source",
+"state": "file",
+"uid": 51,
+"warnings": [
+"Platform linux on host mail-sink is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information."
+]
+}</pre></div>
+            <hr size="1"/>
+            <div class="stderr"><i>Stderr</i><br/>
+                <pre></pre></div>
+                
+        </div>
+    </a>
+        
+            </div>
+        </div>
+        </a>
+        
+        <hr size="2"/>
+        <a name="e9f594c1-aa3d-420e-9731-00d90a3926dd">
+        <div class="testclass">
+            <div>Test Class: /Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:9</div>
+            <div class="testcases">
+            
+    <a name="993caa8e-5ab7-4de5-8f11-100542c00d60">
+        <div class="testcase">
+            <div class="details">
+                <span class="testname"><b>[mail-sink] Prepare mail-sink: shell _raw_params=> /var/mail/vagrant</b></span><br/>
+                <span class="testclassname">/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:9</span><br/>
+                <span class="duration">Time Taken: 0.515849s</span>
+            </div>
+            
+            
+            <hr size="1"/>
+            
+            
+            <div class="stdout"><i>Stdout</i><br/>
+                <pre>{
+"changed": true,
+"cmd": "&gt; /var/mail/vagrant",
+"delta": "0:00:00.002915",
+"end": "2020-04-19 23:42:57.839311",
+"rc": 0,
+"start": "2020-04-19 23:42:57.836396",
+"stderr": "",
+"stderr_lines": [],
+"stdout": "",
+"stdout_lines": []
+}</pre></div>
+            <hr size="1"/>
+            <div class="stderr"><i>Stderr</i><br/>
+                <pre></pre></div>
+                
+        </div>
+    </a>
+        
+            </div>
+        </div>
+        </a>
+        
+        <hr size="2"/>
+        <a name="dd678f41-6576-4fbd-98a2-70b7d8a46f20">
+        <div class="testclass">
+            <div>Test Class: /Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:10</div>
+            <div class="testcases">
+            
+    <a name="12ff7c2c-cdc1-42e3-8f53-43c737091b78">
+        <div class="testcase">
+            <div class="details">
+                <span class="testname"><b>[mail-sink] Prepare mail-sink: shell _raw_params=> /tmp/mailcheck</b></span><br/>
+                <span class="testclassname">/Users/ich/repos/chkpnt-mailserver/tests/tests/_prepare/mail-sink.yml:10</span><br/>
+                <span class="duration">Time Taken: 0.371235s</span>
+            </div>
+            
+            
+            <hr size="1"/>
+            
+            
+            <div class="stdout"><i>Stdout</i><br/>
+                <pre>{
+"changed": true,
+"cmd": "&gt; /tmp/mailcheck",
+"delta": "0:00:00.002924",
+"end": "2020-04-19 23:42:58.212781",
+"rc": 0,
+"start": "2020-04-19 23:42:58.209857",
+"stderr": "",
+"stderr_lines": [],
+"stdout": "",
+"stdout_lines": []
+}</pre></div>
+            <hr size="1"/>
+            <div class="stderr"><i>Stderr</i><br/>
+                <pre></pre></div>
+                
+        </div>
+    </a>
+        
+            </div>
+        </div>
+        </a>
+        
+        <hr size="2"/>
+        <a name="d9054654-035b-4946-977b-8d8db9281350">
+        <div class="testclass">
+            <div>Test Class: /Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/MailCanBeSentFromClientWithAuthenticationTest.yml:6</div>
+            <div class="testcases">
+            
+    <a name="20c85efb-7325-457b-a852-cf0270fe4937">
+        <div class="testcase">
+            <div class="details">
+                <span class="testname"><b>[sut] sut: Send test mail from client to mail-sink via SUT with authentication _raw_params=echo "Test-Body" | mailx -s "Test" -r "john.doe@mydomain.test" -S ssl-verify=ignore -S smtp=smtps://sut.mydomain.test:465 -S smtp-auth=plain -S smtp-auth-user=john.doe@mydomain.test -S smtp-auth-password=changeme test@mail-sink.theirdomain.test </b></span><br/>
+                <span class="testclassname">/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/MailCanBeSentFromClientWithAuthenticationTest.yml:6</span><br/>
+                <span class="duration">Time Taken: 0.683639s</span>
+            </div>
+            
+            
+            <hr size="1"/>
+            
+            
+            <div class="stdout"><i>Stdout</i><br/>
+                <pre>{
+"ansible_facts": {
+"discovered_interpreter_python": "/usr/bin/python"
+},
+"changed": true,
+"cmd": "echo \"Test-Body\" | mailx -s \"Test\" -r \"john.doe@mydomain.test\" -S ssl-verify=ignore -S smtp=smtps://sut.mydomain.test:465 -S smtp-auth=plain -S smtp-auth-user=john.doe@mydomain.test -S smtp-auth-password=changeme test@mail-sink.theirdomain.test\n",
+"delta": "0:00:00.178754",
+"end": "2020-04-19 23:42:58.886285",
+"rc": 0,
+"start": "2020-04-19 23:42:58.707531",
+"stderr": "",
+"stderr_lines": [],
+"stdout": "",
+"stdout_lines": [],
+"warnings": [
+"Platform linux on host sut is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information."
+]
+}</pre></div>
+            <hr size="1"/>
+            <div class="stderr"><i>Stderr</i><br/>
+                <pre></pre></div>
+                
+        </div>
+    </a>
+        
+            </div>
+        </div>
+        </a>
+        
+        <hr size="2"/>
+        <a name="5afbf428-660c-4f6b-bf76-5955f94dc057">
+        <div class="testclass">
+            <div>Test Class: /Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/MailCanBeSentFromClientWithAuthenticationTest.yml:18</div>
+            <div class="testcases">
+            
+    <a name="4a730ad5-b681-4284-a68f-66b6d02072aa">
+        <div class="testcase">
+            <div class="details">
+                <span class="testname"><b>[mail-sink] mail-sink: Assert mail has been received file=/tmp/maildump, with_content=... Received: from sut.mydomain.test ([10.0.3.10]) $$ \t $$by smtp-sink (smtp-sink) with ESMTP id $$ .* $$; ... Received: from sut.mydomain.test (sut.mydomain.test [127.0.0.1]) ... Date: $$ .* $$ From: john.doe@mydomain.test To: test@mail-sink.theirdomain.test Subject: Test ...  Test-Body  </b></span><br/>
+                <span class="testclassname">/Users/ich/repos/chkpnt-mailserver/tests/tests/outgoing/MailCanBeSentFromClientWithAuthenticationTest.yml:18</span><br/>
+                <span class="duration">Time Taken: 0.474846s</span>
+            </div>
+            
+            
+            <hr size="1"/>
+            
+            
+            <div class="stdout"><i>Stdout</i><br/>
+                <pre>{
+"changed": false,
+"meta": []
+}</pre></div>
+            <hr size="1"/>
+            <div class="stderr"><i>Stderr</i><br/>
+                <pre></pre></div>
+                
+        </div>
+    </a>
+        
+            </div>
+        </div>
+        </a>
+        
+            </div>
+        </div>
+        </body></html>

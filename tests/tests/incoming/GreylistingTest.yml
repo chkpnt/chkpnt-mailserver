@@ -31,7 +31,7 @@
           file: /tmp/postqueue
           with_content: |
             -Queue ID-  --Size-- ----Arrival Time---- -Sender/Recipient-------
-            $$ .* $$  vagrant@localhost
+            $$ .* $$  vagrant@localost
             (host sut.mydomain.test[10.0.3.10] said: 451 4.7.1 Try again later (in reply to end of DATA command))
                                                      greylist@mydomain.test
             ...
