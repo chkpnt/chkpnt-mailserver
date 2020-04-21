@@ -35,7 +35,37 @@
             (host sut.mydomain.test[10.0.3.10] said: 451 4.7.1 Try again later (in reply to end of DATA command))
                                                      greylist@mydomain.test
             ...
-    - name: Clean-up client's mail queue
-      shell: postsuper -d ALL
+    - name: Wait for the greylisting timeout
+      wait_for:
+        timeout: 5
+    - name: Flush the client's mail queue, so the queued mail is resent
+      shell: postqueue -f
       become: yes
+
+- hosts: sut
+  tasks:
+    - name: Get path of mail in maildir
+      block:
+      - wait_for:
+          path: /srv/mail/john/Maildir/new/
+          timeout: 5
+      - find:
+          paths: /srv/mail/john/Maildir/new/
+        register: find_result
+      become: yes
+      become_user: vmail
+          
+    - name: Assert mail is received and delivered at SUT
+      compare:
+        file: "{{ find_result.files[0].path }}"
+        with_content: |
+          ...
+          To: greylist@mydomain.test
+          Subject: Test
+          ...
+          From: vagrant@localhost
+          
+          Test-Body
+      become: yes
+      become_user: vmail
       

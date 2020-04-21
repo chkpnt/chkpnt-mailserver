@@ -234,6 +234,6 @@
             "action": "soft reject",
           ...
             "message": "Try again later",
-            "timeout": 300,
+            "timeout": 4,
           ...
           }

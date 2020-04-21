@@ -40,7 +40,7 @@
         - for: 'remote-delivery@mydomain.test'
           nexthop: 'smtp:theirdomain.test'
       mail_spam:
-        greylisting_delay: '1min'
+        greylisting_delay: 4s
         thresholds: # Requirement: greylist < add_header < reject
           greylist: 4
           add_header: 6

@@ -62,7 +62,7 @@ mail_internal_networks:
   - '[::1]/128'
 
 mail_spam:
-  greylisting_delay: '5min' # TODO
+  greylisting_delay: 5min
   thresholds: # Requirement: greylist < add_header < reject
     greylist: 4
     add_header: 6
