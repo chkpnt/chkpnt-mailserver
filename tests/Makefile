@@ -23,7 +23,13 @@ clean:
 all-tests := $(wildcard tests/*/*Test.yml) $(wildcard unittests/*_tests.yml)
 .PHONY: $(all-tests)
 $(all-tests):
+ifeq ($(TRAVIS), true)
+	@echo "travis_fold:start:$@"
+endif
 	ansible-playbook $@
+ifeq ($(TRAVIS), true)
+	@echo "travis_fold:end:$@"
+endif
 
 .PHONY: tests
 tests: $(all-tests)
