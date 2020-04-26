@@ -3,11 +3,12 @@
 
 - hosts: sut
   tasks:
-    - name: Create IMAP-folder "Junk"
-      shell:
-        doveadm mailbox create -u jane.doe@mydomain.test Junk
-      become: yes
-    - name: Configure Sieve rule, which moves mail which has a subject "SPAM" into folder "Junk"
+    # Folder "Spam" is created automatically (see dovecot.conf), other folders would have to be created like this:
+    #- name: Create IMAP-folder "Spam"
+    #  shell:
+    #    doveadm mailbox create -u jane.doe@mydomain.test Spam
+    #  become: yes
+    - name: Configure Sieve rule, which moves mail which has a subject "SPAM" into folder "Spam"
       copy:
         dest: /srv/mail/jane/.dovecot.sieve
         owner: vmail
@@ -17,7 +18,7 @@
           require ["fileinto"];
           if header :contains "subject" "SPAM"
           {
-            fileinto "Junk";
+            fileinto "Spam";
           }
       become: yes
       become_user: vmail
@@ -33,15 +34,15 @@
     - name: Get path of mail in maildir
       block:
       - wait_for:
-          path: /srv/mail/jane/Maildir/.Junk/new/
+          path: /srv/mail/jane/Maildir/.Spam/new/
           timeout: 5
       - find:
-          paths: /srv/mail/jane/Maildir/.Junk/new/
+          paths: /srv/mail/jane/Maildir/.Spam/new/
         register: find_result
       become: yes
       become_user: vmail
       
-    - name: Assert mail is received and delivered at SUT in folder "Junk"
+    - name: Assert mail is received and delivered at SUT in folder "Spam", which is automatically created
       compare:
         file: "{{ find_result.files[0].path }}"
         with_content: |
