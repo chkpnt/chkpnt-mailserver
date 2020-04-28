@@ -10,6 +10,7 @@
 - include: setup-ssl-test.yml
   when: "mail_ssl.generate_certificate_for_test | default(false) | bool"
 - include: setup-dovecot.yml
+- include: setup-sieve.yml
 - include: setup-postfix.yml
 - include: setup-apparmor.yml
 

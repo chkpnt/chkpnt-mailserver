@@ -9,11 +9,38 @@ submission_host = localhost:25
 protocols = imap lmtp sieve
 
 protocol imap {
+  mail_plugins = $mail_plugins imap_sieve
   mail_max_userip_connections = 50
 }
 
 protocol lmtp {
    mail_plugins = $mail_plugins sieve
+}
+
+## mail_plugins
+plugin {
+  sieve_plugins = sieve_imapsieve sieve_extprograms
+  sieve_global_extensions = +vnd.dovecot.pipe
+
+  # From elsewhere to Spam folder
+  imapsieve_mailbox1_name = Spam
+  imapsieve_mailbox1_causes = COPY
+  imapsieve_mailbox1_before = file:/srv/mail/.sieve/learn-spam.sieve
+
+  # From Spam folder to elsewhere
+  #imapsieve_mailbox2_name = *
+  #imapsieve_mailbox2_from = Spam
+  #imapsieve_mailbox2_causes = COPY
+  #imapsieve_mailbox2_before = file:/usr/mail/.sieve/learn-ham.sieve
+
+  # Do not forget to adapt AppArmor
+  sieve_pipe_bin_dir = /srv/mail/.sieve/bin
+
+  sieve_trace_dir = /srv/mail/.sieve/logs
+  # log levels: matching > tests > commands > actions
+  #sieve_trace_level = matching
+  #sieve_trace_debug = yes
+  #sieve_trace_addresses = no
 }
 
 ## Services

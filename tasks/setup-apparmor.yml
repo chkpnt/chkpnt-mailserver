@@ -9,8 +9,8 @@
 
 - name: Configure AppArmor for dovecot
   copy:
-    src: etc/apparmor.d/tunables/dovecot
-    dest: /etc/apparmor.d/tunables/dovecot
+    src: etc/apparmor.d/
+    dest: /etc/apparmor.d/
     owner: root
     group: root
     mode: 0644

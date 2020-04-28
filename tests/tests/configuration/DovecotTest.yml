@@ -15,7 +15,7 @@
           auth_mechanisms = plain
           mail_location = maildir:~/Maildir
           managesieve_notify_capability = mailto
-          managesieve_sieve_capability = fileinto reject envelope encoded-character vacation subaddress comparator-i;ascii-numeric relational regex imap4flags copy include variables body enotify environment mailbox date index ihave duplicate mime foreverypart extracttext
+          managesieve_sieve_capability = fileinto reject envelope encoded-character vacation subaddress comparator-i;ascii-numeric relational regex imap4flags copy include variables body enotify environment mailbox date index ihave duplicate mime foreverypart extracttext imapsieve vnd.dovecot.imapsieve
           namespace inbox {
             inbox = yes
             location = 
@@ -42,6 +42,15 @@
             args = scheme=BLF-CRYPT username_format=%u /etc/dovecot/shadow
             driver = passwd-file
             name = 
+          }
+          plugin {
+            imapsieve_mailbox1_before = file:/srv/mail/.sieve/learn-spam.sieve
+            imapsieve_mailbox1_causes = COPY
+            imapsieve_mailbox1_name = Spam
+            sieve_global_extensions = +vnd.dovecot.pipe
+            sieve_pipe_bin_dir = /srv/mail/.sieve/bin
+            sieve_plugins = sieve_imapsieve sieve_extprograms
+            sieve_trace_dir = /srv/mail/.sieve/logs
           }
           protocols = imap lmtp sieve
           service auth-worker {
@@ -83,8 +92,8 @@
           verbose_ssl = yes
           protocol imap {
             mail_max_userip_connections = 50
+            mail_plugins = " imap_sieve"
           }
           protocol lmtp {
             mail_plugins = " sieve"
           }
-

@@ -1,0 +1,54 @@
+---
+- import_playbook: ../_prepare/client.yml
+- import_playbook: ../_prepare/sut.yml
+
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address SUT is responsible for
+      shell: |
+        echo "Test-Body" | mailx -s "Test" jane.doe@mydomain.test
+
+    - name: Move the mail from the inbox into the Spam folder
+      shell: |
+        log_file -noappend imap.log
+        spawn openssl s_client -crlf -connect sut.mydomain.test:993
+        expect "\* OK * Dovecot ready."
+
+        send "1 LOGIN jane.doe@mydomain.test changeme\r"
+        expect "1 OK \[*\] Logged in"
+
+        send "2 SELECT \"INBOX\"\r"
+        expect "2 OK \[READ-WRITE\] Select completed *."
+
+        send "3 MOVE 1 \"Spam\"\r"
+        expect "3 OK Move completed *."
+
+        send "4 LOGOUT\r"
+        expect eof
+
+        exit 0
+      args:
+        executable: /usr/bin/expect
+    
+    # imap.log is currently only used in case of manual debugging
+    - name: Clean up imap.log
+      replace: path=imap.log regexp='^([^\r]*)\r+$' replace='\1'
+
+- hosts: sut
+  tasks:
+    - name: Restart rspamd, to enforce the statistics being up-to-date
+      systemd: name=rspamd state=restarted
+      become: yes
+
+    - name: Export rspamd statistics
+      shell: rspamc stat > /tmp/rspamc-stats
+
+    - name: Assert moved mails has been learnd as Spam
+      compare:
+        file: /tmp/rspamc-stats
+        with_content: |
+          ...
+          Statfile: BAYES_SPAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 1; users: 1; languages: 0
+          Statfile: BAYES_HAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 0; users: 0; languages: 0
+          Total learns: 1
+          ...
