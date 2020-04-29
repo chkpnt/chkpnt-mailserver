@@ -16,11 +16,16 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver:
 - [x] Catch-all accounts can be configured
 - [x] Multiple domains are supported
 - [x] Sieve rules can be used
-- [x] Spam is rejected
-- [x] Potiantial spam is greylisted
-- [ ] Spam can be learnt by dragging the mail into a special IMAP folder
-- [x] Viruses are rejected
-- [ ] Integration of VirusTotal.com
+- Spam
+  - [x] Spam with a high score is rejected
+  - [x] Potential Spam is not automatically delivered into a Spam folder (of course a customa Sieve rule can be used)
+  - [x] Potiantial spam is greylisted
+  - [x] Spam can be learnt by dragging the mail into a special IMAP folder
+  - [ ] Ham can be learnt by dragging the mail into a special IMAP folder. The mail is then automatically moved back.
+- Antivirus
+  - [x] Integration of ClamAV
+  - [ ] Integration of VirusTotal.com
+  - [x] Infected mails are rejected
 - [x] Nice reports (rspamd WebUI is sufficient for me)
 - [x] Tests are executed by a CI system
 
