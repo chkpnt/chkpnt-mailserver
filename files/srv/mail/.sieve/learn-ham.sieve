@@ -4,5 +4,5 @@
 
 require ["vnd.dovecot.debug", "vnd.dovecot.pipe", "copy"];
 
-debug_log "Passing mail to rspamd for learning as Spam";
-pipe :copy "rspamc" ["learn_spam"];
+debug_log "Passing mail to rspamd for learning as Ham";
+pipe :copy "rspamc" ["learn_ham"];

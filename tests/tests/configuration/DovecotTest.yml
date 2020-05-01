@@ -11,7 +11,6 @@
         file: /tmp/doveconf.conf
         with_content: |
           ...
-          auth_debug = yes
           auth_mechanisms = plain
           mail_location = maildir:~/Maildir
           managesieve_notify_capability = mailto
@@ -22,6 +21,9 @@
             mailbox Drafts {
               auto = subscribe
               special_use = \Drafts
+            }
+            mailbox Ham {
+              auto = subscribe
             }
             mailbox Sent {
               auto = subscribe
@@ -44,10 +46,16 @@
             name = 
           }
           plugin {
-            imapsieve_mailbox1_before = file:/srv/mail/.sieve/learn-spam.sieve
+            imapsieve_mailbox1_after = file:/srv/mail/.sieve/learn-spam.sieve
             imapsieve_mailbox1_causes = COPY
             imapsieve_mailbox1_name = Spam
-            sieve_global_extensions = +vnd.dovecot.pipe
+            imapsieve_mailbox2_after = file:/srv/mail/.sieve/learn-ham.sieve
+            imapsieve_mailbox2_causes = COPY
+            imapsieve_mailbox2_name = Ham
+            imapsieve_mailbox3_after = file:/srv/mail/.sieve/learn-ham-due-to-NonJunk-flag.sieve
+            imapsieve_mailbox3_causes = FLAG
+            imapsieve_mailbox3_name = *
+            sieve_global_extensions = +vnd.dovecot.pipe +vnd.dovecot.debug
             sieve_pipe_bin_dir = /srv/mail/.sieve/bin
             sieve_plugins = sieve_imapsieve sieve_extprograms
             sieve_trace_dir = /srv/mail/.sieve/logs
@@ -89,7 +97,7 @@
             driver = passwd-file
             name = 
           }
-          verbose_ssl = yes
+          verbose_ssl = no
           protocol imap {
             mail_max_userip_connections = 50
             mail_plugins = " imap_sieve"

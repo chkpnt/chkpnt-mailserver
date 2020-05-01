@@ -20,13 +20,17 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver:
   - [x] Spam with a high score is rejected
   - [x] Potential Spam is not automatically delivered into a Spam folder (of course a customa Sieve rule can be used)
   - [x] Potiantial spam is greylisted
-  - [x] Spam can be learnt by dragging the mail into a special IMAP folder
-  - [ ] Ham can be learnt by dragging the mail into a special IMAP folder. The mail is then automatically moved back.
+  - [x] Spam can be learnt by moving the mail into a special IMAP folder
+  - [ ] Spam can be learnt by applying the Junk flag, which is used by Thunderbird
+  - [x] Ham can be learnt by moving the mail into a special IMAP folder
+  - [x] Ham can be learnt by applying the NonJunk flag, which is used by Thunderbird
+  - [x] Ham can be learnt by marking the mail with a green flag in the iOS Mail App
 - Antivirus
   - [x] Integration of ClamAV
   - [ ] Integration of VirusTotal.com
   - [x] Infected mails are rejected
 - [x] Nice reports (rspamd WebUI is sufficient for me)
+- [x] Nearly all requirements are covered by tessts
 - [x] Tests are executed by a CI system
 
 ## Requirements

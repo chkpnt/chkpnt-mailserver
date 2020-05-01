@@ -8,7 +8,7 @@
       shell: |
         echo "Test-Body" | mailx -s "Test" jane.doe@mydomain.test
 
-    - name: Move the mail from the inbox into the Spam folder
+    - name: Copy the mail from the inbox into the Ham folder
       shell: |
         log_file -noappend imap.log
         spawn openssl s_client -crlf -connect sut.mydomain.test:993
@@ -20,8 +20,8 @@
         send "2 SELECT \"INBOX\"\r"
         expect "2 OK \[READ-WRITE\] Select completed *."
 
-        send "3 MOVE 1 \"Spam\"\r"
-        expect "3 OK Move completed *."
+        send "3 COPY 1 \"Ham\"\r"
+        expect "3 OK Copy completed *."
 
         send "4 LOGOUT\r"
         expect eof
@@ -43,12 +43,12 @@
     - name: Export rspamd statistics
       shell: rspamc stat > /tmp/rspamc-stats
 
-    - name: Assert moved mail has been learnd as Spam
+    - name: Assert copied mail has been learnd as Spam
       compare:
         file: /tmp/rspamc-stats
         with_content: |
           ...
-          Statfile: BAYES_SPAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 1; users: 1; languages: 0
-          Statfile: BAYES_HAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 0; users: 0; languages: 0
+          Statfile: BAYES_SPAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 0; users: 0; languages: 0
+          Statfile: BAYES_HAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 1; users: 1; languages: 0
           Total learns: 1
           ...

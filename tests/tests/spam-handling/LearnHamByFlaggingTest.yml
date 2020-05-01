@@ -1,0 +1,70 @@
+---
+- import_playbook: ../_prepare/client.yml
+- import_playbook: ../_prepare/sut.yml
+
+- hosts: client
+  tasks:
+    - name: Send two mails from client to an address SUT is responsible for
+      shell: |
+        echo "Test-Body blub" | mailx -s "Test 1" jane.doe@mydomain.test
+        echo "Different text" | mailx -s "Test 2" jane.doe@mydomain.test
+
+    - name: Simulate marking the first mail with a green flag (iOS Mail App) and flag the second as NonJunk
+      shell: |
+        log_file -noappend imap.log
+        spawn openssl s_client -crlf -connect sut.mydomain.test:993
+        expect "\* OK * Dovecot ready."
+
+        send "1 LOGIN jane.doe@mydomain.test changeme\r"
+        expect "1 OK \[*\] Logged in"
+
+        send "2 SELECT \"INBOX\"\r"
+        expect "2 OK \[READ-WRITE\] Select completed *."
+
+        send "3 STORE 1 +flags \$MailFlagBit1 \$MailFlagBit0\r"
+        expect "3 OK Store completed *."
+
+        send "4 STORE 2 +flags NonJunk\r"
+        expect "4 OK Store completed *."
+
+        send "5 LOGOUT\r"
+        expect eof
+
+        exit 0
+      args:
+        executable: /usr/bin/expect
+    
+    - name: Clean up imap.log
+      replace: path=imap.log regexp='^([^\r]*)\r+$' replace='\1'
+
+- hosts: client
+  tasks:
+    - name: Assert green flag is replaced by NonJunk IMAP flag
+      compare:
+        file: imap.log
+        with_content: |
+          ...
+          3 STORE 1 +flags $MailFlagBit1 $MailFlagBit0
+          ...
+          * 1 FETCH (FLAGS (\Recent NonJunk))
+          3 OK Store completed $$ .* $$
+          ...
+
+- hosts: sut
+  tasks:
+    - name: Restart rspamd, to enforce the statistics being up-to-date
+      systemd: name=rspamd state=restarted
+      become: yes
+
+    - name: Export rspamd statistics
+      shell: rspamc stat > /tmp/rspamc-stats
+
+    - name: Assert both mails has been learnd as Spam
+      compare:
+        file: /tmp/rspamc-stats
+        with_content: |
+          ...
+          Statfile: BAYES_SPAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 0; users: 0; languages: 0
+          Statfile: BAYES_HAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 2; users: 1; languages: 0
+          Total learns: 2
+          ...
