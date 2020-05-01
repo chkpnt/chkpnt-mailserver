@@ -25,11 +25,36 @@ all-tests := $(wildcard tests/*/*Test.yml) $(wildcard unittests/*_tests.yml)
 $(all-tests):
 ifeq ($(TRAVIS), true)
 	@echo "travis_fold:start:$@"
+	$(call travis_time_start,$@)
 endif
 	ansible-playbook $@
 ifeq ($(TRAVIS), true)
+	$(call travis_time_end,$@)
 	@echo "travis_fold:end:$@"
 endif
 
 .PHONY: tests
 tests: $(all-tests)
+
+# Helper for Travis-CI
+
+DATE :=
+ifeq ($(shell uname -s), Darwin)
+	# brew install coreutils
+	DATE = gdate
+else
+	DATE = date
+endif
+
+define travis_time_start
+	$(eval TRAVIS_TIMER_START_TIME := $$(shell $(DATE) +%s%N))
+	@echo "travis_time:start:$(1)"
+endef
+
+define travis_time_end
+	@ \
+	START=$(TRAVIS_TIMER_START_TIME); \
+	END=$$($(DATE) +%s%N); \
+	DURATION=$$(( $${END} - $${START} )); \
+	echo "travis_time:end:$(1):start=$${START},finish=$${END},duration=$${DURATION}";
+endef
