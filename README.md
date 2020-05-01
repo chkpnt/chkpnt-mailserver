@@ -21,7 +21,7 @@ The purpose of this Ansible role is to fulfill my demands on my own mailserver:
   - [x] Potential Spam is not automatically delivered into a Spam folder (of course a customa Sieve rule can be used)
   - [x] Potiantial spam is greylisted
   - [x] Spam can be learnt by moving the mail into a special IMAP folder
-  - [ ] Spam can be learnt by applying the Junk flag, which is used by Thunderbird
+  - [x] Spam can be learnt by applying the Junk flag, which is used by Thunderbird
   - [x] Ham can be learnt by moving the mail into a special IMAP folder
   - [x] Ham can be learnt by applying the NonJunk flag, which is used by Thunderbird
   - [x] Ham can be learnt by marking the mail with a green flag in the iOS Mail App

@@ -33,9 +33,14 @@ plugin {
   imapsieve_mailbox2_causes = COPY
   imapsieve_mailbox2_after = file:/srv/mail/.sieve/learn-ham.sieve
 
+  # Learn as spam
+  # - when the mail is flagged as Junk, as done by Thunderbird
+  # Learn as ham
+  # - when the mail is flagged as NonJunk, as done by Thunderbird
+  # - or when the mail is marked with a green flag in the iOS Mail app
   imapsieve_mailbox3_name = *
   imapsieve_mailbox3_causes = FLAG
-  imapsieve_mailbox3_after = file:/srv/mail/.sieve/learn-ham-due-to-NonJunk-flag.sieve
+  imapsieve_mailbox3_after = file:/srv/mail/.sieve/learn-spam-or-ham-due-to-flags.sieve
 
   # Just for try-out-purposes:
   #imapsieve_mailbox2_name = Ham

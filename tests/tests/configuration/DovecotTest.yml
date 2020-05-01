@@ -52,7 +52,7 @@
             imapsieve_mailbox2_after = file:/srv/mail/.sieve/learn-ham.sieve
             imapsieve_mailbox2_causes = COPY
             imapsieve_mailbox2_name = Ham
-            imapsieve_mailbox3_after = file:/srv/mail/.sieve/learn-ham-due-to-NonJunk-flag.sieve
+            imapsieve_mailbox3_after = file:/srv/mail/.sieve/learn-spam-or-ham-due-to-flags.sieve
             imapsieve_mailbox3_causes = FLAG
             imapsieve_mailbox3_name = *
             sieve_global_extensions = +vnd.dovecot.pipe +vnd.dovecot.debug

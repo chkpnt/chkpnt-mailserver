@@ -13,4 +13,7 @@ if allof (hasflag :contains "$MailFlagBit0",
 if hasflag :contains "NonJunk" {
     debug_log "Passing mail to rspamd for learning as Ham";
     pipe :copy "rspamc" ["learn_ham"];
+} elsif hasflag :contains "Junk" {
+    debug_log "Passing mail to rspamd for learning as Spam";
+    pipe :copy "rspamc" ["learn_spam"];
 }

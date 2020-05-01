@@ -1,0 +1,66 @@
+---
+- import_playbook: ../_prepare/client.yml
+- import_playbook: ../_prepare/sut.yml
+
+- hosts: client
+  tasks:
+    - name: Send a mail from client to an address SUT is responsible for
+      shell: |
+        echo "Test-Body" | mailx -s "Test" jane.doe@mydomain.test
+
+    - name: Simulate flagging the mail as Junk as Thunderbird would do
+      shell: |
+        log_file -noappend imap.log
+        spawn openssl s_client -crlf -connect sut.mydomain.test:993
+        expect "\* OK * Dovecot ready."
+
+        send "1 LOGIN jane.doe@mydomain.test changeme\r"
+        expect "1 OK \[*\] Logged in"
+
+        send "2 SELECT \"INBOX\"\r"
+        expect "2 OK \[READ-WRITE\] Select completed *."
+
+        send "3 STORE 1 +flags Junk\r"
+        expect "3 OK Store completed *."
+
+        send "4 LOGOUT\r"
+        expect eof
+
+        exit 0
+      args:
+        executable: /usr/bin/expect
+    
+    - name: Clean up imap.log
+      replace: path=imap.log regexp='^([^\r]*)\r+$' replace='\1'
+
+- hosts: client
+  tasks:
+    - name: Assert mail has received the Junk flag
+      compare:
+        file: imap.log
+        with_content: |
+          ...
+          3 STORE 1 +flags Junk
+          ...
+          * 1 FETCH (FLAGS (\Recent Junk))
+          3 OK Store completed $$ .* $$
+          ...
+
+- hosts: sut
+  tasks:
+    - name: Reload rspamd, to enforce the statistics being up-to-date
+      systemd: name=rspamd state=reloaded
+      become: yes
+
+    - name: Export rspamd statistics
+      shell: rspamc stat > /tmp/rspamc-stats
+
+    - name: Assert both mails has been learnd as Spam
+      compare:
+        file: /tmp/rspamc-stats
+        with_content: |
+          ...
+          Statfile: BAYES_SPAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 1; users: 1; languages: 0
+          Statfile: BAYES_HAM type: redis; length: 0; free blocks: 0; total blocks: 0; free: 0.00%; learned: 0; users: 0; languages: 0
+          Total learns: 1
+          ...
