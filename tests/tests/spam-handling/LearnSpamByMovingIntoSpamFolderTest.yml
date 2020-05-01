@@ -36,9 +36,13 @@
 
 - hosts: sut
   tasks:
-    - name: Reload rspamd, to enforce the statistics being up-to-date
-      systemd: name=rspamd state=reloaded
+    - name: Restart rspamd, to enforce the statistics being up-to-date
+      systemd: name=rspamd state=restarted
       become: yes
+
+    - name: Wait for 1 seconds to make sure the statistics are really up-to-date
+      wait_for:
+        timeout: 1
 
     - name: Export rspamd statistics
       shell: rspamc stat > /tmp/rspamc-stats
