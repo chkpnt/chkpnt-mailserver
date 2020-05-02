@@ -25,11 +25,11 @@ all-tests := $(wildcard tests/*/*Test.yml) $(wildcard unittests/*_tests.yml)
 $(all-tests):
 ifeq ($(TRAVIS), true)
 	@echo "travis_fold:start:$@"
-	$(call travis_time_start,$@)
+	$(call travis_time_start)
 endif
 	ansible-playbook $@
 ifeq ($(TRAVIS), true)
-	$(call travis_time_end,$@)
+	$(call travis_time_end)
 	@echo "travis_fold:end:$@"
 endif
 
@@ -48,7 +48,8 @@ endif
 
 define travis_time_start
 	$(eval TRAVIS_TIMER_START_TIME := $$(shell $(DATE) +%s%N))
-	@echo "travis_time:start:$(1)"
+	$(eval TRAVIS_TIMER_ID := $(shell bash -c 'printf %08x $$(( RANDOM * RANDOM ))'))
+	@echo "travis_time:start:$(TRAVIS_TIMER_ID)"
 endef
 
 define travis_time_end
@@ -56,5 +57,5 @@ define travis_time_end
 	START=$(TRAVIS_TIMER_START_TIME); \
 	END=$$($(DATE) +%s%N); \
 	DURATION=$$(( $${END} - $${START} )); \
-	echo "travis_time:end:$(1):start=$${START},finish=$${END},duration=$${DURATION}";
+	echo "travis_time:end:$(TRAVIS_TIMER_ID):start=$${START},finish=$${END},duration=$${DURATION}";
 endef
