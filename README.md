@@ -1,5 +1,3 @@
-*Do not use this role, it's still work in progress.*
-
 # Ansible role for an all-in-one mail server based on opensSUSE Leap 15.1
 
 [![Build Status](https://img.shields.io/travis/com/chkpnt/chkpnt-mailserver/master?label=Tests&style=flat-square)](https://travis-ci.com/chkpnt/chkpnt-mailserver)
