@@ -21,7 +21,7 @@
         send "2 SELECT \"INBOX\"\r"
         expect "2 OK \[READ-WRITE\] Select completed *."
 
-        send "3 STORE 1 +flags \$MailFlagBit1 \$MailFlagBit0\r"
+        send "3 STORE 1 +flags \\Flagged \$MailFlagBit1 \$MailFlagBit0\r"
         expect "3 OK Store completed *."
 
         send "4 STORE 2 +flags NonJunk\r"
@@ -44,7 +44,7 @@
         file: imap.log
         with_content: |
           ...
-          3 STORE 1 +flags $MailFlagBit1 $MailFlagBit0
+          3 STORE 1 +flags \Flagged $MailFlagBit1 $MailFlagBit0
           ...
           * 1 FETCH (FLAGS (\Recent NonJunk))
           3 OK Store completed $$ .* $$

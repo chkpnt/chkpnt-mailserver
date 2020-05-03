@@ -3,10 +3,11 @@
 require ["vnd.dovecot.debug", "imap4flags", "vnd.dovecot.pipe", "copy"];
 
 # see https://github.com/chkpnt/chkpnt-mailserver/issues/5
-if allof (hasflag :contains "$MailFlagBit0",
+if allof (hasflag :contains "\\Flagged",
+          hasflag :contains "$MailFlagBit0",
           hasflag :contains "$MailFlagBit1") {
     debug_log "Replacing green flag (iOS Mail) with NonJunk flag";
-    removeflag ["$MailFlagBit1", "$MailFlagBit0"];
+    removeflag ["\\Flagged", "$MailFlagBit1", "$MailFlagBit0"];
     addflag "NonJunk";
 }
 
