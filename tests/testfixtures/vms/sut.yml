@@ -18,7 +18,7 @@
         private_key: '/etc/ssl/private/mydomain.test.key'
         generate_certificate_for_test: yes
         generate_safe_primes_for_dh: no # because generating DSA params is much faster
-      mail_dkim_keys:
+      mail_dkim_keys: # Used for ARC-signing as well
         - { domain: mydomain.test, selector: 'key1', private_key: '/var/lib/rspamd/dkim/mydomain.test.key1.key', copy_from: 'sut/dkim/mydomain.test.key1.key' }
       mail_accounts:
         - { user: 'john.doe@mydomain.test', password: '{BLF-CRYPT}$2y$10$6W9VYuRklwLg8y2UoP6YHuK5Q8g7g.LOJdSa7K4CgoVMmARNYMVMK' } # Password: changeme

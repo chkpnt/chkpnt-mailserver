@@ -1,0 +1,25 @@
+---
+- import_playbook: ../_prepare/mail-sink.yml
+
+- hosts: sut
+  tasks:
+    - name: Send test mail from client to mail-sink via SUT with authentication
+      shell: |
+        echo "Test-Body" | mailx -s "Test" -r "john.doe@mydomain.test" \
+        -S ssl-verify=ignore \
+        -S smtp=smtps://sut.mydomain.test:465 \
+        -S smtp-auth=plain \
+        -S smtp-auth-user=john.doe@mydomain.test \
+        -S smtp-auth-password=changeme \
+        test@mail-sink.theirdomain.test
+
+- hosts: mail-sink
+  tasks:
+    - name: Read received mail
+      shell: cat /tmp/maildump
+      register: mailcontent
+      
+    - name: Assert received mail has no ARC-signature
+      assert:
+        that: "'ARC-Message-Signature' not in mailcontent.stdout"
+        fail_msg: Mail is unexpectedly ARC-signed

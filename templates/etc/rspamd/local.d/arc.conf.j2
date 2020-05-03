@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+domain {
+{% for dkim_key in mail_dkim_keys %}
+    {{ dkim_key.domain }} {
+        path = "{{ dkim_key.private_key }}";
+        selector = "{{ dkim_key.selector }}";
+    }
+{% endfor %}
+}

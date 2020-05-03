@@ -11,9 +11,10 @@ The purpose of this Ansible role is to fulfill my demands on my own mail server:
 - [x] Orchestration of Postfix (MTA), Dovecot (MDA) and Rspamd
 - [x] Postfix uses Dovecot for authentication (SMTP AUTH through Dovecot SASL)
 - [x] No databases for configuration, just plain files
-- [x] Outgoing mails are DKIM signed
 - [x] Mails to specific addresses can be relayed to another MTA
 - [x] Mails to specific addresses can be rejected
+- [x] Outgoing mails are DKIM signed
+- [x] Relayed mails are ARC signed
 - [x] Catch-all accounts can be configured
 - [x] Multiple domains are supported
 - [x] Sieve rules can be used
@@ -31,7 +32,7 @@ The purpose of this Ansible role is to fulfill my demands on my own mail server:
   - [ ] Integration of VirusTotal.com
   - [x] Infected mails are rejected
 - [x] Nice reports (rspamd WebUI is sufficient for me)
-- [x] Nearly all requirements are covered by tessts
+- [x] Nearly all requirements are covered by tests
 - [x] Tests are executed by a CI system
 
 ## Usage and configuration

@@ -57,6 +57,13 @@
   notify:
     - restart rspamd
 
+- name: Configure ARC-signing
+  template:
+    src: etc/rspamd/local.d/arc.conf.j2
+    dest: /etc/rspamd/local.d/arc.conf
+  notify:
+    - restart rspamd
+
 - name: Configure greylisting
   template:
     src: etc/rspamd/local.d/greylist.conf.j2

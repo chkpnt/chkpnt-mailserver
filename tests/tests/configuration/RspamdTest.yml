@@ -32,6 +32,7 @@
         - antivirus
         - actions
         - dkim_signing
+        - arc
         - options
         - classifier
         - greylist
@@ -144,6 +145,36 @@
             "use_redis": false
           }
 
+    - name: Assert ARC-signing is configured as expected
+      compare:
+        file: /tmp/rspamdconfig_arc
+        with_content: |
+          {
+            "allow_envfrom_empty": true,
+            "allow_hdrfrom_mismatch": true,
+            "allow_hdrfrom_multiple": false,
+            "allow_username_mismatch": false,
+            "domain": {
+              "mydomain.test": {
+                "path": "/var/lib/rspamd/dkim/mydomain.test.key1.key",
+                "selector": "key1"
+              }
+            },
+            "key_prefix": "ARC_KEYS",
+            "selector": "arc",
+            "sign_authenticated": false,
+            "sign_inbound": true,
+            "sign_local": false,
+            "sign_networks": [
+              "127.2.4.7"
+            ],
+            "symbol_sign": "ARC_SIGNED",
+            "try_fallback": true,
+            "use_domain": "recipient",
+            "use_esld": true,
+            "use_redis": false
+          }
+      
     - name: Assert basic rspamd configuration is as expected
       compare:
         file: /tmp/rspamdconfig_options
