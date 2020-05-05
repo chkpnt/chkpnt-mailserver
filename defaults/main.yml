@@ -57,10 +57,6 @@ mail_recipient_restrictions:
 mail_transports:
   - for: 'gmail@example.com'
     nexthop: 'smtp:gmail.com'
-    
-mail_internal_networks:
-  - 127.0.0.0/8
-  - '[::1]/128'
 
 mail_spam:
   greylisting_delay: 5min
@@ -75,6 +71,17 @@ mail_spam:
     # > rspamadm pw
     password: '$2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb' # Password: changeme
     bind_socket: 'localhost:11334' 
+
+# Used for http://www.postfix.org/postconf.5.html#smtp_bind_address
+# If specified, the mail will be send using this IP addresses.
+# The PTR-RRs should match mail_mailname.
+mail_send_via:
+  IPv4:
+  IPv6:
+
+mail_internal_networks:
+  - 127.0.0.0/8
+  - '[::1]/128'
 
 # Variables used for postfix
 postfix_inet_interfaces: [ all ]

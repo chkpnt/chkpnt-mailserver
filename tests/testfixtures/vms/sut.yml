@@ -47,7 +47,10 @@
           reject: 15
         controller:
           password: '$2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb' # Password: changeme
-          bind_socket: '*:11334' 
+          bind_socket: '*:11334'
+      mail_send_via:
+        IPv4: 10.0.3.10
+        IPv6:
 
 - hosts: sut
   become: yes
