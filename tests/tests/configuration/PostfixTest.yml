@@ -3,7 +3,7 @@
 - hosts: sut
   tasks:
     - name: Export Postfix configuration
-      shell: postconf > /tmp/postfix.conf
+      shell: postconf -n > /tmp/postfix.conf
       become: yes
 
     - name: Assert Postfix is configured as expected
@@ -14,34 +14,49 @@
           inet_interfaces = all
           inet_protocols = all
           ...
-          smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_restrictions
+          mydestination = $myhostname, localhost, localhost.$mydomain
+          mydomain = mydomain.test
+          myhostname = sut.mydomain.test
+          mynetworks = 127.0.0.0/8, [::1]/128
+          myorigin = $myhostname
+          ...
+          recipient_delimiter = +
+          ...
+          relay_domains =
+          relayhost =
           ...
           smtp_bind_address = 10.0.3.10
           smtp_bind_address6 =
           ...
+          smtp_tls_cert_file = /etc/ssl/servercerts/mydomain.test.pem
+          smtp_tls_key_file = /etc/ssl/private/mydomain.test.key
+          ...
+          smtpd_milters = unix:/var/run/rspamd/worker-proxy.socket
+          smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_restrictions
           smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+          smtpd_sasl_auth_enable = yes
+          smtpd_sasl_path = private/auth
+          smtpd_sasl_type = dovecot
           ...
           smtpd_tls_cert_file = /etc/ssl/servercerts/mydomain.test.pem
+          smtpd_tls_dh1024_param_file = /etc/postfix/dh_4096.pem
+          smtpd_tls_dh512_param_file = /etc/postfix/dh_512.pem
+          smtpd_tls_eecdh_grade = strong
+          smtpd_tls_exclude_ciphers = RC4
+          smtpd_tls_key_file = /etc/ssl/private/mydomain.test.key
           ...
           smtpd_tls_mandatory_ciphers = high
           smtpd_tls_mandatory_exclude_ciphers =
           smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
           smtpd_tls_protocols = !SSLv2, !SSLv3
-          ...
+          smtpd_tls_received_header = yes
           smtpd_tls_security_level = may
           ...
           transport_maps = hash:/etc/postfix/transport
-          ...
-          virtual_alias_domains = $virtual_alias_maps
-          ...
           virtual_alias_maps = hash:/etc/postfix/virtual_aliases
-          ...
           virtual_mailbox_domains = mydomain.test, myotherdomain.test
-          ...
           virtual_mailbox_maps = hash:/etc/postfix/virtual_mailboxes
-          ...
           virtual_transport = lmtp:unix:private/dovecot-lmtp
-          ...
 
     - name: Assert transport map is configured as expected
       compare:
