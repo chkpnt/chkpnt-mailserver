@@ -36,6 +36,7 @@
         - options
         - classifier
         - greylist
+        - fuzzy_check
 
     - name: Assert workers are configured as expected
       compare:
@@ -214,6 +215,7 @@
             "map_file_watch_multiplier": 0.1,
             "map_watch_interval": 300,
             "max_lua_urls": 1024,
+            "max_recipients": 1024,
             "max_urls": 10240,
             "one_shot": false,
             "pidfile": "/var/run/rspamd/rspamd.pid",
@@ -266,5 +268,20 @@
           ...
             "message": "Try again later",
             "timeout": 4,
+          ...
+          }
+
+    - name: Assert fuzzy_check module is configured as expected
+      compare:
+        file: /tmp/rspamdconfig_fuzzy_check
+        with_content: |
+          {
+          ...
+            "rule": {
+              "rspamd.com": {
+          ...
+                "no_share": true,
+          ...
+                "servers": "round-robin:fuzzy1.rspamd.com:11335,fuzzy2.rspamd.com:11335",
           ...
           }
