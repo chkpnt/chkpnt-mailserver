@@ -1,11 +1,11 @@
-# Ansible role for an all-in-one mail server based on opensSUSE Leap 15.1
+# Ansible role for an all-in-one mail server based on opensSUSE Leap 15.2
 
 [![Build Status](https://img.shields.io/travis/com/chkpnt/chkpnt-mailserver/master?label=Tests&style=flat-square)](https://travis-ci.com/chkpnt/chkpnt-mailserver)
 [![Ansible Role](https://img.shields.io/ansible/role/d/39777?label=Ansible%20Galaxy%20downloads&style=flat-square)](https://galaxy.ansible.com/chkpnt/mailserver)
 
 The purpose of this Ansible role is to fulfill my demands on my own mail server:
 
-- [x] Supports openSUSE Leap 15.1
+- [x] Supports openSUSE Leap 15.2
 - [x] Orchestration of Postfix (MTA), Dovecot (MDA) and Rspamd
 - [x] Postfix uses Dovecot for authentication (SMTP AUTH through Dovecot SASL)
 - [x] No databases for configuration, just plain files

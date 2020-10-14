@@ -6,17 +6,7 @@
       copy:
         dest: /tmp/normalize.jq
         # jq -S isn't sorting recursive, so a custom filter is needed
-        # walk is build-in in jq 1.6, but openSUSE Leap 15.1 contains jq 1.5 only
         content: |
-          def walk(f):
-            . as $in
-            | if type == "object" then
-                reduce keys_unsorted[] as $key
-                  ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f
-            elif type == "array" then map( walk(f) ) | f
-            else f
-            end;
-          
           def sort_by_keys:
             to_entries | sort_by(.key) | from_entries;
           
