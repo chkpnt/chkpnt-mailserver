@@ -1,7 +1,7 @@
 ---
 - import_playbook: ../_prepare/mail-sink.yml
 
-- hosts: sut
+- hosts: client
   tasks:
     - name: Send test mail from client to mail-sink via SUT with authentication
       shell: |
@@ -23,7 +23,7 @@
           Received: from sut.mydomain.test ([10.0.3.10])
           $$ \t $$by smtp-sink (smtp-sink) with ESMTP id $$ .* $$;
           ...
-          Received: from sut.mydomain.test (sut.mydomain.test [127.0.0.1])
+          Received: from client.localdomain (ip-10.0.3.201.someisp.test [10.0.3.201])
           ...
           Date: $$ .* $$
           From: john.doe@mydomain.test

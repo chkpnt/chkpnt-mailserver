@@ -1,7 +1,7 @@
 ---
 - import_playbook: ../_prepare/mail-sink.yml
 
-- hosts: sut
+- hosts: client
   tasks:
     - name: Send test mail from client to mail-sink via SUT with authentication
       shell: |
