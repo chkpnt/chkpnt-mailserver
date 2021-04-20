@@ -35,7 +35,7 @@
       block:
       - wait_for:
           path: /srv/mail/jane/Maildir/.Spam/new/
-          timeout: 5
+          timeout: 10
       - find:
           paths: /srv/mail/jane/Maildir/.Spam/new/
         register: find_result
