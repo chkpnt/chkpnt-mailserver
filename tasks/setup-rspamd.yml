@@ -123,11 +123,14 @@
     regexp: '#user_configuration_complete='
     line: 'user_configuration_complete="yes"'
 
-# clamd won't start if /var/lib/clamav doesn't contain databases, therefore I'm
-# adding an empty "whitelist.ign2". Freshclam is fetching the regular databases.
-# Attention: Until freshclam is executed the first time, there is no protection
-# by clamd.
-- name: Ensure a database exists for clamd
+# clamd won't start if /var/lib/clamav doesn't contain the daily and main databases,
+# therefore freshclam needs to be executed once.
+- name: Execute freshclam
+  systemd:
+    name: freshclam
+    state: started
+
+- name: Adding a whiteliste database for clamd
   copy:
     content: "# The signatures listed here will be whitelisted:\n"
     dest: /var/lib/clamav/whitelist.ign2

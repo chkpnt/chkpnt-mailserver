@@ -13,7 +13,7 @@
       block:
       - wait_for:
           path: /srv/mail/erika/Maildir/new/
-          timeout: 5
+          timeout: 10
       - find:
           paths: /srv/mail/erika/Maildir/new/
         register: find_result
