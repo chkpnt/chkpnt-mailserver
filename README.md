@@ -115,14 +115,14 @@ $ pipenv shell
 In order to run the tests, VirtualBox and Vagrant are required. On macOS, these dependencies can be installed using Homebrew as well:
 
 ```
-$ brew cask install virtualbox
-$ brew cask install vagrant
+$ brew install --cask virtualbox
+$ brew install --cask vagrant
 ```
 
 For managing your Vagrant virtual machines, I can recommend the use of [Vagrant-Manager](http://vagrantmanager.com/), a small utility app for the menu bar.
 
 ```
-$ brew cask install vagrant-manager
+$ brew install --cask vagrant-manager
 ```
 
 Additional information about the tests can be found in the corresponding [document](tests/README.md).
