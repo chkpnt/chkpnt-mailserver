@@ -3,6 +3,8 @@ name: Run tests against latest openSUSE Leap 15.2
 on: 
   push:
   workflow_dispatch:
+  schedule:
+    - cron: '0 13 * * 0'
 
 jobs:
   run-tests:
@@ -11,20 +13,48 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Download current box metadata needed for GitHub cache key
+      run: |
+        BOX_URL=$(cat tests/Vagrantfile | sed -n -E 's/.*config\.vm\.box_url = "([^"]*).*/\1/p')
+        wget -O tests/opensuse.json "${BOX_URL}"
+
     - name: Cache Vagrant boxes
       uses: actions/cache@v2
       with:
         path: ~/.vagrant.d/boxes
+        key: ${{ runner.os }}-vagrant-${{ hashFiles('tests/opensuse.json') }}
     
     - name: Show Vagrant version
       run: vagrant --version
 
+    - name: Use Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
     - name: Install pipenv
       run: pip install pipenv
 
+    - name: Cache pipenv environment
+      id: cache-pipenv
+      uses: actions/cache@v2
+      with:
+        path: ~/.local/share/virtualenvs
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+
     - name: Install required (and locked) dependecies with pipenv
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: pipenv install --dev
+
+    # Setting env variables as "pipenv run make -j2 setup" doesn't terminate
+    - name: Enable pipenv environment
+      run: |
+        echo "VIRTUAL_ENV=$(pipenv --venv)" >> $GITHUB_ENV
+        echo "$(pipenv --venv)/bin" >> $GITHUB_PATH
     
+    - name: Print environment variables
+      run: export
+
     - name: Ensure to use the latest boxes
       run: vagrant box update
       working-directory: tests

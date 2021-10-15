@@ -9,6 +9,10 @@
 
 - hosts: mail-sink
   tasks:
+    - name: Wait for the receiving mail
+      wait_for:
+        path: /tmp/maildump
+        timeout: 5
     - name: Assert mail is received by the next SMTP hop
       compare:
         file: /tmp/maildump

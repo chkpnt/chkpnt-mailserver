@@ -1,4 +1,5 @@
 PROVIDER = virtualbox
+GITHUB_WORKFLOW = asdf
 
 .PHONY: usage
 usage:
@@ -26,11 +27,15 @@ $(all-tests):
 ifeq ($(TRAVIS), true)
 	@echo "travis_fold:start:$@"
 	$(call travis_time_start)
+else ifeq ($(GITHUB_ACTIONS), true)
+	@echo "::group::$@"
 endif
 	ansible-playbook $@
 ifeq ($(TRAVIS), true)
 	$(call travis_time_end)
 	@echo "travis_fold:end:$@"
+else ifeq ($(GITHUB_ACTIONS), true)
+	@echo "::endgroup::"
 endif
 
 .PHONY: tests
