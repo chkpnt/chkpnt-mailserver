@@ -4,7 +4,7 @@
   roles:
   - common
   - use-apparmor
-  - { role: use-nameserver, with_ip: "10.0.3.2", domain: "mydomain.test" }
+  - { role: use-nameserver, with_ip: "192.168.56.2", domain: "mydomain.test" }
   - role: mailserver
     vars:
       mail_domain: mydomain.test
@@ -49,7 +49,7 @@
           password: '$2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb' # Password: changeme
           bind_socket: '*:11334'
       mail_send_via:
-        IPv4: 10.0.3.10
+        IPv4: 192.168.56.10
         IPv6:
 
 - hosts: sut

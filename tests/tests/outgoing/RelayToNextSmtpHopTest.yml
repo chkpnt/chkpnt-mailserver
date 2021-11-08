@@ -18,9 +18,9 @@
         file: /tmp/maildump
         with_content: |+
           ...
-          Received: from sut.mydomain.test ([10.0.3.10])
+          Received: from sut.mydomain.test ([192.168.56.10])
           ...
-          Received: from localhost (ip-10.0.3.201.someisp.test [10.0.3.201])
+          Received: from localhost (ip-192.168.56.201.someisp.test [192.168.56.201])
           ...
           To: remote-delivery@mydomain.test
           Subject: Test

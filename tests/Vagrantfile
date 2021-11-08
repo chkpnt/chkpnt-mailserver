@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "ns" do |ns|
         ns.vm.hostname = "ns.test"
-        ns.vm.network "private_network", ip: "10.0.3.2"
+        ns.vm.network "private_network", ip: "192.168.56.2"
         ns.vm.provision "ansible" do |ansible|
             ansible.compatibility_mode = "2.0"
             ansible.verbose = false
@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "sut" do |sut|
         sut.vm.hostname = "sut.mydomain.test"
-        sut.vm.network "private_network", ip: "10.0.3.10"
+        sut.vm.network "private_network", ip: "192.168.56.10"
         sut.vm.provision "ansible" do |ansible|
             ansible.compatibility_mode = "2.0"
             ansible.verbose = false
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "client" do |client|
         client.vm.hostname = "client.localdomain" # doens't match the DNS-RR by purpose
-        client.vm.network "private_network", ip: "10.0.3.201"
+        client.vm.network "private_network", ip: "192.168.56.201"
         client.vm.provision "ansible" do |ansible|
             ansible.compatibility_mode = "2.0"
             ansible.verbose = false
@@ -59,7 +59,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "mail-sink" do |mailsink|
         mailsink.vm.hostname = "mail-sink.theirdomain.test"
-        mailsink.vm.network "private_network", ip: "10.0.3.20"
+        mailsink.vm.network "private_network", ip: "192.168.56.20"
         mailsink.vm.provision "ansible" do |ansible|
             ansible.compatibility_mode = "2.0"
             ansible.verbose = false

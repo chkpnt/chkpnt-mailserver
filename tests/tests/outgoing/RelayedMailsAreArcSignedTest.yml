@@ -22,7 +22,7 @@
           $$ \t $$sut.mydomain.test;
           $$ \t $$dkim=none;
           $$ \t $$dmarc=none;
-          $$ \t $$spf=none (sut.mydomain.test: domain of vagrant@localhost has no SPF policy when checking 10.0.3.201) smtp.mailfrom=vagrant@localhost
+          $$ \t $$spf=none (sut.mydomain.test: domain of vagrant@localhost has no SPF policy when checking 192.168.56.201) smtp.mailfrom=vagrant@localhost
           ARC-Seal: i=1; s=key1; d=mydomain.test; t=$$ \d+ $$; a=rsa-sha256;
           ...
           ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=mydomain.test;

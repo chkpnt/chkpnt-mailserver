@@ -5,6 +5,6 @@ $TTL 300
                         IN NS   ns.test.
                         IN MX   10 sut
 
-sut                     IN A    10.0.3.10
+sut                     IN A    192.168.56.10
 key1._domainkey         IN TXT ( "v=DKIM1; k=rsa; "
 	"p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDLHQivYt1mLuofe9MmzkpXOnGpznBKsUt5euCGrlpcsIzHhmu7vwE/+RTEV3eG/H1xmuvJL7tovH76WtSG/UtnqmYqzSs+RaYnRl07CK1UoWKtVxPt4l4C322lQZ8OIKnr6//TCNmXUGjuW410Nes55mfhBrRUXTjvWycuAqSpGQIDAQAB" ) ;

@@ -22,7 +22,7 @@
          I'm sorry to have to inform you that your message could not
          be delivered to one or more recipients. It's attached below.
          ...
-         <jane.doe@mydomain.test>: host sut.mydomain.test[10.0.3.10] said: 554 5.7.1
+         <jane.doe@mydomain.test>: host sut.mydomain.test[192.168.56.10] said: 554 5.7.1
              clamav: virus found: "Win.Test.EICAR_HDB-1" (in reply to end of DATA
              command)
          ...

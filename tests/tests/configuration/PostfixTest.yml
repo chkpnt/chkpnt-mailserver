@@ -25,7 +25,7 @@
           relay_domains =
           relayhost =
           ...
-          smtp_bind_address = 10.0.3.10
+          smtp_bind_address = 192.168.56.10
           smtp_bind_address6 =
           ...
           smtp_tls_cert_file = /etc/ssl/servercerts/mydomain.test.pem

@@ -5,4 +5,4 @@ $TTL 300
                 IN NS   ns.test.
                 IN MX   10 mail-sink
 
-mail-sink       IN A    10.0.3.20
+mail-sink       IN A    192.168.56.20

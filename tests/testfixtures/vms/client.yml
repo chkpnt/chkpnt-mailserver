@@ -3,5 +3,5 @@
   become: yes
   roles:
   - common
-  - { role: use-nameserver, with_ip: "10.0.3.2", domain: "someisp.test" }
+  - { role: use-nameserver, with_ip: "192.168.56.2", domain: "someisp.test" }
   - client

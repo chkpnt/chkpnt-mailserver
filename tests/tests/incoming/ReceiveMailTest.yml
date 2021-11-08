@@ -31,7 +31,7 @@
           $$ \t $$id $$ .* $$
           $$ \t $$(envelope-from <vagrant@localhost>)
           $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
-          Received: from localhost (ip-10.0.3.201.someisp.test [10.0.3.201])
+          Received: from localhost (ip-192.168.56.201.someisp.test [192.168.56.201])
           $$ \t $$by sut.mydomain.test (Postfix) with ESMTP id $$ .* $$
           $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
           Received: by localhost (Postfix, from userid 1000)
@@ -47,7 +47,7 @@
       become: yes
       become_user: vmail
 
-    - name: Assert the received mail is tagged as Spam due to sending from client with hostname localhost (ip-10.0.3.201.someisp.test)
+    - name: Assert the received mail is tagged as Spam due to sending from client with hostname localhost (ip-192.168.56.201.someisp.test)
       compare:
         file: "{{ find_result.files[0].path }}"
         with_content: |

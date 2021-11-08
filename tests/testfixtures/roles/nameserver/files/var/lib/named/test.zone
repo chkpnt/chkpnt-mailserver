@@ -4,4 +4,4 @@ $TTL 300
 @               IN SOA  ns.test.  root.test. ( 2018092600 1D 2H 1W 300 )
                 IN NS   ns.test.
 
-ns              IN A    10.0.3.2
+ns              IN A    192.168.56.2
