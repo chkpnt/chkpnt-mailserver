@@ -181,7 +181,7 @@ Test-Body
         assert result[1] == "Line 5: 'Message-ID: <5cbf8b3f.KRE6KgzO9+saDxMn%vagrant@client.localdomain>' does not match 'Message-ID: <id@client.localdomain>'"
 
     def test_regex_does_not_match(self, sut, file_with_actual_content):
-        excepted_content = r"""\
+        excepted_content = r"""
 Date: Wed, $$ \d{1,2} Jan \d{4} \d\d:\d\d:\d\d $$ +0200
 From: vagrant@client.localdomain
 To: test@mail-sink.theirdomain.test
@@ -193,7 +193,7 @@ Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
 Test-Body
-"""
+""".strip()
         
         is_matching, result = sut.matches(file_with_actual_content, excepted_content)
 
@@ -262,12 +262,12 @@ Content-Transfer-Encoding: 42bit
         assert result[2] == "Line 12: EOF does not match 'Content-Transfer-Encoding: 42bit'"
 
     def test_with_skipped_lines__regex_does_not_match(self, sut, file_with_actual_content):
-        excepted_content = r"""\
+        excepted_content = r"""
 ...
 To: test@mail-sink.theirdomain.test
 Subject: $$ \d+ $$
 ...
-"""
+""".strip()
         is_matching, result = sut.matches(file_with_actual_content, excepted_content)
 
         assert is_matching == False

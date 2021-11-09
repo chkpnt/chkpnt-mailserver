@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 ansible-lint = "*"
 yamllint = "*"
+pytest = "*"
 
 [packages]
 ansible = "~=4.8"

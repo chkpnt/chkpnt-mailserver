@@ -19,7 +19,7 @@ class FileComparer(object):
             # "s -> (s0, s1), (s1,s2), (s2, s3), ..., (sn, None)"
             a, b = itertools.tee(iterable)
             next(b, None)
-            return itertools.izip_longest(a, b, fillvalue=None)
+            return itertools.zip_longest(a, b, fillvalue=None)
 
     def __init__(self, regex_start_delimiter, regex_end_delimiter, skip_line_pattern):
         self.regex_start_delimiter = regex_start_delimiter
