@@ -8,7 +8,7 @@ ansible-lint = "*"
 yamllint = "*"
 
 [packages]
-ansible = ">=2.7"
+ansible = "~=4.8"
 jmespath = "*"
 
 [requires]
