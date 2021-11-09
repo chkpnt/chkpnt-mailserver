@@ -23,5 +23,4 @@
       - clamav
       - clamav-unofficial-sigs
       - acl
-      - python2-pyOpenSSL # needed for ansible-module openssl_certificate
     state: present
