@@ -16,19 +16,19 @@
   systemd: name=apparmor state=restarted
 
 - name: postmap virtual_aliases
-  command: postmap hash:/etc/postfix/virtual_aliases
+  command: postmap lmdb:/etc/postfix/virtual_aliases
   notify: restart postfix
 
 - name: postmap virtual_mailboxes
-  command: postmap hash:/etc/postfix/virtual_mailboxes
+  command: postmap lmdb:/etc/postfix/virtual_mailboxes
   notify: restart postfix
 
 - name: postmap transport
-  command: postmap hash:/etc/postfix/transport
+  command: postmap lmdb:/etc/postfix/transport
   notify: restart postfix
 
 - name: postmap recipient_restrictions
-  command: postmap hash:/etc/postfix/recipient_restrictions
+  command: postmap lmdb:/etc/postfix/recipient_restrictions
   notify: restart postfix
 
 - name: print error_messages

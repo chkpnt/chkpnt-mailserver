@@ -32,7 +32,7 @@
           smtp_tls_key_file = /etc/ssl/private/mydomain.test.key
           ...
           smtpd_milters = unix:/var/run/rspamd/worker-proxy.socket
-          smtpd_recipient_restrictions = check_recipient_access hash:/etc/postfix/recipient_restrictions
+          smtpd_recipient_restrictions = check_recipient_access lmdb:/etc/postfix/recipient_restrictions
           smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
           smtpd_sasl_auth_enable = yes
           smtpd_sasl_path = private/auth
@@ -52,10 +52,10 @@
           smtpd_tls_received_header = yes
           smtpd_tls_security_level = may
           ...
-          transport_maps = hash:/etc/postfix/transport
-          virtual_alias_maps = hash:/etc/postfix/virtual_aliases
+          transport_maps = lmdb:/etc/postfix/transport
+          virtual_alias_maps = lmdb:/etc/postfix/virtual_aliases
           virtual_mailbox_domains = mydomain.test, myotherdomain.test
-          virtual_mailbox_maps = hash:/etc/postfix/virtual_mailboxes
+          virtual_mailbox_maps = lmdb:/etc/postfix/virtual_mailboxes
           virtual_transport = lmtp:unix:private/dovecot-lmtp
 
     - name: Assert transport map is configured as expected
