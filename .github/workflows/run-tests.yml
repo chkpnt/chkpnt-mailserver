@@ -1,4 +1,4 @@
-name: Run tests against latest openSUSE Leap 15.2
+name: Run tests against latest openSUSE Leap 15.3
 
 on: 
   push:

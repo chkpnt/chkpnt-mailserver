@@ -4,7 +4,7 @@
 - name: Install repository home:chkpnt:mailserver
   zypper_repository:
     name: home_chkpnt_mailserver
-    repo: https://download.opensuse.org/repositories/home:/chkpnt:/mailserver/openSUSE_Leap_15.2/
+    repo: https://download.opensuse.org/repositories/home:/chkpnt:/mailserver/15.3/
     state: present
     auto_import_keys: yes
 

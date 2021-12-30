@@ -9,4 +9,5 @@
       - htop
       - man
       - telnet
+    refresh: yes
     state: present

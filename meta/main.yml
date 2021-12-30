@@ -1,14 +1,14 @@
 galaxy_info:
   role_name: mailserver
-  description: Ansible role for an all-in-one mail server based on opensSUSE Leap 15.2
+  description: Ansible role for an all-in-one mail server based on opensSUSE Leap 15.3
   author: Gregor Dschung
   company:
   license: Apache
-  min_ansible_version: 2.7
+  min_ansible_version: 4.8
   platforms:
     - name: openSUSE
       versions:
-      - 15.2
+      - 15.3
   galaxy_tags:
     - mailserver
     - mail
