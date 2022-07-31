@@ -71,6 +71,16 @@
   notify:
     - restart rspamd
 
+- name: Configure allowlists for Multimap module
+  template:
+    src: "etc/rspamd/local.d/{{ item }}.j2"
+    dest: "/etc/rspamd/local.d/{{ item }}"
+  loop:
+    - allowlist.sender.domain.map
+    - allowlist.sender.email.map
+  notify:
+    - restart rspamd
+
 - name: Ensure directory for the private keys exists
   file: >
     path="{{ item.private_key | dirname }}" state=directory

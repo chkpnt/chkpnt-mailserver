@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for entry in mail_spam.allowlist_email | default([]) %}
+{{ entry }}
+{% endfor %}

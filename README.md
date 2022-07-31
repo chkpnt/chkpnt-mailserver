@@ -18,8 +18,9 @@ The purpose of this Ansible role is to fulfill my demands on my own mail server:
 - [x] Sieve rules can be used
 - Spam
   - [x] Spam with a high score is rejected
-  - [x] Potential Spam is not automatically delivered into a Spam folder (of course a customa Sieve rule can be used)
-  - [x] Potiantial spam is greylisted
+  - [x] Spam detection can be disabled for specific senders (addresses or domains)
+  - [x] Potential spam is not automatically delivered into a Spam folder (of course a customa Sieve rule can be used)
+  - [x] Potential spam is greylisted
   - [x] Spam can be learnt by moving the mail into a special IMAP folder
   - [x] Spam can be learnt by applying the Junk flag, which is used by Thunderbird
   - [x] Ham can be learnt by moving the mail into a special IMAP folder
@@ -91,6 +92,12 @@ and used within a playbook like
       mail_transports:
         - for: 'gmail@example.com'
           nexthop: 'smtp:gmail.com'
+      mail_spam:
+        # Regexps are supported
+        allowlist_domain:
+          - foobar.test
+        allowlist_email:
+          - /.*@important.test/
 ```
 
 The defaults of the variables are defined in [defaults/main.yml](defaults/main.yml). All variables refering to `example.com` or similar are expected to be explicitly declared in your playbook.
