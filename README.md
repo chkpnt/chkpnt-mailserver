@@ -93,6 +93,18 @@ and used within a playbook like
         - for: 'gmail@example.com'
           nexthop: 'smtp:gmail.com'
       mail_spam:
+        greylisting_delay: 5min
+        thresholds: # Requirement: greylist < add_header < reject
+          greylist: 4
+          add_header: 6
+          reject: 15
+        controller:
+          # Controller worker is used to manage rspamd stats, to learn rspamd and to serve WebUI.
+          # https://rspamd.com/doc/workers/controller.html
+          # If you access the WebUI from localhost, you won't be asked for the password as localhost is a "secure_ip"
+          # > rspamadm pw
+          password: '$2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb' # Password: changeme
+          bind_socket: 'localhost:11334' 
         # Regexps are supported
         allowlist_domain:
           - foobar.test
