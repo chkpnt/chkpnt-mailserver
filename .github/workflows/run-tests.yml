@@ -19,7 +19,7 @@ jobs:
         wget -O tests/opensuse.json "${BOX_URL}"
 
     - name: Cache Vagrant boxes
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.vagrant.d/boxes
         key: ${{ runner.os }}-vagrant-${{ hashFiles('tests/opensuse.json') }}
@@ -37,7 +37,7 @@ jobs:
 
     - name: Cache pipenv environment
       id: cache-pipenv
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.local/share/virtualenvs
         key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
