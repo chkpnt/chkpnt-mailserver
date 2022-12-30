@@ -35,9 +35,7 @@
           X-Rspamd-Pre-Result: action=no action;
           $$ \t $$module=multimap;
           $$ \t $$Matched map: ALLOWLIST_SENDER_EMAIL
-          X-Spamd-Result: default: False [0.00 / 15.00];
-          $$ \t $$ALLOWLIST_SENDER_EMAIL(0.00)[service@otheralloweddomain.test]
-          X-Rspamd-Server: sut
+          ...
           
           Test-Body
       become: yes

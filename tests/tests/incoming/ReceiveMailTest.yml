@@ -34,6 +34,7 @@
           Received: from localhost (ip-192.168.56.201.someisp.test [192.168.56.201])
           $$ \t $$by sut.mydomain.test (Postfix) with ESMTP id $$ .* $$
           $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
+          ...
           Received: by localhost (Postfix, from userid 1000)
           ...
           Date: $$ .* $$
@@ -59,7 +60,6 @@
           $$ \t $$HFILTER_FROMHOST_NOT_FQDN(3.00)[localhost];
           $$ \t $$HFILTER_HELO_5(3.00)[localhost];
           ...
-          X-Rspamd-Server: sut
           X-Spam: Yes
           
           Test-Body

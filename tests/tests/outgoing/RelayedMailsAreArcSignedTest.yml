@@ -14,17 +14,6 @@
         file: /tmp/maildump
         with_content: |
           ...
-          To: remote-delivery@mydomain.test
-          Subject: Test
-          ...
-          From: vagrant@localhost
-          ARC-Authentication-Results: i=1;
-          $$ \t $$sut.mydomain.test;
-          $$ \t $$dkim=none;
-          $$ \t $$dmarc=none;
-          $$ \t $$spf=none (sut.mydomain.test: domain of vagrant@localhost has no SPF policy when checking 192.168.56.201) smtp.mailfrom=vagrant@localhost
-          ARC-Seal: i=1; s=key1; d=mydomain.test; t=$$ \d+ $$; a=rsa-sha256;
-          ...
           ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=mydomain.test;
           $$ \t $$s=key1; t=$$ \d+ $$;
           $$ \t $$h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
@@ -32,4 +21,9 @@
           $$ \t $$ content-transfer-encoding:content-transfer-encoding;
           $$ \t $$bh=$$ .* $$;
           $$ \t $$b=$$ .* $$
+          ...
+          To: remote-delivery@mydomain.test
+          Subject: Test
+          ...
+          From: vagrant@localhost
           ...
