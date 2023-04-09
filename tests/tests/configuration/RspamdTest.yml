@@ -159,7 +159,7 @@
             "sign_networks": [
               "127.2.4.7"
             ],
-            "symbol_sign": "ARC_SIGNED",
+            "sign_symbol": "ARC_SIGNED",
             "try_fallback": true,
             "use_domain": "recipient",
             "use_esld": true,
