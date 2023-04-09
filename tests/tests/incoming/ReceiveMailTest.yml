@@ -56,7 +56,7 @@
           To: jane.doe@mydomain.test
           Subject: Test
           ...
-          X-Spamd-Result: default: False [7.50 / 15.00];
+          X-Spamd-Result: default: False [7.60 / 15.00];
           $$ \t $$HFILTER_FROMHOST_NOT_FQDN(3.00)[localhost];
           $$ \t $$HFILTER_HELO_5(3.00)[localhost];
           ...
