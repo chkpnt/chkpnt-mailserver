@@ -9,7 +9,7 @@ yamllint = "*"
 pytest = "*"
 
 [packages]
-ansible = "~=4.8"
+ansible = "~=7.0"
 jmespath = "*"
 
 [requires]
