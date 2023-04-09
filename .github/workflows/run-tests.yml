@@ -11,7 +11,7 @@ jobs:
     runs-on: macos-12
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Download current box metadata needed for GitHub cache key
       run: |
@@ -28,7 +28,7 @@ jobs:
       run: vagrant --version
 
     - name: Use Python 3.x
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
