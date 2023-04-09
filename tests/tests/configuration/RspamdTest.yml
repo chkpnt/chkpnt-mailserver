@@ -61,7 +61,7 @@
               "quarantine_on_reject": false,
               "reject_message": "Spam message rejected",
               "spam_header": "X-Spam",
-              "timeout": 120,
+              "timeout": 60,
               "upstream": {
                 "local": {
                   "default": true,
