@@ -4,13 +4,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-ansible-lint = "*"
-yamllint = "*"
-pytest = "*"
+ansible-lint = "==24.2.1"
+yamllint = "==1.35.1"
+pytest = "==8.1.1"
 
 [packages]
-ansible = "~=4.8"
-jmespath = "*"
+ansible = "==9.4.0"
+jmespath = "==1.0.1"
 
 [requires]
-python_version = "3.11"
+python_version = "3.12.2"
