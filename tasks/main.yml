@@ -4,15 +4,15 @@
   set_fact:
     error_messages: []
 
-- include: install.yml
-- include: setup.yml
-- include: setup-rspamd.yml
-- include: setup-ssl-test.yml
+- ansible.builtin.import_tasks: install.yml
+- ansible.builtin.import_tasks: setup.yml
+- ansible.builtin.import_tasks: setup-rspamd.yml
+- ansible.builtin.include_tasks: setup-ssl-test.yml
   when: "mail_ssl.generate_certificate_for_test | default(false) | bool"
-- include: setup-dovecot.yml
-- include: setup-sieve.yml
-- include: setup-postfix.yml
-- include: setup-apparmor.yml
+- ansible.builtin.import_tasks: setup-dovecot.yml
+- ansible.builtin.import_tasks: setup-sieve.yml
+- ansible.builtin.import_tasks: setup-postfix.yml
+- ansible.builtin.import_tasks: setup-apparmor.yml
 
 - name: Messages for your attention
   command: /bin/true
