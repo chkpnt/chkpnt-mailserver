@@ -7,56 +7,55 @@ python:
 # Cache the big Vagrant boxes
 cache:
   directories:
-  - /home/travis/.vagrant.d/boxes
+    - /home/travis/.vagrant.d/boxes
 
 install:
-# Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
-- sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev
+  # Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
+  - sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev
 
-# Unfortunately, newgrp doens't work, as travis-ci will hang
-#- sudo adduser travis libvirt
-#- newgrp libvrt
-- sudo chmod o+rwx /var/run/libvirt/libvirt-sock
+  # Unfortunately, newgrp doens't work, as travis-ci will hang
+  #- sudo adduser travis libvirt
+  #- newgrp libvrt
+  - sudo chmod o+rwx /var/run/libvirt/libvirt-sock
 
-# Download Vagrant & Install Vagrant package
-- sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.deb
-- sudo dpkg -i vagrant_2.2.14_x86_64.deb
+  # Download Vagrant & Install Vagrant package
+  - sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.deb
+  - sudo dpkg -i vagrant_2.2.14_x86_64.deb
 
-# Vagrant correctly installed?
-- vagrant --version
+  # Vagrant correctly installed?
+  - vagrant --version
 
-# Install vagrant-libvirt Vagrant plugin
-- vagrant plugin install vagrant-libvirt
-- find ~/.vagrant.d/gems/
+  # Install vagrant-libvirt Vagrant plugin
+  - vagrant plugin install vagrant-libvirt
+  - find ~/.vagrant.d/gems/
 
-# Install required (and locked) dependecies with pipenv
-- pip install pipenv
-- pipenv install --dev
+  # Install required (and locked) dependecies with pipenv
+  - pip install pipenv
+  - pipenv install --dev
 
 before_script:
-- cd tests
-- vagrant box update
-- make -j -e PROVIDER=libvirt setup
+  - cd tests
+  - vagrant box update
+  - make -j -e PROVIDER=libvirt setup
 
 script:
-- make -k tests
+  - make -k tests
 
 after_failure:
-# Some useful information in case the tests fail
-- pip list
-- vagrant ssh -c "ip addr show" ns
-- vagrant ssh -c "ip addr show" sut
-- vagrant ssh -c "ip addr show" client
-- vagrant ssh -c "ip addr show" mail-sink
-- vagrant ssh -c "dig mydomain.test MX" client
-- vagrant ssh -c "ping -c 3 192.168.56.10" client
-- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u named" ns
-- vagrant ssh -c "systemctl --no-page list-units --type=service" sut
-- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u clamd" sut
-- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u postfix" sut
-- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u rspamd" sut
-- vagrant ssh -c "sudo journalctl --no-pager -n 50 -u dovecot" sut
-
+  # Some useful information in case the tests fail
+  - pip list
+  - vagrant ssh -c "ip addr show" ns
+  - vagrant ssh -c "ip addr show" sut
+  - vagrant ssh -c "ip addr show" client
+  - vagrant ssh -c "ip addr show" mail-sink
+  - vagrant ssh -c "dig mydomain.test MX" client
+  - vagrant ssh -c "ping -c 3 192.168.56.10" client
+  - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u named" ns
+  - vagrant ssh -c "systemctl --no-page list-units --type=service" sut
+  - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u clamd" sut
+  - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u postfix" sut
+  - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u rspamd" sut
+  - vagrant ssh -c "sudo journalctl --no-pager -n 50 -u dovecot" sut
 
 # Mmh.... don't know yet how to deal with copyright notice when using
 # open sourced code snippets and where to put the license header.

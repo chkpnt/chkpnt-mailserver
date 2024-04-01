@@ -5,11 +5,10 @@
 - hosts: client
   tasks:
     - name: Send a mail from client to an address SUT is responsible for
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "Test" jane.doe@mydomain.test
-
     - name: Move the mail from the inbox into the Spam folder
-      shell: |
+      ansible.builtin.shell: |
         log_file -noappend imap.log
         spawn openssl s_client -crlf -connect sut.mydomain.test:993
         expect "\* OK * Dovecot ready."
@@ -29,24 +28,28 @@
         exit 0
       args:
         executable: /usr/bin/expect
-    
+
     # imap.log is currently only used in case of manual debugging
     - name: Clean up imap.log
-      replace: path=imap.log regexp='^([^\r]*)\r+$' replace='\1'
+      ansible.builtin.replace:
+        path: imap.log
+        regexp: ^([^\r]*)\r+$
+        replace: \1
 
 - hosts: sut
   tasks:
     - name: Restart rspamd, to enforce the statistics being up-to-date
-      systemd: name=rspamd state=restarted
-      become: yes
+      ansible.builtin.systemd:
+        name: rspamd
+        state: restarted
+      become: true
 
     - name: Wait for 1 seconds to make sure the statistics are really up-to-date
-      wait_for:
+      ansible.builtin.wait_for:
         timeout: 1
 
     - name: Export rspamd statistics
-      shell: rspamc stat > /tmp/rspamc-stats
-
+      ansible.builtin.shell: rspamc stat > /tmp/rspamc-stats
     - name: Assert moved mail has been learnd as Spam
       compare:
         file: /tmp/rspamc-stats

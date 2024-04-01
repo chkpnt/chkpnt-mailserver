@@ -1,70 +1,75 @@
 ---
 - hosts: sut
-  become: yes
+  become: true
   roles:
-  - common
-  - use-apparmor
-  - { role: use-nameserver, with_ip: "192.168.56.2", domain: "mydomain.test" }
-  - role: mailserver
-    vars:
-      mail_domain: mydomain.test
-      mail_hostname: sut.mydomain.test
-      mail_mailname: sut.mydomain.test
-      mail_mailbox_domains:
-        - mydomain.test
-        - myotherdomain.test
-      mail_ssl:
-        certificate: '/etc/ssl/servercerts/mydomain.test.pem'
-        private_key: '/etc/ssl/private/mydomain.test.key'
-        generate_certificate_for_test: yes
-        generate_safe_primes_for_dh: no # because generating DSA params is much faster
-      mail_dkim_keys: # Used for ARC-signing as well
-        - { domain: mydomain.test, selector: 'key1', private_key: '/var/lib/rspamd/dkim/mydomain.test.key1.key', copy_from: 'sut/dkim/mydomain.test.key1.key' }
-      mail_accounts:
-        - { user: 'john.doe@mydomain.test', password: '{BLF-CRYPT}$2y$10$6W9VYuRklwLg8y2UoP6YHuK5Q8g7g.LOJdSa7K4CgoVMmARNYMVMK' } # Password: changeme
-        - { user: 'jane.doe@mydomain.test', password: '{BLF-CRYPT}$2y$10$wZtIn5uHAsbsMgMmOdBdU.qbRgrQxfeej65G63aUxMaDNEHfb8P2e' } # Password: changeme
-      mail_mailboxes:
-        - { name: 'john.doe@mydomain.test', path: '/srv/mail/john' }
-        - { name: 'jane.doe@mydomain.test', path: '/srv/mail/jane' }
-        - { name: 'erika.m@myotherdomain.test', path: '/srv/mail/erika' }
-      mail_aliases:
+    - common
+    - use-apparmor
+    - { role: use-nameserver, with_ip: 192.168.56.2, domain: mydomain.test }
+    - role: mailserver
+      vars:
+        mail_domain: mydomain.test
+        mail_hostname: sut.mydomain.test
+        mail_mailname: sut.mydomain.test
+        mail_mailbox_domains:
+          - mydomain.test
+          - myotherdomain.test
+        mail_ssl:
+          certificate: /etc/ssl/servercerts/mydomain.test.pem
+          private_key: /etc/ssl/private/mydomain.test.key
+          generate_certificate_for_test: true
+          generate_safe_primes_for_dh: false # because generating DSA params is much faster
+        mail_dkim_keys: # Used for ARC-signing as well
+          - domain: mydomain.test
+            selector: key1
+            private_key: /var/lib/rspamd/dkim/mydomain.test.key1.key
+            copy_from: sut/dkim/mydomain.test.key1.key
+        mail_accounts:
+          - { user: john.doe@mydomain.test, password: "{BLF-CRYPT}$2y$10$6W9VYuRklwLg8y2UoP6YHuK5Q8g7g.LOJdSa7K4CgoVMmARNYMVMK" } # Password: changeme
+          - { user: jane.doe@mydomain.test, password: "{BLF-CRYPT}$2y$10$wZtIn5uHAsbsMgMmOdBdU.qbRgrQxfeej65G63aUxMaDNEHfb8P2e" } # Password: changeme
+        mail_mailboxes:
+          - { name: john.doe@mydomain.test, path: /srv/mail/john }
+          - { name: jane.doe@mydomain.test, path: /srv/mail/jane }
+          - { name: erika.m@myotherdomain.test, path: /srv/mail/erika }
+        mail_aliases:
         # Needed as otherwise the catch-all would match:
-        - { for: 'remote-delivery@mydomain.test', destination: 'remote-delivery@mydomain.test' }
-        - { for: 'jane.doe@mydomain.test', destination: 'jane.doe@mydomain.test' }
-        # Catch-all:
-        - { for: '@mydomain.test', destination: 'john.doe@mydomain.test' }
-      mail_recipient_restrictions:
-        - for: 'reject@mydomain.test'
-          action: 'REJECT This address is not supposed to receive mails!'
-      mail_transports:
-        - for: 'remote-delivery@mydomain.test'
-          nexthop: 'smtp:theirdomain.test'
-      mail_spam:
-        greylisting_delay: 4s
-        thresholds: # Requirement: greylist < add_header < reject
-          greylist: 4
-          add_header: 6
-          reject: 15
-        controller:
-          password: '$2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb' # Password: changeme
-          bind_socket: '*:11334'
-        allowlist_domain:
-          - /^alloweddomain.test$/
-        allowlist_email:
-          - /ser.*@otheralloweddomain\.test/
-      mail_send_via:
-        IPv4: 192.168.56.10
-        IPv6:
+          - { for: remote-delivery@mydomain.test, destination: remote-delivery@mydomain.test }
+          - { for: jane.doe@mydomain.test, destination: jane.doe@mydomain.test }
+          # Catch-all:
+          - { for: "@mydomain.test", destination: john.doe@mydomain.test }
+        mail_recipient_restrictions:
+          - for: reject@mydomain.test
+            action: REJECT This address is not supposed to receive mails!
+        mail_transports:
+          - for: remote-delivery@mydomain.test
+            nexthop: smtp:theirdomain.test
+        mail_spam:
+          greylisting_delay: 4s
+          thresholds: # Requirement: greylist < add_header < reject
+            greylist: 4
+            add_header: 6
+            reject: 15
+          controller:
+            password: $2$c75qgo1b8brudgq7wokg8wxr5qiby84p$ye6ss3ymc4h4u4swk3fhx3ph7jesahqrzw8kkxwhyfb14g4rkfhb # Password: changeme
+            bind_socket: "*:11334"
+          allowlist_domain:
+            - /^alloweddomain.test$/
+          allowlist_email:
+            - /ser.*@otheralloweddomain\.test/
+        mail_send_via:
+          IPv4: 192.168.56.10
+          IPv6:
 
 - hosts: sut
-  become: yes
+  become: true
   tasks:
-  - name: Apply some test environment specific settings for rspamd
-    copy:
-      src: sut/rspamd/settings.conf
-      dest: /etc/rspamd/local.d/settings.conf
-    notify:
-      - restart rspamd
+    - name: Apply some test environment specific settings for rspamd
+      ansible.builtin.copy:
+        src: sut/rspamd/settings.conf
+        dest: /etc/rspamd/local.d/settings.conf
+      notify:
+        - Restart rspamd
   handlers:
-  - name: restart rspamd
-    systemd: name=rspamd state=restarted
+    - name: Restart rspamd
+      ansible.builtin.systemd:
+        name: rspamd
+        state: restarted

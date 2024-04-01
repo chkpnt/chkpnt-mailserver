@@ -1,7 +1,7 @@
 ---
 - hosts: ns
-  become: yes
+  become: true
   roles:
-  - common
-  - nameserver
-  - { role: use-nameserver, with_ip: "127.0.0.1", domain: "test" }
+    - common
+    - nameserver
+    - { role: use-nameserver, with_ip: 127.0.0.1, domain: test }

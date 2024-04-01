@@ -1,15 +1,14 @@
 ---
-
 # provides rspamd and clamav-unofficial-sigs
 - name: Install repository home:chkpnt:mailserver
-  zypper_repository:
+  community.general.zypper_repository:
     name: home_chkpnt_mailserver
     repo: https://download.opensuse.org/repositories/home:/chkpnt:/mailserver/15.4/
     state: present
-    auto_import_keys: yes
+    auto_import_keys: true
 
 - name: Install packages for mailserver
-  zypper:
+  community.general.zypper:
     name:
       - postfix
       - mailx

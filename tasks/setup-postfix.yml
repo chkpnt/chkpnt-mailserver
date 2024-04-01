@@ -1,80 +1,83 @@
 ---
-
 - name: Ensure openSUSE will not override our config (see /usr/sbin/config.postfix)
   block:
-    - lineinfile: # noqa 502
+    - ansible.builtin.lineinfile: # noqa: name[missing]
         path: /etc/sysconfig/mail
-        regexp: '^MAIL_CREATE_CONFIG='
-        line: 'MAIL_CREATE_CONFIG="no"'
-    - copy: # noqa 502
+        regexp: ^MAIL_CREATE_CONFIG=
+        line: MAIL_CREATE_CONFIG="no"
+    - ansible.builtin.copy: # noqa: name[missing]
         # see /etc/postfix/system/config_postfix, which is called by /usr/lib/systemd/system/postfix.service
         dest: /var/adm/postfix.configured
         content: ""
-        force: no
+        force: false
 
 # see /etc/postfix/system/update_postmaps, which is called by /usr/lib/systemd/system/postfix.service
 - name: Ensure the maps will be only updated by ansible and not by openSUSE
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/sysconfig/postfix
-    regexp: '^POSTFIX_UPDATE_MAPS='
-    line: 'POSTFIX_UPDATE_MAPS="no"'
+    regexp: ^POSTFIX_UPDATE_MAPS=
+    line: POSTFIX_UPDATE_MAPS="no"
 
 - name: Configure Postfix
-  template:
+  ansible.builtin.template:
     src: etc/postfix/main.cf.j2
     dest: /etc/postfix/main.cf
   notify:
     - restart postfix
 
 - name: Configure Postfix (master.cf)
-  copy:
+  ansible.builtin.copy:
     src: etc/postfix/master.cf
     dest: /etc/postfix/master.cf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - restart postfix
 
 - name: Generate Diffie-Hellman parameters for non-export ciphers (4096 bit)
-  command: "openssl dhparam{{ ' -dsaparam' if not (mail_ssl.generate_safe_primes_for_dh | default(true) | bool) else '' }} -out /etc/postfix/dh_4096.pem 4096"
+  ansible.builtin.command: >-
+    openssl dhparam{{ ' -dsaparam' if not (mail_ssl.generate_safe_primes_for_dh | default(true) | bool) else '' }}
+    -out /etc/postfix/dh_4096.pem 4096
   args:
     creates: /etc/postfix/dh_4096.pem
 
 - name: Generate Diffie-Hellman parameters for export ciphers (512 bit)
-  command: "openssl dhparam{{ ' -dsaparam' if not (mail_ssl.generate_safe_primes_for_dh | default(true) | bool) else '' }} -out /etc/postfix/dh_512.pem 512"
+  ansible.builtin.command: >-
+    openssl dhparam{{ ' -dsaparam' if not (mail_ssl.generate_safe_primes_for_dh | default(true) | bool) else '' }}
+    -out /etc/postfix/dh_512.pem 512
   args:
     creates: /etc/postfix/dh_512.pem
 
 - name: Ensure user postfix is member of group _rspamd, so /var/run/rspamd/worker-proxy.socket can be accessed
-  user:
+  ansible.builtin.user:
     name: postfix
     groups: _rspamd
-    append: yes
+    append: true
 
 - name: Configure virtual aliases
-  template:
+  ansible.builtin.template:
     src: etc/postfix/virtual_aliases.j2
     dest: /etc/postfix/virtual_aliases
   notify:
     - postmap virtual_aliases
 
 - name: Configure virtual mailboxes
-  template:
+  ansible.builtin.template:
     src: etc/postfix/virtual_mailboxes.j2
     dest: /etc/postfix/virtual_mailboxes
   notify:
     - postmap virtual_mailboxes
 
 - name: Configure transports map
-  template:
+  ansible.builtin.template:
     src: etc/postfix/transport.j2
     dest: /etc/postfix/transport
   notify:
     - postmap transport
 
 - name: Configure recipient restrictions map
-  template:
+  ansible.builtin.template:
     src: etc/postfix/recipient_restrictions.j2
     dest: /etc/postfix/recipient_restrictions
   notify:

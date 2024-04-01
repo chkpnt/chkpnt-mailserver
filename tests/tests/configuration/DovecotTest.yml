@@ -1,10 +1,9 @@
 ---
-
 - hosts: sut
   tasks:
     - name: Export Dovecot configuration
-      shell: doveconf -N -P > /tmp/doveconf.conf
-      become: yes
+      ansible.builtin.shell: doveconf -N -P > /tmp/doveconf.conf
+      become: true
 
     - name: Assert Dovecot is configured as expected
       compare:

@@ -4,13 +4,13 @@
 - hosts: client
   tasks:
     - name: Send a mail from client to an address that is relayed to another SMTP
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "Test" remote-delivery@mydomain.test
 
 - hosts: mail-sink
   tasks:
     - name: Wait for the receiving mail
-      wait_for:
+      ansible.builtin.wait_for:
         path: /tmp/maildump
         timeout: 5
     - name: Assert mail is received by the next SMTP hop

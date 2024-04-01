@@ -1,10 +1,9 @@
 ---
-
 - hosts: sut
   tasks:
     - name: Export Postfix configuration
-      shell: postconf -n > /tmp/postfix.conf
-      become: yes
+      ansible.builtin.shell: postconf -n > /tmp/postfix.conf
+      become: true
 
     - name: Assert Postfix is configured as expected
       compare:

@@ -1,18 +1,17 @@
 ---
-
 - hosts: localhost
   vars:
     list_of_hosts:
-    - example.com
-    - example.org
-  
-  tasks:
-  - name: Testing format_list...
-    debug:
-      msg: '{{ list_of_hosts | format_list("''.%s''") | join(", ") }}'
-    register: result
+      - example.com
+      - example.org
 
-  - name: Testing format_list... asserting
-    assert:
-      that:
-      - "result.msg == \"'.example.com', '.example.org'\""
+  tasks:
+    - name: Testing format_list...
+      ansible.builtin.debug:
+        msg: "{{ list_of_hosts | format_list(\"'.%s'\") | join(\", \") }}"
+      register: result
+
+    - name: Testing format_list... asserting
+      ansible.builtin.assert:
+        that:
+          - result.msg == "'.example.com', '.example.org'"

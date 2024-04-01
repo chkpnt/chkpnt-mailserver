@@ -4,7 +4,7 @@
 - hosts: client
   tasks:
     - name: Send a mail from client to an address that is rejected
-      shell: |
+      ansible.builtin.shell: |
         cat <<' EOF' | mailx -s "Test" jane.doe@mydomain.test
         This is the GTUBE, the
           Generic

@@ -2,7 +2,7 @@
 - name: Prepare client
   hosts: client
   tasks:
-    - shell: '> ~/dead.letter'
-    - shell: '> ~/mail.err'
-    - shell: '> ~/imap.log'
-    - shell: '> /var/mail/vagrant'
+    - ansible.builtin.shell: "> ~/dead.letter"
+    - ansible.builtin.shell: "> ~/mail.err"
+    - ansible.builtin.shell: "> ~/imap.log"
+    - ansible.builtin.shell: "> /var/mail/vagrant"

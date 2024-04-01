@@ -2,12 +2,12 @@
 - hosts: all
 
   tasks:
-  - name: get hostname
-    command: /bin/hostname
-    changed_when: False
+    - name: get hostname
+      ansible.builtin.command: /bin/hostname
+      changed_when: false
 
 - hosts: all
 
   roles:
-  - common
-  - mailserver
+    - common
+    - mailserver

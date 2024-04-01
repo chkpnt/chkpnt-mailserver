@@ -4,7 +4,7 @@
 - hosts: client
   tasks:
     - name: Send test mail from client to mail-sink via SUT with authentication
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "Test" -r "john.doe@mydomain.test" \
         -S ssl-verify=ignore \
         -S smtp=smtps://sut.mydomain.test:465 \

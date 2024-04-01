@@ -1,20 +1,21 @@
-- name: Install postfix, which provides sendmail that acts as the local MTA 
-  zypper:
+---
+- name: Install postfix, which provides sendmail that acts as the local MTA
+  community.general.zypper:
     name: postfix
     state: present
 
 - name: Enable postfix and make sure it is running
-  systemd:
+  ansible.builtin.systemd:
     name: postfix
-    enabled: yes
+    enabled: true
     state: started
 
 - name: Install mailx (MUA)
-  zypper:
+  community.general.zypper:
     name: mailx
     state: present
 
 - name: Install expect needed for some tests
-  zypper:
+  community.general.zypper:
     name: expect
     state: present

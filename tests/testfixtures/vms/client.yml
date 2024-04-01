@@ -1,7 +1,7 @@
 ---
 - hosts: client
-  become: yes
+  become: true
   roles:
-  - common
-  - { role: use-nameserver, with_ip: "192.168.56.2", domain: "someisp.test" }
-  - client
+    - common
+    - { role: use-nameserver, with_ip: 192.168.56.2, domain: someisp.test }
+    - client

@@ -4,22 +4,20 @@
 - hosts: client
   tasks:
     - name: Send a mail from client to an address SUT is responsible for
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "Test" jane.doe@mydomain.test
-
 - hosts: sut
   tasks:
     - name: Get path of mail in maildir
-      block:
-      - wait_for:
-          path: /srv/mail/jane/Maildir/new/
-          timeout: 10
-      - find:
-          paths: /srv/mail/jane/Maildir/new/
-        register: find_result
-      become: yes
+      become: true
       become_user: vmail
-      
+      block:
+        - ansible.builtin.wait_for:
+            path: /srv/mail/jane/Maildir/new/
+            timeout: 10
+        - ansible.builtin.find:
+            paths: /srv/mail/jane/Maildir/new/
+          register: find_result
     - name: Assert mail is received and delivered at SUT
       compare:
         file: "{{ find_result.files[0].path }}"
@@ -43,9 +41,9 @@
           ...
           From: vagrant@localhost
           ...
-          
+
           Test-Body
-      become: yes
+      become: true
       become_user: vmail
 
     - name: Assert the received mail is tagged as Spam due to sending from client with hostname localhost (ip-192.168.56.201.someisp.test)
@@ -61,7 +59,7 @@
           $$ \t $$HFILTER_HELO_5(3.00)[localhost];
           ...
           X-Spam: Yes
-          
+
           Test-Body
-      become: yes
+      become: true
       become_user: vmail

@@ -1,15 +1,15 @@
+---
 galaxy_info:
   role_name: mailserver
   namespace: chkpnt
   description: Ansible role for an all-in-one mail server based on openSUSE Leap 15.4
   author: Gregor Dschung
-  company:
   license: Apache
-  min_ansible_version: 4.8
+  min_ansible_version: "9.0"
   platforms:
-    - name: openSUSE
+    - name: opensuse
       versions:
-      - 15.4
+        - "15.4"
   galaxy_tags:
     - mailserver
     - mail

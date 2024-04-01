@@ -1,2 +1,3 @@
+---
 exclude_paths:
   - testfixtures/roles/mailserver
