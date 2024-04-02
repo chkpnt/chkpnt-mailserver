@@ -9,6 +9,7 @@
   ansible.builtin.template:
     src: etc/dovecot/dovecot.conf.j2
     dest: /etc/dovecot/dovecot.conf
+    mode: "0640"
   notify:
     - restart dovecot
 
@@ -24,6 +25,9 @@
   ansible.builtin.template:
     src: etc/dovecot/users.j2
     dest: /etc/dovecot/users
+    owner: dovecot
+    group: root
+    mode: "0400"
 
 - name: Ensure that required mailboxes exists
   ansible.builtin.file:

@@ -9,6 +9,7 @@
         # see /etc/postfix/system/config_postfix, which is called by /usr/lib/systemd/system/postfix.service
         dest: /var/adm/postfix.configured
         content: ""
+        mode: "0644"
         force: false
 
 # see /etc/postfix/system/update_postmaps, which is called by /usr/lib/systemd/system/postfix.service
@@ -22,6 +23,7 @@
   ansible.builtin.template:
     src: etc/postfix/main.cf.j2
     dest: /etc/postfix/main.cf
+    mode: "0644"
   notify:
     - restart postfix
 
@@ -49,6 +51,16 @@
   args:
     creates: /etc/postfix/dh_512.pem
 
+- name: Ensure file permissions of generated Diffie-Hellman parameters 
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: "0400"
+  with_items:
+    - /etc/postfix/dh_4096.pem
+    - /etc/postfix/dh_512.pem
+
 - name: Ensure user postfix is member of group _rspamd, so /var/run/rspamd/worker-proxy.socket can be accessed
   ansible.builtin.user:
     name: postfix
@@ -59,6 +71,7 @@
   ansible.builtin.template:
     src: etc/postfix/virtual_aliases.j2
     dest: /etc/postfix/virtual_aliases
+    mode: "0600"
   notify:
     - postmap virtual_aliases
 
@@ -66,6 +79,7 @@
   ansible.builtin.template:
     src: etc/postfix/virtual_mailboxes.j2
     dest: /etc/postfix/virtual_mailboxes
+    mode: "0600"
   notify:
     - postmap virtual_mailboxes
 
@@ -73,6 +87,7 @@
   ansible.builtin.template:
     src: etc/postfix/transport.j2
     dest: /etc/postfix/transport
+    mode: "0600"
   notify:
     - postmap transport
 
@@ -80,5 +95,6 @@
   ansible.builtin.template:
     src: etc/postfix/recipient_restrictions.j2
     dest: /etc/postfix/recipient_restrictions
+    mode: "0600"
   notify:
     - postmap recipient_restrictions

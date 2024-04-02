@@ -63,6 +63,7 @@
         with_content: |
           ...
           remote-delivery@mydomain.test    smtp:theirdomain.test
+      become: true
 
     - name: Assert recipient restriction map is configured as expected
       compare:
@@ -70,6 +71,7 @@
         with_content: |
           ...
           reject@mydomain.test             REJECT This address is not supposed to receive mails!
+      become: true
 
     - name: Assert virtual mailbox map is configured as expected
       compare:
@@ -79,6 +81,7 @@
           john.doe@mydomain.test    OK
           jane.doe@mydomain.test    OK
           erika.m@myotherdomain.test    OK
+      become: true
 
     - name: Assert virtual aliases map is configured as expected
       compare:
@@ -88,3 +91,4 @@
           remote-delivery@mydomain.test      remote-delivery@mydomain.test
           jane.doe@mydomain.test             jane.doe@mydomain.test
           @mydomain.test                     john.doe@mydomain.test
+      become: true

@@ -39,6 +39,8 @@
   ansible.builtin.copy:
     src: etc/rspamd/
     dest: /etc/rspamd/
+    mode: "0644"
+    directory_mode: "0755"
   notify:
     - restart rspamd
 
@@ -46,6 +48,7 @@
   ansible.builtin.template:
     src: etc/rspamd/local.d/worker-controller.inc.j2
     dest: /etc/rspamd/local.d/worker-controller.inc
+    mode: "0644"
   notify:
     - restart rspamd
 
@@ -53,6 +56,7 @@
   ansible.builtin.template:
     src: etc/rspamd/local.d/dkim_signing.conf.j2
     dest: /etc/rspamd/local.d/dkim_signing.conf
+    mode: "0644"
   notify:
     - restart rspamd
 
@@ -60,6 +64,7 @@
   ansible.builtin.template:
     src: etc/rspamd/local.d/arc.conf.j2
     dest: /etc/rspamd/local.d/arc.conf
+    mode: "0644"
   notify:
     - restart rspamd
 
@@ -67,6 +72,7 @@
   ansible.builtin.template:
     src: etc/rspamd/local.d/greylist.conf.j2
     dest: /etc/rspamd/local.d/greylist.conf
+    mode: "0644"
   notify:
     - restart rspamd
 
@@ -74,6 +80,7 @@
   ansible.builtin.template:
     src: etc/rspamd/local.d/{{ item }}.j2
     dest: /etc/rspamd/local.d/{{ item }}
+    mode: "0644"
   loop:
     - allowlist.sender.domain.map
     - allowlist.sender.email.map
@@ -123,6 +130,7 @@
   ansible.builtin.template:
     src: etc/rspamd/local.d/actions.conf.j2
     dest: /etc/rspamd/local.d/actions.conf
+    mode: "0644"
   notify:
     - restart rspamd
 
