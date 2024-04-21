@@ -27,7 +27,7 @@ The purpose of this Ansible role is to fulfill my demands on my own mail server:
   - [x] Ham can be learnt by applying the NonJunk flag, which is used by Thunderbird
   - [x] Ham can be learnt by marking the mail with a green flag in the iOS Mail App
 - Antivirus
-  - [x] Integration of [ClamAV](https://www.clamav.net/)
+  - [x] Integration of [ClamAV](https://www.clamav.net/) <!-- markdown-link-check-disable-line -->
   - [x] Integration of [Fangfrisch](https://rseichter.github.io/fangfrisch/)
   - [ ] Integration of VirusTotal.com
   - [x] Infected mails are rejected
