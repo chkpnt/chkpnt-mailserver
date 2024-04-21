@@ -1,7 +1,7 @@
 # Ansible role for an all-in-one mail server based on openSUSE Leap 15.5
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/chkpnt/chkpnt-mailserver/Run%20tests%20against%20latest%20openSUSE%20Leap%2015.5?label=Tests%20against%20latest%20openSUSE%20Leap%2015.5)](https://github.com/chkpnt/chkpnt-mailserver/actions/workflows/run-tests.yml)
-[![Ansible Role](https://img.shields.io/ansible/role/d/39777?label=Ansible%20Galaxy%20downloads&style=flat-square)](https://galaxy.ansible.com/chkpnt/mailserver)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chkpnt/chkpnt-mailserver/run-tests.yml?branch=main&style=flat-square&logo=github&label=Tests%20against%20latest%20openSUSE%20Leap%2015.5)](https://github.com/chkpnt/chkpnt-mailserver/actions/workflows/run-tests.yml)
+[![Ansible Role](https://img.shields.io/ansible/role/d/chkpnt/mailserver?style=flat-square&logo=ansible&label=Ansible%20Galaxy%20downloads)](https://galaxy.ansible.com/chkpnt/mailserver)
 
 The purpose of this Ansible role is to fulfill my demands on my own mail server:
 
