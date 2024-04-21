@@ -4,7 +4,7 @@
 - hosts: client
   tasks:
     - name: Send a mail from client to an address that is relayed to another SMTP
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "Test" remote-delivery@mydomain.test
 
 - hosts: mail-sink

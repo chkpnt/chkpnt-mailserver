@@ -4,11 +4,10 @@
 - hosts: client
   tasks:
     - name: Send test mail from client to mail-sink via SUT without authentication
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "Test" \
         -S smtp=smtp://sut.mydomain.test \
         test@mail-sink.theirdomain.test 2> ~/mail.err
-
 - name: Assert mail could not be sent
   hosts: client
   tasks:

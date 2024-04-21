@@ -4,8 +4,7 @@
 - hosts: client
   tasks:
     - name: Send a mail from client to an address that is rejected
-      shell: echo "Test-Body" | mailx -s "Test" reject@mydomain.test
-
+      ansible.builtin.shell: echo "Test-Body" | mailx -s "Test" reject@mydomain.test
 - hosts: client
   tasks:
     - name: Assert client has received a DSN containing reject informations

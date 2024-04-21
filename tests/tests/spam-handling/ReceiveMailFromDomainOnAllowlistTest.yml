@@ -4,22 +4,21 @@
 - hosts: client
   tasks:
     - name: Send a mail with a from domain on the allowlist
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "Test" -r mail@alloweddomain.test  jane.doe@mydomain.test
 
 - hosts: sut
   tasks:
     - name: Get path of mail in maildir
-      block:
-      - wait_for:
-          path: /srv/mail/jane/Maildir/new/
-          timeout: 10
-      - find:
-          paths: /srv/mail/jane/Maildir/new/
-        register: find_result
-      become: yes
+      become: true
       become_user: vmail
-      
+      block:
+        - ansible.builtin.wait_for:
+            path: /srv/mail/jane/Maildir/new/
+            timeout: 10
+        - ansible.builtin.find:
+            paths: /srv/mail/jane/Maildir/new/
+          register: find_result
     - name: Assert mail is received with a no-action pre-result from rspamd
       compare:
         file: "{{ find_result.files[0].path }}"
@@ -36,8 +35,7 @@
           $$ \t $$module=multimap;
           $$ \t $$Matched map: ALLOWLIST_SENDER_DOMAIN
           ...
-          
+
           Test-Body
-      become: yes
+      become: true
       become_user: vmail
-      

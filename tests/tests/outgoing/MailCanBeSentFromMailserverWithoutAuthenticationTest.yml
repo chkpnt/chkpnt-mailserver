@@ -4,8 +4,7 @@
 - hosts: sut
   tasks:
     - name: Send test mail from SUT
-      shell: echo "Test-Body" | mailx -s "Test" test@mail-sink.theirdomain.test
-
+      ansible.builtin.shell: echo "Test-Body" | mailx -s "Test" test@mail-sink.theirdomain.test
 - hosts: mail-sink
   tasks:
     - name: Assert mail has been received
@@ -22,6 +21,6 @@
           Subject: Test
           ...
           From: vagrant@sut.mydomain.test
-          
+
           Test-Body
-          
+

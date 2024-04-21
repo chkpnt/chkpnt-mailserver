@@ -3,10 +3,12 @@
   hosts: sut
   tasks:
     - name: Reset maildirs
-      file: path="/srv/mail/{{ item }}" state=absent
-      become: yes
+      ansible.builtin.file:
+        path: /srv/mail/{{ item }}
+        state: absent
+      become: true
       loop: "{{ ['john', 'jane', 'erika'] | product(['Maildir', '.dovecot.sieve']) | map('join', '/') | list }}"
 
-    - name: Reset Redis-DB used by rspamd 
-      command: redis-cli -s /var/run/redis/rspamd.sock flushall
-      become: yes
+    - name: Reset Redis-DB used by rspamd
+      ansible.builtin.command: redis-cli -s /var/run/redis/rspamd.sock flushall
+      become: true

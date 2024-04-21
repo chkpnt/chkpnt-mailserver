@@ -7,26 +7,25 @@
 - hosts: sut
   tasks:
     - name: Configure Sieve rule, which rejects mail which has a subject "SPAM"
-      copy:
+      ansible.builtin.copy:
         dest: /srv/mail/jane/.dovecot.sieve
         owner: vmail
         group: vmail
-        mode: '0600'
+        mode: "0600"
         content: |
           require ["reject"];
           if header :contains "subject" "SPAM"
           {
             reject "I do not like spam";
           }
-      become: yes
+      become: true
       become_user: vmail
-          
+
 - hosts: client
   tasks:
     - name: Send a mail from client to an address SUT is responsible for
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "SPAM" -r test@theirdomain.test jane.doe@mydomain.test
-
 - hosts: mail-sink
   tasks:
     - name: Assert received mail has an DKIM-signature

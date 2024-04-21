@@ -9,39 +9,37 @@
     #    doveadm mailbox create -u jane.doe@mydomain.test Spam
     #  become: yes
     - name: Configure Sieve rule, which moves mail which has a subject "SPAM" into folder "Spam"
-      copy:
+      ansible.builtin.copy:
         dest: /srv/mail/jane/.dovecot.sieve
         owner: vmail
         group: vmail
-        mode: '0600'
+        mode: "0600"
         content: |
           require ["fileinto"];
           if header :contains "subject" "SPAM"
           {
             fileinto "Spam";
           }
-      become: yes
+      become: true
       become_user: vmail
 
 - hosts: client
   tasks:
     - name: Send a mail from client to an address SUT is responsible for and should be handled by the Sieve rule
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "SPAM" jane.doe@mydomain.test
-
 - hosts: sut
   tasks:
     - name: Get path of mail in maildir
-      block:
-      - wait_for:
-          path: /srv/mail/jane/Maildir/.Spam/new/
-          timeout: 10
-      - find:
-          paths: /srv/mail/jane/Maildir/.Spam/new/
-        register: find_result
-      become: yes
+      become: true
       become_user: vmail
-      
+      block:
+        - ansible.builtin.wait_for:
+            path: /srv/mail/jane/Maildir/.Spam/new/
+            timeout: 10
+        - ansible.builtin.find:
+            paths: /srv/mail/jane/Maildir/.Spam/new/
+          register: find_result
     - name: Assert mail is received and delivered at SUT in folder "Spam", which is automatically created
       compare:
         file: "{{ find_result.files[0].path }}"
@@ -52,7 +50,7 @@
           ...
           From: vagrant@localhost
           ...
-          
+
           Test-Body
-      become: yes
+      become: true
       become_user: vmail

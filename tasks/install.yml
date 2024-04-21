@@ -1,15 +1,14 @@
 ---
-
-# provides rspamd and clamav-unofficial-sigs
+# provides rspamd and fangfrisch
 - name: Install repository home:chkpnt:mailserver
-  zypper_repository:
+  community.general.zypper_repository:
     name: home_chkpnt_mailserver
-    repo: https://download.opensuse.org/repositories/home:/chkpnt:/mailserver/15.4/
+    repo: https://download.opensuse.org/repositories/home:/chkpnt:/mailserver/15.5/
     state: present
-    auto_import_keys: yes
+    auto_import_keys: true
 
 - name: Install packages for mailserver
-  zypper:
+  community.general.zypper:
     name:
       - postfix
       - mailx
@@ -21,6 +20,6 @@
       - redis
       - unbound # using a local resolver is highly recommended for RBLs
       - clamav
-      - clamav-unofficial-sigs
+      - python311-fangfrisch
       - acl
     state: present

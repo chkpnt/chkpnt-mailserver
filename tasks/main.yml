@@ -1,21 +1,21 @@
 ---
-
 - name: Initialize variable
-  set_fact:
+  ansible.builtin.set_fact:
     error_messages: []
 
-- include: install.yml
-- include: setup.yml
-- include: setup-rspamd.yml
-- include: setup-ssl-test.yml
-  when: "mail_ssl.generate_certificate_for_test | default(false) | bool"
-- include: setup-dovecot.yml
-- include: setup-sieve.yml
-- include: setup-postfix.yml
-- include: setup-apparmor.yml
+- ansible.builtin.import_tasks: install.yml # noqa: name[missing]
+- ansible.builtin.import_tasks: setup.yml # noqa: name[missing]
+- ansible.builtin.import_tasks: setup-rspamd.yml # noqa: name[missing]
+- ansible.builtin.include_tasks: setup-ssl-test.yml # noqa: name[missing]
+  when: mail_ssl.generate_certificate_for_test | default(false) | bool
+- ansible.builtin.import_tasks: setup-dovecot.yml # noqa: name[missing]
+- ansible.builtin.import_tasks: setup-sieve.yml # noqa: name[missing]
+- ansible.builtin.import_tasks: setup-postfix.yml # noqa: name[missing]
+- ansible.builtin.import_tasks: setup-apparmor.yml # noqa: name[missing]
 
 - name: Messages for your attention
-  command: /bin/true
+  ansible.builtin.command: /bin/true
+  changed_when: true
   notify: >-
     {% if error_messages | length == 0 -%}
       print everything alright

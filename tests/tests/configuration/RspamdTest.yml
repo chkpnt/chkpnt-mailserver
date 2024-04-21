@@ -1,21 +1,20 @@
 ---
-
 - hosts: sut
   tasks:
     - name: Prepare filter for jq to normalize json documents
-      copy:
+      ansible.builtin.copy:
         dest: /tmp/normalize.jq
         # jq -S isn't sorting recursive, so a custom filter is needed
         content: |
           def sort_by_keys:
             to_entries | sort_by(.key) | from_entries;
-          
+
           walk(if type == "object" then sort_by_keys else . end)
 
     - name: Export relevant configuration sections of rspamd
       # config is output as json, so it can be sorted
-      shell: "rspamadm configdump -j {{ item }} | jq -f /tmp/normalize.jq > /tmp/rspamdconfig_{{ item }}"
-      become: yes
+      ansible.builtin.shell: rspamadm configdump -j {{ item }} | jq -f /tmp/normalize.jq > /tmp/rspamdconfig_{{ item }}
+      become: true
       with_items:
         - worker
         - redis
@@ -77,7 +76,7 @@
               "count": -1,
           ...
           }
-  
+
     - name: Assert Redis backend is configured as expected
       compare:
         file: /tmp/rspamdconfig_redis
@@ -93,7 +92,7 @@
           {
             "clamav": {
               "action": "reject",
-              "servers": "/var/run/clamav/clamd-socket"
+              "servers": "/var/run/clamav/clamd.sock"
             }
           }
 
@@ -165,7 +164,7 @@
             "use_esld": true,
             "use_redis": false
           }
-      
+
     - name: Assert basic rspamd configuration is as expected
       compare:
         file: /tmp/rspamdconfig_options

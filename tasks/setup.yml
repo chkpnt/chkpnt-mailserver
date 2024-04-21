@@ -1,26 +1,25 @@
 ---
-
 - name: Ensure group vmail exists
-  group:
+  ansible.builtin.group:
     name: vmail
     gid: 5000
     state: present
 
 - name: Ensure user vmail exists
-  user:
+  ansible.builtin.user:
     name: vmail
     uid: 5000
     group: vmail
     comment: User for virtual mailboxes
     shell: /bin/false
     home: /srv/mail/
-    create_home: no
+    create_home: false
     state: present
 
 - name: Ensure directory for virtual mailboxes exists
-  file:
+  ansible.builtin.file:
     path: /srv/mail
     state: directory
     owner: vmail
     group: vmail
-    mode: 0755
+    mode: "0755"

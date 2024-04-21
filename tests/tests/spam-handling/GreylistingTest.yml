@@ -4,58 +4,56 @@
 - hosts: client
   tasks:
     - name: Send a mail from client to an address which will be greylisted
-      shell: |
+      ansible.builtin.shell: |
         echo "Test-Body" | mailx -s "Test" greylist@mydomain.test
-
 - hosts: sut
   tasks:
     - name: Get path of mail in maildir
-      find:
+      ansible.builtin.find:
         paths: /srv/mail/john/Maildir/new/
       register: find_result
-      become: yes
+      become: true
       become_user: vmail
-      
+
     - name: Assert no mail is received yet
-      assert:
+      ansible.builtin.assert:
         that: find_result.matched == 0
         fail_msg: Greylisting didn't worked
- 
+
 - hosts: client
   tasks:
     - name: Assert the sent mail is defered and still in the client's mail queue
       block:
-      - shell: postqueue -p > /tmp/postqueue
-        become: yes
-      - compare:
-          file: /tmp/postqueue
-          with_content: |
-            -Queue ID-  --Size-- ----Arrival Time---- -Sender/Recipient-------
-            ...
-            $$ .* $$  vagrant@localhost
-            (host sut.mydomain.test[192.168.56.10] said: 451 4.7.1 Try again later (in reply to end of DATA command))
-                                                     greylist@mydomain.test
-            ...
+        - ansible.builtin.shell: postqueue -p > /tmp/postqueue
+          become: true
+        - compare:
+            file: /tmp/postqueue
+            with_content: |
+              -Queue ID-  --Size-- ----Arrival Time---- -Sender/Recipient-------
+              ...
+              $$ .* $$  vagrant@localhost
+              (host sut.mydomain.test[192.168.56.10] said: 451 4.7.1 Try again later (in reply to end of DATA command))
+                                                       greylist@mydomain.test
+              ...
     - name: Wait for the greylisting timeout
-      wait_for:
+      ansible.builtin.wait_for:
         timeout: 5
     - name: Flush the client's mail queue, so the queued mail is resent
-      shell: postqueue -f
-      become: yes
+      ansible.builtin.command: postqueue -f
+      become: true
 
 - hosts: sut
   tasks:
     - name: Get path of mail in maildir
-      block:
-      - wait_for:
-          path: /srv/mail/john/Maildir/new/
-          timeout: 5
-      - find:
-          paths: /srv/mail/john/Maildir/new/
-        register: find_result
-      become: yes
+      become: true
       become_user: vmail
-          
+      block:
+        - ansible.builtin.wait_for:
+            path: /srv/mail/john/Maildir/new/
+            timeout: 5
+        - ansible.builtin.find:
+            paths: /srv/mail/john/Maildir/new/
+          register: find_result
     - name: Assert mail is received and delivered at SUT
       compare:
         file: "{{ find_result.files[0].path }}"
@@ -64,8 +62,7 @@
           To: greylist@mydomain.test
           Subject: Test
           ...
-          
+
           Test-Body
-      become: yes
+      become: true
       become_user: vmail
-      

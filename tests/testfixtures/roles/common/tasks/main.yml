@@ -1,7 +1,6 @@
 ---
-
 - name: Install useful packages
-  zypper:
+  community.general.zypper:
     name:
       - command-not-found
       - bind-utils # contains dig
@@ -9,5 +8,6 @@
       - htop
       - man
       - telnet
-    refresh: yes
+    refresh: true
+    extra_args_precommand: --gpg-auto-import-keys
     state: present
