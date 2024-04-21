@@ -92,7 +92,7 @@
           {
             "clamav": {
               "action": "reject",
-              "servers": "/var/run/clamav/clamd-socket"
+              "servers": "/var/run/clamav/clamd.sock"
             }
           }
 

@@ -33,7 +33,6 @@
     - name: Get path of mail in maildir
       become: true
       become_user: vmail
-
       block:
         - ansible.builtin.wait_for:
             path: /srv/mail/jane/Maildir/.Spam/new/

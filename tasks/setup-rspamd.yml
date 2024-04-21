@@ -140,17 +140,18 @@
     enabled: true
     state: started
 
-- name: Enable clamav-unofficial-sigs
-  ansible.builtin.lineinfile:
-    path: /etc/clamav-unofficial-sigs/user.conf
-    regexp: "#user_configuration_complete="
-    line: user_configuration_complete="yes"
-
 # clamd won't start if /var/lib/clamav doesn't contain the daily and main databases,
 # therefore freshclam needs to be executed once.
-- name: Execute freshclam
+- name: Enable freshclam.timer and make sure it is executed once.
   ansible.builtin.systemd:
-    name: freshclam
+    name: freshclam.timer
+    enabled: true
+    state: started
+
+- name: Enable fangfrisch.timer (unofficial signatures) and make sure it is executed once.
+  ansible.builtin.systemd:
+    name: fangfrisch.timer
+    enabled: true
     state: started
 
 - name: Adding a whiteliste database for clamd
@@ -161,6 +162,16 @@
     owner: vscan
     group: vscan
     mode: "0644"
+
+- name: Wait for /var/lib/clamav/daily.cvd to be available
+  ansible.builtin.wait_for:
+    path: /var/lib/clamav/daily.cvd
+    state: present
+
+- name: Wait for /var/lib/clamav/main.cvd to be available
+  ansible.builtin.wait_for:
+    path: /var/lib/clamav/main.cvd
+    state: present
 
 - name: Enable clamd and make sure it is running
   ansible.builtin.systemd:

@@ -9,4 +9,5 @@
       - man
       - telnet
     refresh: true
+    extra_args_precommand: --gpg-auto-import-keys
     state: present
