@@ -13,4 +13,4 @@ ansible = "==9.4.0"
 jmespath = "==1.0.1"
 
 [requires]
-python_version = "3.12.2"
+python_version = "3"
