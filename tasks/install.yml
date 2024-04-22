@@ -17,7 +17,7 @@
       #- amavisd-new
       #- spamassassin
       - rspamd
-      - redis
+      - redis7
       - unbound # using a local resolver is highly recommended for RBLs
       - clamav
       - python311-fangfrisch
