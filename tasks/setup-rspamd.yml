@@ -163,10 +163,20 @@
     group: vscan
     mode: "0644"
 
-- name: Wait for /var/lib/clamav/daily.cvd to be available
-  ansible.builtin.wait_for:
-    path: /var/lib/clamav/daily.cvd
-    state: present
+- name: Wait for either daily.cvd or daily.cld to be available in /var/lib/clamav/
+  ansible.builtin.find:
+    paths: /var/lib/clamav
+    patterns: "daily.cvd,daily.cld"
+    recurse: no
+  register: clamav_files
+  retries: 60
+  delay: 5
+  until: clamav_files.matched > 0
+
+- name: Fail if neither daily.cvd nor daily.cld is present
+  fail:
+    msg: "Neither daily.cvd nor daily.cld is present."
+  when: clamav_files.matched == 0
 
 - name: Wait for /var/lib/clamav/main.cvd to be available
   ansible.builtin.wait_for:
