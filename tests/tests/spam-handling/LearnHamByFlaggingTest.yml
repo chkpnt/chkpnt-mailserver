@@ -6,9 +6,8 @@
   tasks:
     - name: Send two mails from client to an address SUT is responsible for
       ansible.builtin.shell: |
-        echo "Test-Body blub" | mailx -s "Test 1" jane.doe@mydomain.test
-        echo "Different text" | mailx -s "Test 2" jane.doe@mydomain.test
-
+          echo "Test-Body that needs to be a little bit longer to reach the required number of tokens for bayes classifier." | mailx -s "Test 1" jane.doe@mydomain.test
+          echo "Different text that needs to be a little bit longer to reach the required number of tokens for bayes classifier." | mailx -s "Test 1" jane.doe@mydomain.test
     - name: Simulate marking the first mail with a green flag (iOS Mail App) and flag the second as NonJunk
       ansible.builtin.shell: |
         log_file -noappend imap.log

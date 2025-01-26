@@ -172,7 +172,7 @@
           {
             "allow_raw_input": true,
             "cache_file": "/var/lib/rspamd/symbols.cache",
-            "check_all_filters": true,
+            "check_all_filters": false,
             "classify_headers": [
               "User-Agent",
               "X-Mailer",
@@ -190,6 +190,7 @@
             },
             "dns_max_requests": 64,
             "dynamic_conf": "/var/lib/rspamd/rspamd_dynamic",
+            "enable_mime_utf": false,
             "explicit_modules": [
               "settings",
               "bayes_expiry"
@@ -208,7 +209,6 @@
             "max_urls": 10240,
             "one_shot": false,
             "pidfile": "/var/run/rspamd/rspamd.pid",
-            "raw_mode": false,
             "rrd": "/var/lib/rspamd/rspamd.rrd",
             "soft_reject_on_timeout": false,
             "stats_file": "/var/lib/rspamd/stats.ucl",

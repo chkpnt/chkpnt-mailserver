@@ -5,9 +5,9 @@
 - hosts: client
   tasks:
     - name: Send a mail from client to an address SUT is responsible for
-      ansible.builtin.shell: |
-        echo "Test-Body" | mailx -s "Test" jane.doe@mydomain.test
-
+      ansible.builtin.shell: >
+        echo "Test-Body that needs to be a little bit longer to reach the required
+          number of tokens for bayes classifier." | mailx -s "Test" jane.doe@mydomain.test
     - name: Copy the mail from the inbox into the Ham folder
       ansible.builtin.shell: |
         log_file -noappend imap.log
