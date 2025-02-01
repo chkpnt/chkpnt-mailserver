@@ -24,14 +24,21 @@
 # > Debug: sieve: Script `learn-spam' from /srv/mail/.sieve/learn-spam.sieve successfully compiled
 - name: Copy global Sieve scripts
   ansible.builtin.copy:
-    src: srv/mail/.sieve/
-    dest: /srv/mail/.sieve/
+    src: srv/mail/.sieve/{{ item }}
+    dest: /srv/mail/.sieve/{{ item }}
     owner: vmail
     group: vmail
     mode: "0644"
+  with_items:
+    - learn-ham.sieve
+    - learn-spam.sieve
+    - learn-spam-or-ham-due-to-flags.sieve
+    - playground.sieve
 
-- name: Ensure rspamc to be executabled by Sieve scripts
-  ansible.builtin.file:
-    src: /usr/bin/rspamc
+- name: Copy rspamc wrapper script
+  ansible.builtin.copy:
+    src: srv/mail/.sieve/bin/rspamc
     dest: /srv/mail/.sieve/bin/rspamc
-    state: link
+    owner: vmail
+    group: vmail
+    mode: "0755"

@@ -1,4 +1,5 @@
 # Ansible managed
 
+/srv/mail/.sieve/bin/rspamc rux,
 /usr/bin/rspamc rux,
 /usr/bin/rspamc-* rux,

@@ -1,0 +1,4 @@
+#!/bin/bash
+# see https://github.com/rspamd/rspamd/issues/3082
+export OMP_NUM_THREADS=1
+/usr/bin/rspamc "$@"
