@@ -22,31 +22,31 @@
       compare:
         file: "{{ find_result.files[0].path }}"
         with_content: |
-          Return-Path: <vagrant@localhost>
+          Return-Path: <vagrant@client.localdomain>
           Delivered-To: jane.doe@mydomain.test
           Received: from sut.mydomain.test
           $$ \t $$by sut.mydomain.test with LMTP
           $$ \t $$id $$ .* $$
-          $$ \t $$(envelope-from <vagrant@localhost>)
+          $$ \t $$(envelope-from <vagrant@client.localdomain>)
           $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
-          Received: from localhost (ip-192.168.56.201.someisp.test [192.168.56.201])
+          Received: from client.localdomain (ip-192.168.56.201.someisp.test [192.168.56.201])
           $$ \t $$by sut.mydomain.test (Postfix) with ESMTP id $$ .* $$
           $$ \t $$for <jane.doe@mydomain.test>; $$ .* $$
           ...
-          Received: by localhost (Postfix, from userid 1000)
+          Received: by client.localdomain (Postfix, from userid 1000)
           ...
           Date: $$ .* $$
           To: jane.doe@mydomain.test
           Subject: Test
           ...
-          From: vagrant@localhost
+          From: vagrant@client.localdomain
           ...
 
           Test-Body
       become: true
       become_user: vmail
 
-    - name: Assert the received mail is tagged as Spam due to sending from client with hostname localhost (ip-192.168.56.201.someisp.test)
+    - name: Assert the received mail is greylisted due to sending from client with hostname client.localdomain (ip-192.168.56.201.someisp.test)
       compare:
         file: "{{ find_result.files[0].path }}"
         with_content: |
@@ -54,12 +54,8 @@
           To: jane.doe@mydomain.test
           Subject: Test
           ...
-          X-Spamd-Result: default: False [7.70 / 15.00];
-          $$ \t $$HFILTER_FROMHOST_NOT_FQDN(3.00)[localhost];
-          $$ \t $$HFILTER_HELO_5(3.00)[localhost];
+          X-Rspamd-Action: greylist
           ...
-          X-Spam: Yes
-
           Test-Body
       become: true
       become_user: vmail

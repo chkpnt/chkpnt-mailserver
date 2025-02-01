@@ -31,5 +31,5 @@
           To: remote-delivery@mydomain.test
           Subject: Test
           ...
-          From: vagrant@localhost
+          From: vagrant@client.localdomain
           ...

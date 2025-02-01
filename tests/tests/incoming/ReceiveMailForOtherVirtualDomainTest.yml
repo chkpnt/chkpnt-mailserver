@@ -22,13 +22,13 @@
       compare:
         file: "{{ find_result.files[0].path }}"
         with_content: |
-          Return-Path: <vagrant@localhost>
+          Return-Path: <vagrant@client.localdomain>
           Delivered-To: erika.m@myotherdomain.test
           ...
           To: erika.m@myotherdomain.test
           Subject: Test
           ...
-          From: vagrant@localhost
+          From: vagrant@client.localdomain
           ...
 
           Test-Body

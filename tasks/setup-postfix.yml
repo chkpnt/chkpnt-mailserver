@@ -99,6 +99,32 @@
   notify:
     - postmap recipient_restrictions
 
+- name: Check if postfix /etc/postfix/access.lmdb exists
+  ansible.builtin.stat:
+    path: /etc/postfix/access.lmdb
+  register: access_file
+
+- name: Trigger postmap handler for /etc/postfix/access.lmdb
+  debug:
+    msg: "Triggering postmap for /etc/postfix/access.lmdb"
+  changed_when: true
+  notify:
+    - postmap access
+  when: not access_file.stat.exists
+
+- name: Check if postfix /etc/aliases.lmdb exists
+  ansible.builtin.stat:
+    path: /etc/aliases.lmdb
+  register: aliases_file
+
+- name: Trigger postmap handler for /etc/aliases.lmdb
+  debug:
+    msg: "Triggering postmap for /etc/aliases.lmdb"
+  changed_when: true
+  notify:
+    - postmap aliases
+  when: not aliases_file.stat.exists
+
 - name: Configure header checks
   ansible.builtin.template:
     src: etc/postfix/header_checks.j2

@@ -31,7 +31,7 @@
             with_content: |
               -Queue ID-  --Size-- ----Arrival Time---- -Sender/Recipient-------
               ...
-              $$ .* $$  vagrant@localhost
+              $$ .* $$  vagrant@client.localdomain
               (host sut.mydomain.test[192.168.56.10] said: 451 4.7.1 Try again later (in reply to end of DATA command))
                                                        greylist@mydomain.test
               ...

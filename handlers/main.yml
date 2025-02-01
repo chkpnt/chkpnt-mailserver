@@ -45,6 +45,16 @@
   changed_when: true
   notify: restart postfix
 
+- name: postmap access # noqa: name[casing]
+  ansible.builtin.command: postmap lmdb:/etc/postfix/access
+  changed_when: true
+  notify: restart postfix
+
+- name: postmap aliases # noqa: name[casing]
+  ansible.builtin.command: postmap lmdb:/etc/aliases
+  changed_when: true
+  notify: restart postfix
+
 - name: print error_messages # noqa: name[casing]
   ansible.builtin.debug:
     var: error_messages

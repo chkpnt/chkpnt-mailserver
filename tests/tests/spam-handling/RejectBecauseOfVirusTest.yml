@@ -23,6 +23,6 @@
           be delivered to one or more recipients. It's attached below.
           ...
           <jane.doe@mydomain.test>: host sut.mydomain.test[192.168.56.10] said: 554 5.7.1
-              clamav: virus found: "Eicar-Test-Signature" (in reply to end of DATA
-              command)
+              clamav: virus found: "winnow.malware.test.eicar.com.UNOFFICIAL" (in reply
+              to end of DATA command)
           ...

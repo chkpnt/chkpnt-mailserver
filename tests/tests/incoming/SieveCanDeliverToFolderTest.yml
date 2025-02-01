@@ -48,7 +48,7 @@
           To: jane.doe@mydomain.test
           Subject: SPAM
           ...
-          From: vagrant@localhost
+          From: vagrant@client.localdomain
           ...
 
           Test-Body
