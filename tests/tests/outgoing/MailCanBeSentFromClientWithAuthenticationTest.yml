@@ -23,7 +23,8 @@
           Received: from sut.mydomain.test ([192.168.56.10])
           $$ \t $$by smtp-sink (smtp-sink) with ESMTP id $$ .* $$;
           ...
-          Received: from client.localdomain (ip-192.168.56.201.someisp.test [192.168.56.201])
+          Received: by sut.mydomain.test (Postfix) with ESMTPSA id $$ .* $$
+          $$ \t $$for <test@mail-sink.theirdomain.test>; $$ .* $$
           ...
           Date: $$ .* $$
           From: john.doe@mydomain.test

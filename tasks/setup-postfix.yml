@@ -98,3 +98,11 @@
     mode: "0600"
   notify:
     - postmap recipient_restrictions
+
+- name: Configure header checks
+  ansible.builtin.template:
+    src: etc/postfix/header_checks.j2
+    dest: /etc/postfix/header_checks
+    mode: "0600"
+  notify:
+    - restart postfix
