@@ -9,6 +9,12 @@
 
 - hosts: mail-sink
   tasks:
+    - name: Wait for the mail to receive mail-sink
+      ansible.builtin.wait_for:
+        path: /tmp/maildump
+        search_regex: .+
+        timeout: 10
+
     - name: Assert received mail has an ARC-signature
       compare:
         file: /tmp/maildump
