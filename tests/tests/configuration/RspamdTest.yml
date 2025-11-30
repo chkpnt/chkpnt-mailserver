@@ -196,6 +196,15 @@
             "local_addrs": [],
             "map_file_watch_multiplier": 0.1,
             "map_watch_interval": 300,
+            "maps": {
+              "connect_timeout": 1,
+              "connection_ttl": 300,
+              "idle_timeout": 65,
+              "max_reuse": 256,
+              "read_timeout": 4,
+              "ssl_timeout": 1,
+              "write_timeout": 1
+            },
             "max_lua_urls": 1024,
             "max_recipients": 1024,
             "max_urls": 10240,
@@ -218,7 +227,7 @@
             "bayes": {
               "backend": "redis",
               "cache": {},
-              "learn_condition": "return require(\"lua_bayes_learn\").can_learn",
+              "learn_condition": "return require('lua_bayes_learn').can_learn",
               "min_learns": 200,
               "min_tokens": 11,
               "new_schema": true,
