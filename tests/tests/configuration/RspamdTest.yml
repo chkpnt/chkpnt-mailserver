@@ -125,9 +125,6 @@
             "selector": "dkim",
             "sign_authenticated": true,
             "sign_local": true,
-            "sign_networks": [
-              "127.2.4.7"
-            ],
             "symbol": "DKIM_SIGNED",
             "try_fallback": true,
             "use_domain": "header",
@@ -155,9 +152,6 @@
             "sign_authenticated": false,
             "sign_inbound": true,
             "sign_local": false,
-            "sign_networks": [
-              "127.2.4.7"
-            ],
             "sign_symbol": "ARC_SIGNED",
             "try_fallback": true,
             "use_domain": "recipient",
@@ -199,9 +193,7 @@
             "history_file": "/var/lib/rspamd/rspamd.history",
             "history_rows": 200,
             "hs_cache_dir": "/var/lib/rspamd/",
-            "local_addrs": [
-              "127.2.4.7"
-            ],
+            "local_addrs": [],
             "map_file_watch_multiplier": 0.1,
             "map_watch_interval": 300,
             "max_lua_urls": 1024,
