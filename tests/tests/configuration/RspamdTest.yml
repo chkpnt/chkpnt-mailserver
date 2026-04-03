@@ -65,7 +65,13 @@
                 "local": {
                   "default": true,
                   "hosts": "localhost",
-                  "self_scan": true
+                  "self_scan": true,
+                  "token_bucket": {
+                    "base_cost": 10,
+                    "max_tokens": 10000,
+                    "min_tokens": 1,
+                    "scale": 1024
+                  }
                 }
               }
             }
@@ -75,6 +81,9 @@
           ...
               "count": -1,
           ...
+          }
+          {
+            "hs_helper": {}
           }
 
     - name: Assert Redis backend is configured as expected
