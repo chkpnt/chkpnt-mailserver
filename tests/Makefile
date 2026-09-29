@@ -1,4 +1,4 @@
-PROVIDER = virtualbox
+PROVIDER = libvirt
 GITHUB_WORKFLOW = asdf
 
 .PHONY: usage

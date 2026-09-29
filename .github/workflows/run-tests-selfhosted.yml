@@ -1,0 +1,85 @@
+---
+name: Run tests on self-hosted libvirt runner
+
+on:
+  push:
+    branches:
+      - feature/vagrant-libvirt
+  workflow_dispatch:
+  schedule:
+    - cron: "0 13 * * 0"
+
+concurrency:
+  group: self-hosted-libvirt
+  cancel-in-progress: false
+
+jobs:
+  run-tests:
+    # Self-hosted openSUSE Tumbleweed x86_64 host with KVM/libvirt.
+    # Register the runner with e.g.:
+    # ./config.sh --url https://github.com/<owner>/<repo> \
+    #   --labels self-hosted,linux,x64,kvm-tumbleweed
+    runs-on: [self-hosted, linux, x64, kvm-tumbleweed]
+    timeout-minutes: 180
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check KVM host prerequisites
+        run: |
+          ls -l /dev/kvm
+          virsh list --all
+          vagrant --version
+          vagrant plugin list | grep -i libvirt
+          free -g
+          df -h .
+
+      - name: Use Python 3.x
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Install required (and locked) dependecies with pipenv
+        run: pipenv install --dev
+
+      # Setting env variables as "pipenv run make -j2 setup" doesn't terminate
+      - name: Enable pipenv environment
+        run: |
+          echo "VIRTUAL_ENV=$(pipenv --venv)" >> $GITHUB_ENV
+          echo "$(pipenv --venv)/bin" >> $GITHUB_PATH
+
+      - name: Print environment variables
+        run: export
+
+      - name: Ensure to use the latest boxes
+        run: vagrant box update
+        working-directory: tests
+
+      - name: Prepare Vagrant test environment
+        run: make -j setup
+        working-directory: tests
+
+      - name: Run tests
+        run: make -k tests
+        working-directory: tests
+
+      - name: Gather facts
+        if: always()
+        run: |
+          pip list
+          vagrant ssh -c "ip addr show" ns
+          vagrant ssh -c "ip addr show" sut
+          vagrant ssh -c "ip addr show" client
+          vagrant ssh -c "ip addr show" mail-sink
+          vagrant ssh -c "dig mydomain.test MX" client
+          vagrant ssh -c "ping -c 3 192.168.56.10" client
+          vagrant ssh -c "sudo journalctl --no-pager -n 50 -u named" ns
+          vagrant ssh -c "systemctl --no-page list-units --type=service" sut
+          vagrant ssh -c "sudo journalctl --no-pager -n 50 -u clamd" sut
+          vagrant ssh -c "sudo journalctl --no-pager -n 50 -u postfix" sut
+          vagrant ssh -c "sudo journalctl --no-pager -n 50 -u rspamd" sut
+          vagrant ssh -c "sudo journalctl --no-pager -n 50 -u dovecot" sut
+        working-directory: tests

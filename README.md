@@ -132,18 +132,16 @@ $ pipenv install --dev
 $ pipenv shell
 ```
 
-In order to run the tests, VirtualBox and Vagrant are required. On macOS, these dependencies can be installed using Homebrew as well:
+In order to run the tests, Vagrant with the libvirt provider (KVM) is required. On openSUSE Tumbleweed:
 
 ```
-$ brew install --cask virtualbox
-$ brew install --cask vagrant
+$ sudo zypper install qemu-kvm libvirt libvirt-daemon-qemu bridge-utils vagrant ruby-devel libvirt-devel gcc make
+$ sudo systemctl enable --now libvirtd
+$ sudo usermod -aG libvirt,kvm $USER
+$ vagrant plugin install vagrant-libvirt
 ```
 
-For managing your Vagrant virtual machines, I can recommend the use of [Vagrant-Manager](http://vagrantmanager.com/), a small utility app for the menu bar.
-
-```
-$ brew install --cask vagrant-manager
-```
+The previous VirtualBox based setup (`brew install --cask virtualbox vagrant`) is no longer used; the default test provider is now `libvirt` (see `tests/Makefile` and `tests/Vagrantfile`).
 
 Additional information about the tests can be found in the corresponding [document](tests/README.md).
 

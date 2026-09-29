@@ -3,9 +3,20 @@ There are some tests, which use a Vagrant environment composed of four VMs.
 
 ### Executing tests
 
-Vagrant and VirtualBox is needed to run the tests, which are simple Ansible playbooks under [`tests/*`](tests/).
+Vagrant with the libvirt provider (KVM) is needed to run the tests, which are simple Ansible playbooks under [`tests/*`](tests/).
 
-There is a [`Makefile`](Makefile) which can be used to setup the Vagrant environment (`make -j setup`) and to run the test suite (`make tests`).
+On openSUSE Tumbleweed install the host dependencies, e.g.:
+
+```
+$ sudo zypper install qemu-kvm libvirt libvirt-daemon-qemu bridge-utils vagrant ruby-devel libvirt-devel gcc make
+$ sudo systemctl enable --now libvirtd
+$ sudo usermod -aG libvirt,kvm $USER
+$ vagrant plugin install vagrant-libvirt
+```
+
+then re-login so the group membership applies and check `virsh list --all` and `ls -l /dev/kvm`.
+
+There is a [`Makefile`](Makefile) which can be used to setup the Vagrant environment (`make -j setup`, default `PROVIDER=libvirt`) and to run the test suite (`make tests`).
 
 ### Vagrant environment
 
